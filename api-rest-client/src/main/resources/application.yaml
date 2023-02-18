@@ -1,0 +1,11 @@
+server:
+  servlet:
+    context-path: /api-business
+  port: 5002
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_3I4rens7y
