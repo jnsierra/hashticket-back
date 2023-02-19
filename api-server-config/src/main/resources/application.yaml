@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/jnsierra/hasticket-config.git
+          #uri: file:///C:/configuraciones/api-article-configurations
+server:
+  port: 8888

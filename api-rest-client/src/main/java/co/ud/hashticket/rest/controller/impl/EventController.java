@@ -13,5 +13,5 @@ public class EventController {
     public String hello() {
         return "Este es el servicio de eventos";
     }
-}
 
+}

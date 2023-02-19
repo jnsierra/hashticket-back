@@ -1,6 +1,4 @@
 server:
-  servlet:
-    context-path: /api-business
   port: 5002
 
 spring:

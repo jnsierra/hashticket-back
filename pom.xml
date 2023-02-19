@@ -33,9 +33,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 	<modules>
 		<module>api-security</module>
 		<module>api-rest-client</module>
+		<module>api-server-config</module>
 	</modules>
 </project>
