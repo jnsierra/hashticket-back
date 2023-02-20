@@ -43,5 +43,7 @@
 		<module>api-security</module>
 		<module>api-rest-client</module>
 		<module>api-server-config</module>
+		<module>api-acceso-datos</module>
+		<module>api-utiles</module>
 	</modules>
 </project>
