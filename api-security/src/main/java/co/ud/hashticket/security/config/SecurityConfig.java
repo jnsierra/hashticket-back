@@ -1,4 +1,4 @@
-package co.ud.hashticket.security;
+package co.ud.hashticket.security.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

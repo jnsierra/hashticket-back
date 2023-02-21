@@ -23,3 +23,12 @@ spring:
             non_contextual_creation: true
     show-sql: true
     generate-ddl: false
+aws:
+  accessKey: AKIAXLWLJTNPAYZ77O2O
+  secretKey: 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
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
