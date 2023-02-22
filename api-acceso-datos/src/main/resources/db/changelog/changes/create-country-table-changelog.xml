@@ -21,11 +21,11 @@
         </rollback>
     </changeSet>
     <changeSet author="admin" id="2">
-        <createSequence sequenceName="country_seq" startValue="2" incrementBy="1" />
+        <createSequence sequenceName="country_seq" startValue="1" incrementBy="1" />
     </changeSet>
     <changeSet id="3" author="admin">
         <insert tableName="country">
-            <column name="id" value="1"/>
+            <column name="id" valueComputed="${sequence.country}"/>
             <column name="name" value="COLOMBIA"/>
             <column name="diminutive_alpha3" value="COL"/>
         </insert>

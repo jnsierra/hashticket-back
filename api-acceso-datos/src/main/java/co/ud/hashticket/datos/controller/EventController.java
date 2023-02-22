@@ -20,14 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class EventController {
 
-    private EventService eventService;
-    private ModelMapper modelMapper;
+    private final EventService eventService;
+    private final ModelMapper modelMapper;
     @Autowired
     public EventController(EventService eventService, ModelMapper modelMapper) {
         this.eventService = eventService;
         this.modelMapper = modelMapper;
     }
-    @Secured("NICO")
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EventDto> save(@RequestBody EventDto eventDto){
         EventEntity entity = modelMapper.map(eventDto, EventEntity.class);

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="admin" id="1">
+        <createTable tableName="department">
+            <column name="code" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="department"/>
+        </rollback>
+    </changeSet>
+    <changeSet author="admin" id="2">
+        <createSequence sequenceName="department_seq" startValue="1" incrementBy="1" />
+    </changeSet>
+    <changeSet id="3" author="admin">
+        <insert tableName="department"><column name="code" value="05"/><column name="country_id" value="1"/><column name="name" value="ANTIOQUIA" /></insert>
+        <insert tableName="department"><column name="code" value="08"/><column name="country_id" value="1"/><column name="name" value="ATLANTICO" /></insert>
+        <insert tableName="department"><column name="code" value="11"/><column name="country_id" value="1"/><column name="name" value="BOGOTA" /></insert>
+        <insert tableName="department"><column name="code" value="13"/><column name="country_id" value="1"/><column name="name" value="BOLIVAR" /></insert>
+        <insert tableName="department"><column name="code" value="15"/><column name="country_id" value="1"/><column name="name" value="BOYACA" /></insert>
+        <insert tableName="department"><column name="code" value="17"/><column name="country_id" value="1"/><column name="name" value="CALDAS" /></insert>
+        <insert tableName="department"><column name="code" value="18"/><column name="country_id" value="1"/><column name="name" value="CAQUETA" /></insert>
+        <insert tableName="department"><column name="code" value="19"/><column name="country_id" value="1"/><column name="name" value="CAUCA" /></insert>
+        <insert tableName="department"><column name="code" value="20"/><column name="country_id" value="1"/><column name="name" value="CESAR" /></insert>
+        <insert tableName="department"><column name="code" value="23"/><column name="country_id" value="1"/><column name="name" value="CORDOBA" /></insert>
+        <insert tableName="department"><column name="code" value="25"/><column name="country_id" value="1"/><column name="name" value="CUNDINAMARCA" /></insert>
+        <insert tableName="department"><column name="code" value="27"/><column name="country_id" value="1"/><column name="name" value="CHOCO" /></insert>
+        <insert tableName="department"><column name="code" value="41"/><column name="country_id" value="1"/><column name="name" value="HUILA" /></insert>
+        <insert tableName="department"><column name="code" value="44"/><column name="country_id" value="1"/><column name="name" value="LA GUAJIRA" /></insert>
+        <insert tableName="department"><column name="code" value="47"/><column name="country_id" value="1"/><column name="name" value="MAGDALENA" /></insert>
+        <insert tableName="department"><column name="code" value="50"/><column name="country_id" value="1"/><column name="name" value="META" /></insert>
+        <insert tableName="department"><column name="code" value="52"/><column name="country_id" value="1"/><column name="name" value="NARIÑO" /></insert>
+        <insert tableName="department"><column name="code" value="54"/><column name="country_id" value="1"/><column name="name" value="N. DE SANTANDER" /></insert>
+        <insert tableName="department"><column name="code" value="63"/><column name="country_id" value="1"/><column name="name" value="QUINDIO" /></insert>
+        <insert tableName="department"><column name="code" value="66"/><column name="country_id" value="1"/><column name="name" value="RISARALDA" /></insert>
+        <insert tableName="department"><column name="code" value="68"/><column name="country_id" value="1"/><column name="name" value="SANTANDER" /></insert>
+        <insert tableName="department"><column name="code" value="70"/><column name="country_id" value="1"/><column name="name" value="SUCRE" /></insert>
+        <insert tableName="department"><column name="code" value="73"/><column name="country_id" value="1"/><column name="name" value="TOLIMA" /></insert>
+        <insert tableName="department"><column name="code" value="76"/><column name="country_id" value="1"/><column name="name" value="VALLE DEL CAUCA" /></insert>
+        <insert tableName="department"><column name="code" value="81"/><column name="country_id" value="1"/><column name="name" value="ARAUCA" /></insert>
+        <insert tableName="department"><column name="code" value="85"/><column name="country_id" value="1"/><column name="name" value="CASANARE" /></insert>
+        <insert tableName="department"><column name="code" value="86"/><column name="country_id" value="1"/><column name="name" value="PUTUMAYO" /></insert>
+        <insert tableName="department"><column name="code" value="88"/><column name="country_id" value="1"/><column name="name" value="SAN ANDRES" /></insert>
+        <insert tableName="department"><column name="code" value="91"/><column name="country_id" value="1"/><column name="name" value="AMAZONAS" /></insert>
+        <insert tableName="department"><column name="code" value="94"/><column name="country_id" value="1"/><column name="name" value="GUAINIA" /></insert>
+        <insert tableName="department"><column name="code" value="95"/><column name="country_id" value="1"/><column name="name" value="GUAVIARE" /></insert>
+        <insert tableName="department"><column name="code" value="97"/><column name="country_id" value="1"/><column name="name" value="VAUPES" /></insert>
+        <insert tableName="department"><column name="code" value="99"/><column name="country_id" value="1"/><column name="name" value="VICHADA" /></insert>
+    </changeSet>
+    <changeSet id="4" author="admin">
+        <addForeignKeyConstraint baseTableName="department" baseColumnNames="country_id" constraintName="fk_department_country" referencedTableName="country" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
