@@ -1,14 +1,21 @@
 package co.ud.hashticket.datos.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@Builder
 @Data
-public class CityPkEntity {
+@AllArgsConstructor
+@NoArgsConstructor
+public class CityPkEntity implements Serializable {
     @Column(name = "code")
     private Long code;
     @Column(name = "department_code")

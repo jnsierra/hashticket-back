@@ -6,6 +6,7 @@ import co.ud.ud.hashticket.dto.CountryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class CountryController {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public CountryController(CountryService countryService, ModelMapper modelMapper) {
+    public CountryController(CountryService countryService, @Qualifier("defaultMapper") ModelMapper modelMapper) {
         this.countryService = countryService;
         this.modelMapper = modelMapper;
     }

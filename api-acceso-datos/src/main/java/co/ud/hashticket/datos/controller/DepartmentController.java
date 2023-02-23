@@ -6,6 +6,7 @@ import co.ud.ud.hashticket.dto.DepartmentDto;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
     private final ModelMapper modelMapper;
     @Autowired
-    public DepartmentController(DepartmentService departmentService, ModelMapper modelMapper) {
+    public DepartmentController(DepartmentService departmentService,@Qualifier("defaultMapper") ModelMapper modelMapper) {
         this.departmentService = departmentService;
         this.modelMapper = modelMapper;
     }

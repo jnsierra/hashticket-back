@@ -6,10 +6,10 @@ import co.ud.ud.hashticket.dto.EventDto;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public class EventController {
     private final EventService eventService;
     private final ModelMapper modelMapper;
     @Autowired
-    public EventController(EventService eventService, ModelMapper modelMapper) {
+    public EventController(EventService eventService, @Qualifier("defaultMapper") ModelMapper modelMapper) {
         this.eventService = eventService;
         this.modelMapper = modelMapper;
     }
