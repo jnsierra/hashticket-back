@@ -9,4 +9,5 @@
     <include file="/db/changelog/changes/create-event-table-changelog.xml" />
     <include file="/db/changelog/changes/create-country-table-changelog.xml" />
     <include file="/db/changelog/changes/create-department-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-city-table-changelog.xml" />
 </databaseChangeLog>

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.Parameter;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "department")
@@ -37,6 +38,8 @@ public class DepartmentEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private CountryEntity country;
+    @OneToMany(mappedBy = "department")
+    private Set<CityEntity> cities;
 
     @Override
     public boolean equals(Object o) {

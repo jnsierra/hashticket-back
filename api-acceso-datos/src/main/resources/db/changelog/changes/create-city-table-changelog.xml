@@ -1,0 +1,1151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="admin" id="1">
+        <createTable tableName="city">
+            <column name="code" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CITY"/>
+            </column>
+            <column name="department_code" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CITY"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="city"/>
+        </rollback>
+    </changeSet>
+    <changeSet author="admin" id="2">
+        <createSequence sequenceName="city_seq" startValue="1" incrementBy="1" />
+    </changeSet>
+    <changeSet id="3" author="admin">
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="001"/><column name="name" value="MEDELLIN"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="002"/><column name="name" value="ABEJORRAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="004"/><column name="name" value="ABRIAQUI"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="021"/><column name="name" value="ALEJANDRIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="030"/><column name="name" value="AMAGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="031"/><column name="name" value="AMALFI "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="034"/><column name="name" value="ANDES"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="036"/><column name="name" value="ANGELOPOLIS"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="038"/><column name="name" value="ANGOSTURA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="040"/><column name="name" value="ANORI"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="042"/><column name="name" value="SANTAFE DE ANTIOQUIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="044"/><column name="name" value="ANZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="045"/><column name="name" value="APARTADO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="051"/><column name="name" value="ARBOLETES "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="055"/><column name="name" value="ARGELIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="059"/><column name="name" value="ARMENIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="079"/><column name="name" value="BARBOSA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="086"/><column name="name" value="BELMIRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="088"/><column name="name" value="BELLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="091"/><column name="name" value="BETANIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="093"/><column name="name" value="BETULIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="101"/><column name="name" value="CIUDAD BOLIVAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="107"/><column name="name" value="BRICEÑO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="113"/><column name="name" value="BURITICA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="120"/><column name="name" value="CACERES"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="125"/><column name="name" value="CAICEDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="129"/><column name="name" value="CALDAS "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="134"/><column name="name" value="CAMPAMENTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="138"/><column name="name" value="CAÑASGORDAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="142"/><column name="name" value="CARACOLI"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="145"/><column name="name" value="CARAMANTA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="147"/><column name="name" value="CAREPA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="148"/><column name="name" value="EL CARMEN DE VIBORAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="150"/><column name="name" value="CAROLINA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="154"/><column name="name" value="CAUCASIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="172"/><column name="name" value="CHIGORODO "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="190"/><column name="name" value="CISNEROS"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="197"/><column name="name" value="COCORNA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="206"/><column name="name" value="CONCEPCION"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="209"/><column name="name" value="CONCORDIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="212"/><column name="name" value="COPACABANA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="234"/><column name="name" value="DABEIBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="237"/><column name="name" value="DON MATIAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="240"/><column name="name" value="EBEJICO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="250"/><column name="name" value="EL BAGRE"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="264"/><column name="name" value="ENTRERRIOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="266"/><column name="name" value="ENVIGADO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="282"/><column name="name" value="FREDONIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="284"/><column name="name" value="FRONTINO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="306"/><column name="name" value="GIRALDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="308"/><column name="name" value="GIRARDOTA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="310"/><column name="name" value="GOMEZ PLATA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="313"/><column name="name" value="GRANADA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="315"/><column name="name" value="GUADALUPE "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="318"/><column name="name" value="GUARNE "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="321"/><column name="name" value="GUATAPE"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="347"/><column name="name" value="HELICONIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="353"/><column name="name" value="HISPANIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="360"/><column name="name" value="ITAGUI "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="361"/><column name="name" value="ITUANGO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="364"/><column name="name" value="JARDIN "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="368"/><column name="name" value="JERICO "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="376"/><column name="name" value="LA CEJA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="380"/><column name="name" value="LA ESTRELLA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="390"/><column name="name" value="LA PINTADA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="400"/><column name="name" value="LA UNION"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="411"/><column name="name" value="LIBORINA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="425"/><column name="name" value="MACEO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="440"/><column name="name" value="MARINILLA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="467"/><column name="name" value="MONTEBELLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="475"/><column name="name" value="MURINDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="480"/><column name="name" value="MUTATA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="483"/><column name="name" value="NARIÑO "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="490"/><column name="name" value="NECOCLI"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="495"/><column name="name" value="NECHI"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="501"/><column name="name" value="OLAYA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="541"/><column name="name" value="PEÐOL"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="543"/><column name="name" value="PEQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="576"/><column name="name" value="PUEBLORRICO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="579"/><column name="name" value="PUERTO BERRIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="585"/><column name="name" value="PUERTO NARE"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="591"/><column name="name" value="PUERTO TRIUNFO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="604"/><column name="name" value="REMEDIOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="607"/><column name="name" value="RETIRO "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="615"/><column name="name" value="RIONEGRO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="628"/><column name="name" value="SABANALARGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="631"/><column name="name" value="SABANETA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="642"/><column name="name" value="SALGAR "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="647"/><column name="name" value="SAN ANDRES DE CUERQUIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="649"/><column name="name" value="SAN CARLOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="652"/><column name="name" value="SAN FRANCISCO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="656"/><column name="name" value="SAN JERONIMO "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="658"/><column name="name" value="SAN JOSE DE LA MONTAÑA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="659"/><column name="name" value="SAN JUAN DE URABA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="660"/><column name="name" value="SAN LUIS"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="664"/><column name="name" value="SAN PEDRO "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="665"/><column name="name" value="SAN PEDRO DE URABA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="667"/><column name="name" value="SAN RAFAEL"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="670"/><column name="name" value="SAN ROQUE "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="674"/><column name="name" value="SAN VICENTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="679"/><column name="name" value="SANTA BARBARA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="686"/><column name="name" value="SANTA ROSA DE OSOS "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="690"/><column name="name" value="SANTO DOMINGO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="697"/><column name="name" value="EL SANTUARIO "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="736"/><column name="name" value="SEGOVIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="756"/><column name="name" value="SONSON "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="761"/><column name="name" value="SOPETRAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="789"/><column name="name" value="TAMESIS"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="790"/><column name="name" value="TARAZA "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="792"/><column name="name" value="TARSO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="809"/><column name="name" value="TITIRIBI"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="819"/><column name="name" value="TOLEDO "/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="837"/><column name="name" value="TURBO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="842"/><column name="name" value="URAMITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="847"/><column name="name" value="URRAO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="854"/><column name="name" value="VALDIVIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="856"/><column name="name" value="VALPARAISO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="858"/><column name="name" value="VEGACHI"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="861"/><column name="name" value="VENECIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="873"/><column name="name" value="VIGIA DEL FUERTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="885"/><column name="name" value="YALI"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="887"/><column name="name" value="YARUMAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="890"/><column name="name" value="YOLOMBO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="893"/><column name="name" value="YONDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="05"/><column name="code" value="895"/><column name="name" value="ZARAGOZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="001"/><column name="name" value="BARRANQUILLA "/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="078"/><column name="name" value="BARANOA"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="137"/><column name="name" value="CAMPO DE LA CRUZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="141"/><column name="name" value="CANDELARIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="296"/><column name="name" value="GALAPA "/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="372"/><column name="name" value="JUAN DE ACOSTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="421"/><column name="name" value="LURUACO"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="433"/><column name="name" value="MALAMBO"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="436"/><column name="name" value="MANATI "/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="520"/><column name="name" value="PALMAR DE VARELA"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="549"/><column name="name" value="PIOJO"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="558"/><column name="name" value="POLONUEVO "/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="560"/><column name="name" value="PONEDERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="573"/><column name="name" value="PUERTO COLOMBIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="606"/><column name="name" value="REPELON"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="634"/><column name="name" value="SABANAGRANDE "/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="638"/><column name="name" value="SABANALARGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="675"/><column name="name" value="SANTA LUCIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="685"/><column name="name" value="SANTO TOMAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="758"/><column name="name" value="SOLEDAD"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="770"/><column name="name" value="SUAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="832"/><column name="name" value="TUBARA "/></insert>
+        <insert tableName="city"><column name="department_code" value="08"/><column name="code" value="849"/><column name="name" value="USIACURI"/></insert>
+        <insert tableName="city"><column name="department_code" value="11"/><column name="code" value="001"/><column name="name" value="BOGOTA, D.C. "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="001"/><column name="name" value="CARTAGENA "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="006"/><column name="name" value="ACHI"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="030"/><column name="name" value="ALTOS DEL ROSARIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="042"/><column name="name" value="ARENAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="052"/><column name="name" value="ARJONA "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="062"/><column name="name" value="ARROYOHONDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="074"/><column name="name" value="BARRANCO DE LOBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="140"/><column name="name" value="CALAMAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="160"/><column name="name" value="CANTAGALLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="188"/><column name="name" value="CICUCO "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="212"/><column name="name" value="CORDOBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="222"/><column name="name" value="CLEMENCIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="244"/><column name="name" value="EL CARMEN DE BOLIVAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="248"/><column name="name" value="EL GUAMO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="268"/><column name="name" value="EL PEÑON"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="300"/><column name="name" value="HATILLO DE LOBA "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="430"/><column name="name" value="MAGANGUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="433"/><column name="name" value="MAHATES"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="440"/><column name="name" value="MARGARITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="442"/><column name="name" value="MARIA LA BAJA"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="458"/><column name="name" value="MONTECRISTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="468"/><column name="name" value="MOMPOS "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="490"/><column name="name" value="NOROSI "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="473"/><column name="name" value="MORALES"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="549"/><column name="name" value="PINILLOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="580"/><column name="name" value="REGIDOR"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="600"/><column name="name" value="RIO VIEJO "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="620"/><column name="name" value="SAN CRISTOBAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="647"/><column name="name" value="SAN ESTANISLAO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="650"/><column name="name" value="SAN FERNANDO "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="654"/><column name="name" value="SAN JACINTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="655"/><column name="name" value="SAN JACINTO DEL CAUCA "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="657"/><column name="name" value="SAN JUAN NEPOMUCENO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="667"/><column name="name" value="SAN MARTIN DE LOBA "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="670"/><column name="name" value="SAN PABLO "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="673"/><column name="name" value="SANTA CATALINA"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="683"/><column name="name" value="SANTA ROSA"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="688"/><column name="name" value="SANTA ROSA DEL SUR "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="744"/><column name="name" value="SIMITI "/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="760"/><column name="name" value="SOPLAVIENTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="780"/><column name="name" value="TALAIGUA NUEVO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="810"/><column name="name" value="TIQUISIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="836"/><column name="name" value="TURBACO"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="838"/><column name="name" value="TURBANA"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="873"/><column name="name" value="VILLANUEVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="13"/><column name="code" value="894"/><column name="name" value="ZAMBRANO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="001"/><column name="name" value="TUNJA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="022"/><column name="name" value="ALMEIDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="047"/><column name="name" value="AQUITANIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="051"/><column name="name" value="ARCABUCO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="087"/><column name="name" value="BELEN"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="090"/><column name="name" value="BERBEO "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="092"/><column name="name" value="BETEITIVA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="097"/><column name="name" value="BOAVITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="104"/><column name="name" value="BOYACA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="106"/><column name="name" value="BRICEÑO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="109"/><column name="name" value="BUENAVISTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="114"/><column name="name" value="BUSBANZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="131"/><column name="name" value="CALDAS "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="135"/><column name="name" value="CAMPOHERMOSO "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="162"/><column name="name" value="CERINZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="172"/><column name="name" value="CHINAVITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="176"/><column name="name" value="CHIQUINQUIRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="180"/><column name="name" value="CHISCAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="183"/><column name="name" value="CHITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="185"/><column name="name" value="CHITARAQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="187"/><column name="name" value="CHIVATA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="189"/><column name="name" value="CIENEGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="204"/><column name="name" value="COMBITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="212"/><column name="name" value="COPER"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="215"/><column name="name" value="CORRALES"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="218"/><column name="name" value="COVARACHIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="223"/><column name="name" value="CUBARA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="224"/><column name="name" value="CUCAITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="226"/><column name="name" value="CUITIVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="232"/><column name="name" value="CHIQUIZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="236"/><column name="name" value="CHIVOR "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="238"/><column name="name" value="DUITAMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="244"/><column name="name" value="EL COCUY"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="248"/><column name="name" value="EL ESPINO "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="272"/><column name="name" value="FIRAVITOBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="276"/><column name="name" value="FLORESTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="293"/><column name="name" value="GACHANTIVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="296"/><column name="name" value="GAMEZA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="299"/><column name="name" value="GARAGOA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="317"/><column name="name" value="GUACAMAYAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="322"/><column name="name" value="GUATEQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="325"/><column name="name" value="GUAYATA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="332"/><column name="name" value="GsICAN "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="362"/><column name="name" value="IZA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="367"/><column name="name" value="JENESANO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="368"/><column name="name" value="JERICO "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="377"/><column name="name" value="LABRANZAGRANDE"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="380"/><column name="name" value="LA CAPILLA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="401"/><column name="name" value="LA VICTORIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="403"/><column name="name" value="LA UVITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="407"/><column name="name" value="VILLA DE LEYVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="425"/><column name="name" value="MACANAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="442"/><column name="name" value="MARIPI "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="455"/><column name="name" value="MIRAFLORES"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="464"/><column name="name" value="MONGUA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="466"/><column name="name" value="MONGUI "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="469"/><column name="name" value="MONIQUIRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="476"/><column name="name" value="MOTAVITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="480"/><column name="name" value="MUZO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="491"/><column name="name" value="NOBSA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="494"/><column name="name" value="NUEVO COLON"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="500"/><column name="name" value="OICATA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="507"/><column name="name" value="OTANCHE"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="511"/><column name="name" value="PACHAVITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="514"/><column name="name" value="PAEZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="516"/><column name="name" value="PAIPA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="518"/><column name="name" value="PAJARITO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="522"/><column name="name" value="PANQUEBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="531"/><column name="name" value="PAUNA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="533"/><column name="name" value="PAYA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="537"/><column name="name" value="PAZ DE RIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="542"/><column name="name" value="PESCA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="550"/><column name="name" value="PISBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="572"/><column name="name" value="PUERTO BOYACA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="580"/><column name="name" value="QUIPAMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="599"/><column name="name" value="RAMIRIQUI "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="600"/><column name="name" value="RAQUIRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="621"/><column name="name" value="RONDON "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="632"/><column name="name" value="SABOYA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="638"/><column name="name" value="SACHICA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="646"/><column name="name" value="SAMACA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="660"/><column name="name" value="SAN EDUARDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="664"/><column name="name" value="SAN JOSE DE PARE"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="667"/><column name="name" value="SAN LUIS DE GACENO "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="673"/><column name="name" value="SAN MATEO "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="676"/><column name="name" value="SAN MIGUEL DE SEMA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="681"/><column name="name" value="SAN PABLO DE BORBUR"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="686"/><column name="name" value="SANTANA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="690"/><column name="name" value="SANTA MARIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="693"/><column name="name" value="SANTA ROSA DE VITERBO "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="696"/><column name="name" value="SANTA SOFIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="720"/><column name="name" value="SATIVANORTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="723"/><column name="name" value="SATIVASUR "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="740"/><column name="name" value="SIACHOQUE "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="753"/><column name="name" value="SOATA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="755"/><column name="name" value="SOCOTA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="757"/><column name="name" value="SOCHA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="759"/><column name="name" value="SOGAMOSO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="761"/><column name="name" value="SOMONDOCO "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="762"/><column name="name" value="SORA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="763"/><column name="name" value="SOTAQUIRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="764"/><column name="name" value="SORACA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="774"/><column name="name" value="SUSACON"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="776"/><column name="name" value="SUTAMARCHAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="778"/><column name="name" value="SUTATENZA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="790"/><column name="name" value="TASCO"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="798"/><column name="name" value="TENZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="804"/><column name="name" value="TIBANA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="806"/><column name="name" value="TIBASOSA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="808"/><column name="name" value="TINJACA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="810"/><column name="name" value="TIPACOQUE "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="814"/><column name="name" value="TOCA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="816"/><column name="name" value="TOGsI"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="820"/><column name="name" value="TOPAGA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="822"/><column name="name" value="TOTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="832"/><column name="name" value="TUNUNGUA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="835"/><column name="name" value="TURMEQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="837"/><column name="name" value="TUTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="839"/><column name="name" value="TUTAZA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="842"/><column name="name" value="UMBITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="861"/><column name="name" value="VENTAQUEMADA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="879"/><column name="name" value="VIRACACHA "/></insert>
+        <insert tableName="city"><column name="department_code" value="15"/><column name="code" value="897"/><column name="name" value="ZETAQUIRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="001"/><column name="name" value="MANIZALES "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="013"/><column name="name" value="AGUADAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="042"/><column name="name" value="ANSERMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="050"/><column name="name" value="ARANZAZU"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="088"/><column name="name" value="BELALCAZAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="174"/><column name="name" value="CHINCHINA "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="272"/><column name="name" value="FILADELFIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="380"/><column name="name" value="LA DORADA "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="388"/><column name="name" value="LA MERCED "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="433"/><column name="name" value="MANZANARES"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="442"/><column name="name" value="MARMATO"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="444"/><column name="name" value="MARQUETALIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="446"/><column name="name" value="MARULANDA "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="486"/><column name="name" value="NEIRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="495"/><column name="name" value="NORCASIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="513"/><column name="name" value="PACORA "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="524"/><column name="name" value="PALESTINA "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="541"/><column name="name" value="PENSILVANIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="614"/><column name="name" value="RIOSUCIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="616"/><column name="name" value="RISARALDA "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="653"/><column name="name" value="SALAMINA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="662"/><column name="name" value="SAMANA "/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="665"/><column name="name" value="SAN JOSE"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="777"/><column name="name" value="SUPIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="867"/><column name="name" value="VICTORIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="873"/><column name="name" value="VILLAMARIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="17"/><column name="code" value="877"/><column name="name" value="VITERBO"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="001"/><column name="name" value="FLORENCIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="029"/><column name="name" value="ALBANIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="094"/><column name="name" value="BELEN DE LOS ANDAQUIES"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="150"/><column name="name" value="CARTAGENA DEL CHAIRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="205"/><column name="name" value="CURILLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="247"/><column name="name" value="EL DONCELLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="256"/><column name="name" value="EL PAUJIL "/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="410"/><column name="name" value="LA MONTAÑITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="460"/><column name="name" value="MILAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="479"/><column name="name" value="MORELIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="592"/><column name="name" value="PUERTO RICO"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="610"/><column name="name" value="SAN JOSE DEL FRAGUA"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="753"/><column name="name" value="SAN VICENTE DEL CAGUAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="756"/><column name="name" value="SOLANO "/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="785"/><column name="name" value="SOLITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="18"/><column name="code" value="860"/><column name="name" value="VALPARAISO"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="001"/><column name="name" value="POPAYAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="022"/><column name="name" value="ALMAGUER"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="050"/><column name="name" value="ARGELIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="075"/><column name="name" value="BALBOA "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="100"/><column name="name" value="BOLIVAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="110"/><column name="name" value="BUENOS AIRES "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="130"/><column name="name" value="CAJIBIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="137"/><column name="name" value="CALDONO"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="142"/><column name="name" value="CALOTO "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="212"/><column name="name" value="CORINTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="256"/><column name="name" value="EL TAMBO"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="290"/><column name="name" value="FLORENCIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="300"/><column name="name" value="GUACHENE"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="318"/><column name="name" value="GUAPI"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="355"/><column name="name" value="INZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="364"/><column name="name" value="JAMBALO"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="392"/><column name="name" value="LA SIERRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="397"/><column name="name" value="LA VEGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="418"/><column name="name" value="LOPEZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="450"/><column name="name" value="MERCADERES"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="455"/><column name="name" value="MIRANDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="473"/><column name="name" value="MORALES"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="513"/><column name="name" value="PADILLA"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="517"/><column name="name" value="PAEZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="532"/><column name="name" value="PATIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="533"/><column name="name" value="PIAMONTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="548"/><column name="name" value="PIENDAMO"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="573"/><column name="name" value="PUERTO TEJADA"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="585"/><column name="name" value="PURACE "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="622"/><column name="name" value="ROSAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="693"/><column name="name" value="SAN SEBASTIAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="698"/><column name="name" value="SANTANDER DE QUILICHAO"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="701"/><column name="name" value="SANTA ROSA"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="743"/><column name="name" value="SILVIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="760"/><column name="name" value="SOTARA "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="780"/><column name="name" value="SUAREZ "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="785"/><column name="name" value="SUCRE"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="807"/><column name="name" value="TIMBIO "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="809"/><column name="name" value="TIMBIQUI"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="821"/><column name="name" value="TORIBIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="824"/><column name="name" value="TOTORO "/></insert>
+        <insert tableName="city"><column name="department_code" value="19"/><column name="code" value="845"/><column name="name" value="VILLA RICA"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="001"/><column name="name" value="VALLEDUPAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="011"/><column name="name" value="AGUACHICA "/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="013"/><column name="name" value="AGUSTIN CODAZZI "/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="032"/><column name="name" value="ASTREA "/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="045"/><column name="name" value="BECERRIL"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="060"/><column name="name" value="BOSCONIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="175"/><column name="name" value="CHIMICHAGUA"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="178"/><column name="name" value="CHIRIGUANA"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="228"/><column name="name" value="CURUMANI"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="238"/><column name="name" value="EL COPEY"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="250"/><column name="name" value="EL PASO"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="295"/><column name="name" value="GAMARRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="310"/><column name="name" value="GONZALEZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="383"/><column name="name" value="LA GLORIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="400"/><column name="name" value="LA JAGUA DE IBIRICO"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="443"/><column name="name" value="MANAURE"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="517"/><column name="name" value="PAILITAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="550"/><column name="name" value="PELAYA "/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="570"/><column name="name" value="PUEBLO BELLO "/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="614"/><column name="name" value="RIO DE ORO"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="621"/><column name="name" value="LA PAZ "/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="710"/><column name="name" value="SAN ALBERTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="750"/><column name="name" value="SAN DIEGO "/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="770"/><column name="name" value="SAN MARTIN"/></insert>
+        <insert tableName="city"><column name="department_code" value="20"/><column name="code" value="787"/><column name="name" value="TAMALAMEQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="001"/><column name="name" value="MONTERIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="068"/><column name="name" value="AYAPEL "/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="079"/><column name="name" value="BUENAVISTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="090"/><column name="name" value="CANALETE"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="162"/><column name="name" value="CERETE "/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="168"/><column name="name" value="CHIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="182"/><column name="name" value="CHINU"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="189"/><column name="name" value="CIENAGA DE ORO"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="300"/><column name="name" value="COTORRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="350"/><column name="name" value="LA APARTADA"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="417"/><column name="name" value="LORICA "/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="419"/><column name="name" value="LOS CORDOBAS "/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="464"/><column name="name" value="MOMIL"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="466"/><column name="name" value="MONTELIBANO"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="500"/><column name="name" value="MOÑITOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="555"/><column name="name" value="PLANETA RICA "/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="570"/><column name="name" value="PUEBLO NUEVO "/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="574"/><column name="name" value="PUERTO ESCONDIDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="580"/><column name="name" value="PUERTO LIBERTADOR"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="586"/><column name="name" value="PURISIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="660"/><column name="name" value="SAHAGUN"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="670"/><column name="name" value="SAN ANDRES SOTAVENTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="672"/><column name="name" value="SAN ANTERO"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="675"/><column name="name" value="SAN BERNARDO DEL VIENTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="678"/><column name="name" value="SAN CARLOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="686"/><column name="name" value="SAN PELAYO"/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="807"/><column name="name" value="TIERRALTA "/></insert>
+        <insert tableName="city"><column name="department_code" value="23"/><column name="code" value="855"/><column name="name" value="VALENCIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="001"/><column name="name" value="AGUA DE DIOS "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="019"/><column name="name" value="ALBAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="035"/><column name="name" value="ANAPOIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="040"/><column name="name" value="ANOLAIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="053"/><column name="name" value="ARBELAEZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="086"/><column name="name" value="BELTRAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="095"/><column name="name" value="BITUIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="099"/><column name="name" value="BOJACA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="120"/><column name="name" value="CABRERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="123"/><column name="name" value="CACHIPAY"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="126"/><column name="name" value="CAJICA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="148"/><column name="name" value="CAPARRAPI "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="151"/><column name="name" value="CAQUEZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="154"/><column name="name" value="CARMEN DE CARUPA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="168"/><column name="name" value="CHAGUANI"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="175"/><column name="name" value="CHIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="178"/><column name="name" value="CHIPAQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="181"/><column name="name" value="CHOACHI"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="183"/><column name="name" value="CHOCONTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="200"/><column name="name" value="COGUA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="214"/><column name="name" value="COTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="224"/><column name="name" value="CUCUNUBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="245"/><column name="name" value="EL COLEGIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="258"/><column name="name" value="EL PEÑON"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="260"/><column name="name" value="EL ROSAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="269"/><column name="name" value="FACATATIVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="279"/><column name="name" value="FOMEQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="281"/><column name="name" value="FOSCA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="286"/><column name="name" value="FUNZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="288"/><column name="name" value="FUQUENE"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="290"/><column name="name" value="FUSAGASUGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="293"/><column name="name" value="GACHALA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="295"/><column name="name" value="GACHANCIPA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="297"/><column name="name" value="GACHETA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="299"/><column name="name" value="GAMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="307"/><column name="name" value="GIRARDOT"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="312"/><column name="name" value="GRANADA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="317"/><column name="name" value="GUACHETA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="320"/><column name="name" value="GUADUAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="322"/><column name="name" value="GUASCA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="324"/><column name="name" value="GUATAQUI"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="326"/><column name="name" value="GUATAVITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="328"/><column name="name" value="GUAYABAL DE SIQUIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="335"/><column name="name" value="GUAYABETAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="339"/><column name="name" value="GUTIERREZ "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="368"/><column name="name" value="JERUSALEN "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="372"/><column name="name" value="JUNIN"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="377"/><column name="name" value="LA CALERA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="386"/><column name="name" value="LA MESA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="394"/><column name="name" value="LA PALMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="398"/><column name="name" value="LA PEÑA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="402"/><column name="name" value="LA VEGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="407"/><column name="name" value="LENGUAZAQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="426"/><column name="name" value="MACHETA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="430"/><column name="name" value="MADRID "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="436"/><column name="name" value="MANTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="438"/><column name="name" value="MEDINA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="473"/><column name="name" value="MOSQUERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="483"/><column name="name" value="NARIÑO "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="486"/><column name="name" value="NEMOCON"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="488"/><column name="name" value="NILO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="489"/><column name="name" value="NIMAIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="491"/><column name="name" value="NOCAIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="506"/><column name="name" value="VENECIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="513"/><column name="name" value="PACHO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="518"/><column name="name" value="PAIME"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="524"/><column name="name" value="PANDI"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="530"/><column name="name" value="PARATEBUENO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="535"/><column name="name" value="PASCA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="572"/><column name="name" value="PUERTO SALGAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="580"/><column name="name" value="PULI"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="592"/><column name="name" value="QUEBRADANEGRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="594"/><column name="name" value="QUETAME"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="596"/><column name="name" value="QUIPILE"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="599"/><column name="name" value="APULO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="612"/><column name="name" value="RICAURTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="645"/><column name="name" value="SAN ANTONIO DEL TEQUENDAMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="649"/><column name="name" value="SAN BERNARDO "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="653"/><column name="name" value="SAN CAYETANO "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="658"/><column name="name" value="SAN FRANCISCO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="662"/><column name="name" value="SAN JUAN DE RIO SECO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="718"/><column name="name" value="SASAIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="736"/><column name="name" value="SESQUILE"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="740"/><column name="name" value="SIBATE "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="743"/><column name="name" value="SILVANIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="745"/><column name="name" value="SIMIJACA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="754"/><column name="name" value="SOACHA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="758"/><column name="name" value="SOPO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="769"/><column name="name" value="SUBACHOQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="772"/><column name="name" value="SUESCA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="777"/><column name="name" value="SUPATA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="779"/><column name="name" value="SUSA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="781"/><column name="name" value="SUTATAUSA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="785"/><column name="name" value="TABIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="793"/><column name="name" value="TAUSA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="797"/><column name="name" value="TENA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="799"/><column name="name" value="TENJO"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="805"/><column name="name" value="TIBACUY"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="807"/><column name="name" value="TIBIRITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="815"/><column name="name" value="TOCAIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="817"/><column name="name" value="TOCANCIPA "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="823"/><column name="name" value="TOPAIPI"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="839"/><column name="name" value="UBALA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="841"/><column name="name" value="UBAQUE "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="843"/><column name="name" value="VILLA DE SAN DIEGO DE UBATE "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="845"/><column name="name" value="UNE "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="851"/><column name="name" value="UTICA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="862"/><column name="name" value="VERGARA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="867"/><column name="name" value="VIANI"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="871"/><column name="name" value="VILLAGOMEZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="873"/><column name="name" value="VILLAPINZON"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="875"/><column name="name" value="VILLETA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="878"/><column name="name" value="VIOTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="885"/><column name="name" value="YACOPI "/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="898"/><column name="name" value="ZIPACON"/></insert>
+        <insert tableName="city"><column name="department_code" value="25"/><column name="code" value="899"/><column name="name" value="ZIPAQUIRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="001"/><column name="name" value="QUIBDO "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="006"/><column name="name" value="ACANDI "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="025"/><column name="name" value="ALTO BAUDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="050"/><column name="name" value="ATRATO "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="073"/><column name="name" value="BAGADO "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="075"/><column name="name" value="BAHIA SOLANO "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="077"/><column name="name" value="BAJO BAUDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="099"/><column name="name" value="BOJAYA "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="135"/><column name="name" value="EL CANTON DEL SAN PABLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="150"/><column name="name" value="CARMEN DEL DARIEN"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="160"/><column name="name" value="CERTEGUI"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="205"/><column name="name" value="CONDOTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="245"/><column name="name" value="EL CARMEN DE ATRATO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="250"/><column name="name" value="EL LITORAL DEL SAN JUAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="361"/><column name="name" value="ISTMINA"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="372"/><column name="name" value="JURADO "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="413"/><column name="name" value="LLORO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="425"/><column name="name" value="MEDIO ATRATO "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="430"/><column name="name" value="MEDIO BAUDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="450"/><column name="name" value="MEDIO SAN JUAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="491"/><column name="name" value="NOVITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="495"/><column name="name" value="NUQUI"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="580"/><column name="name" value="RIO IRO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="600"/><column name="name" value="RIO QUITO "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="615"/><column name="name" value="RIOSUCIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="660"/><column name="name" value="SAN JOSE DEL PALMAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="745"/><column name="name" value="SIPI"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="787"/><column name="name" value="TADO"/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="800"/><column name="name" value="UNGUIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="27"/><column name="code" value="810"/><column name="name" value="UNION PANAMERICANA "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="001"/><column name="name" value="NEIVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="006"/><column name="name" value="ACEVEDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="013"/><column name="name" value="AGRADO "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="016"/><column name="name" value="AIPE"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="020"/><column name="name" value="ALGECIRAS "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="026"/><column name="name" value="ALTAMIRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="078"/><column name="name" value="BARAYA "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="132"/><column name="name" value="CAMPOALEGRE"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="206"/><column name="name" value="COLOMBIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="244"/><column name="name" value="ELIAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="298"/><column name="name" value="GARZON "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="306"/><column name="name" value="GIGANTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="319"/><column name="name" value="GUADALUPE "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="349"/><column name="name" value="HOBO"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="357"/><column name="name" value="IQUIRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="359"/><column name="name" value="ISNOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="378"/><column name="name" value="LA ARGENTINA "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="396"/><column name="name" value="LA PLATA"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="483"/><column name="name" value="NATAGA "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="503"/><column name="name" value="OPORAPA"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="518"/><column name="name" value="PAICOL "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="524"/><column name="name" value="PALERMO"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="530"/><column name="name" value="PALESTINA "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="548"/><column name="name" value="PITAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="551"/><column name="name" value="PITALITO"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="615"/><column name="name" value="RIVERA "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="660"/><column name="name" value="SALADOBLANCO "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="668"/><column name="name" value="SAN AGUSTIN"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="676"/><column name="name" value="SANTA MARIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="770"/><column name="name" value="SUAZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="791"/><column name="name" value="TARQUI "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="797"/><column name="name" value="TESALIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="799"/><column name="name" value="TELLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="801"/><column name="name" value="TERUEL "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="807"/><column name="name" value="TIMANA "/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="872"/><column name="name" value="VILLAVIEJA"/></insert>
+        <insert tableName="city"><column name="department_code" value="41"/><column name="code" value="885"/><column name="name" value="YAGUARA"/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="001"/><column name="name" value="RIOHACHA"/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="035"/><column name="name" value="ALBANIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="078"/><column name="name" value="BARRANCAS "/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="090"/><column name="name" value="DIBULLA"/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="098"/><column name="name" value="DISTRACCION"/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="110"/><column name="name" value="EL MOLINO "/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="279"/><column name="name" value="FONSECA"/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="378"/><column name="name" value="HATONUEVO "/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="420"/><column name="name" value="LA JAGUA DEL PILAR "/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="430"/><column name="name" value="MAICAO "/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="560"/><column name="name" value="MANAURE"/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="650"/><column name="name" value="SAN JUAN DEL CESAR "/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="847"/><column name="name" value="URIBIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="855"/><column name="name" value="URUMITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="44"/><column name="code" value="874"/><column name="name" value="VILLANUEVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="001"/><column name="name" value="SANTA MARTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="030"/><column name="name" value="ALGARROBO "/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="053"/><column name="name" value="ARACATACA "/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="058"/><column name="name" value="ARIGUANI"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="161"/><column name="name" value="CERRO SAN ANTONIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="170"/><column name="name" value="CHIBOLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="189"/><column name="name" value="CIENAGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="205"/><column name="name" value="CONCORDIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="245"/><column name="name" value="EL BANCO"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="258"/><column name="name" value="EL PIÑON"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="268"/><column name="name" value="EL RETEN"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="288"/><column name="name" value="FUNDACION "/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="318"/><column name="name" value="GUAMAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="460"/><column name="name" value="NUEVA GRANADA"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="541"/><column name="name" value="PEDRAZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="545"/><column name="name" value="PIJIÑO DEL CARMEN"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="551"/><column name="name" value="PIVIJAY"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="555"/><column name="name" value="PLATO"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="570"/><column name="name" value="PUEBLOVIEJO"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="605"/><column name="name" value="REMOLINO"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="660"/><column name="name" value="SABANAS DE SAN ANGEL"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="675"/><column name="name" value="SALAMINA"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="692"/><column name="name" value="SAN SEBASTIAN DE BUENAVISTA "/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="703"/><column name="name" value="SAN ZENON "/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="707"/><column name="name" value="SANTA ANA "/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="720"/><column name="name" value="SANTA BARBARA DE PINTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="745"/><column name="name" value="SITIONUEVO"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="798"/><column name="name" value="TENERIFE"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="960"/><column name="name" value="ZAPAYAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="47"/><column name="code" value="980"/><column name="name" value="ZONA BANANERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="001"/><column name="name" value="VILLAVICENCIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="006"/><column name="name" value="ACACIAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="110"/><column name="name" value="BARRANCA DE UPIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="124"/><column name="name" value="CABUYARO"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="150"/><column name="name" value="CASTILLA LA NUEVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="223"/><column name="name" value="CUBARRAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="226"/><column name="name" value="CUMARAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="245"/><column name="name" value="EL CALVARIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="251"/><column name="name" value="EL CASTILLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="270"/><column name="name" value="EL DORADO "/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="287"/><column name="name" value="FUENTE DE ORO"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="313"/><column name="name" value="GRANADA"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="318"/><column name="name" value="GUAMAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="325"/><column name="name" value="MAPIRIPAN "/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="330"/><column name="name" value="MESETAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="350"/><column name="name" value="LA MACARENA"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="370"/><column name="name" value="URIBE"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="400"/><column name="name" value="LEJANIAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="450"/><column name="name" value="PUERTO CONCORDIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="568"/><column name="name" value="PUERTO GAITAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="573"/><column name="name" value="PUERTO LOPEZ "/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="577"/><column name="name" value="PUERTO LLERAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="590"/><column name="name" value="PUERTO RICO"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="606"/><column name="name" value="RESTREPO"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="680"/><column name="name" value="SAN CARLOS DE GUAROA"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="683"/><column name="name" value="SAN JUAN DE ARAMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="686"/><column name="name" value="SAN JUANITO"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="689"/><column name="name" value="SAN MARTIN"/></insert>
+        <insert tableName="city"><column name="department_code" value="50"/><column name="code" value="711"/><column name="name" value="VISTAHERMOSA "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="001"/><column name="name" value="PASTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="019"/><column name="name" value="ALBAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="022"/><column name="name" value="ALDANA "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="036"/><column name="name" value="ANCUYA "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="051"/><column name="name" value="ARBOLEDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="079"/><column name="name" value="BARBACOAS "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="083"/><column name="name" value="BELEN"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="110"/><column name="name" value="BUESACO"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="203"/><column name="name" value="COLON"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="207"/><column name="name" value="CONSACA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="210"/><column name="name" value="CONTADERO "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="215"/><column name="name" value="CORDOBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="224"/><column name="name" value="CUASPUD"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="227"/><column name="name" value="CUMBAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="233"/><column name="name" value="CUMBITARA "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="240"/><column name="name" value="CHACHAGsI "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="250"/><column name="name" value="EL CHARCO "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="254"/><column name="name" value="EL PEÑOL"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="256"/><column name="name" value="EL ROSARIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="258"/><column name="name" value="EL TABLON DE GOMEZ "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="260"/><column name="name" value="EL TAMBO"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="287"/><column name="name" value="FUNES"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="317"/><column name="name" value="GUACHUCAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="320"/><column name="name" value="GUAITARILLA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="323"/><column name="name" value="GUALMATAN "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="352"/><column name="name" value="ILES"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="354"/><column name="name" value="IMUES"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="356"/><column name="name" value="IPIALES"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="378"/><column name="name" value="LA CRUZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="381"/><column name="name" value="LA FLORIDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="385"/><column name="name" value="LA LLANADA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="390"/><column name="name" value="LA TOLA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="399"/><column name="name" value="LA UNION"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="405"/><column name="name" value="LEIVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="411"/><column name="name" value="LINARES"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="418"/><column name="name" value="LOS ANDES "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="427"/><column name="name" value="MAGsI"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="435"/><column name="name" value="MALLAMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="473"/><column name="name" value="MOSQUERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="480"/><column name="name" value="NARIÑO "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="490"/><column name="name" value="OLAYA HERRERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="506"/><column name="name" value="OSPINA "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="520"/><column name="name" value="FRANCISCO PIZARRO"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="540"/><column name="name" value="POLICARPA "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="560"/><column name="name" value="POTOSI "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="565"/><column name="name" value="PROVIDENCIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="573"/><column name="name" value="PUERRES"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="585"/><column name="name" value="PUPIALES"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="612"/><column name="name" value="RICAURTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="621"/><column name="name" value="ROBERTO PAYAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="678"/><column name="name" value="SAMANIEGO "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="683"/><column name="name" value="SANDONA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="685"/><column name="name" value="SAN BERNARDO "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="687"/><column name="name" value="SAN LORENZO"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="693"/><column name="name" value="SAN PABLO "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="694"/><column name="name" value="SAN PEDRO DE CARTAGO"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="696"/><column name="name" value="SANTA BARBARA"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="699"/><column name="name" value="SANTACRUZ "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="720"/><column name="name" value="SAPUYES"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="786"/><column name="name" value="TAMINANGO "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="788"/><column name="name" value="TANGUA "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="835"/><column name="name" value="SAN ANDRES DE TUMACO"/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="838"/><column name="name" value="TUQUERRES "/></insert>
+        <insert tableName="city"><column name="department_code" value="52"/><column name="code" value="885"/><column name="name" value="YACUANQUER"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="001"/><column name="name" value="CUCUTA "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="003"/><column name="name" value="ABREGO "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="051"/><column name="name" value="ARBOLEDAS "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="099"/><column name="name" value="BOCHALEMA "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="109"/><column name="name" value="BUCARASICA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="125"/><column name="name" value="CACOTA "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="128"/><column name="name" value="CACHIRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="172"/><column name="name" value="CHINACOTA "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="174"/><column name="name" value="CHITAGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="206"/><column name="name" value="CONVENCION"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="223"/><column name="name" value="CUCUTILLA "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="239"/><column name="name" value="DURANIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="245"/><column name="name" value="EL CARMEN "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="250"/><column name="name" value="EL TARRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="261"/><column name="name" value="EL ZULIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="313"/><column name="name" value="GRAMALOTE "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="344"/><column name="name" value="HACARI "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="347"/><column name="name" value="HERRAN "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="377"/><column name="name" value="LABATECA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="385"/><column name="name" value="LA ESPERANZA "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="398"/><column name="name" value="LA PLAYA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="405"/><column name="name" value="LOS PATIOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="418"/><column name="name" value="LOURDES"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="480"/><column name="name" value="MUTISCUA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="498"/><column name="name" value="OCAÑA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="518"/><column name="name" value="PAMPLONA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="520"/><column name="name" value="PAMPLONITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="553"/><column name="name" value="PUERTO SANTANDER"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="599"/><column name="name" value="RAGONVALIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="660"/><column name="name" value="SALAZAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="670"/><column name="name" value="SAN CALIXTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="673"/><column name="name" value="SAN CAYETANO "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="680"/><column name="name" value="SANTIAGO"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="720"/><column name="name" value="SARDINATA "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="743"/><column name="name" value="SILOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="800"/><column name="name" value="TEORAMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="810"/><column name="name" value="TIBU"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="820"/><column name="name" value="TOLEDO "/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="871"/><column name="name" value="VILLA CARO"/></insert>
+        <insert tableName="city"><column name="department_code" value="54"/><column name="code" value="874"/><column name="name" value="VILLA DEL ROSARIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="001"/><column name="name" value="ARMENIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="111"/><column name="name" value="BUENAVISTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="130"/><column name="name" value="CALARCA"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="190"/><column name="name" value="CIRCASIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="212"/><column name="name" value="CORDOBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="272"/><column name="name" value="FILANDIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="302"/><column name="name" value="GENOVA "/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="401"/><column name="name" value="LA TEBAIDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="470"/><column name="name" value="MONTENEGRO"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="548"/><column name="name" value="PIJAO"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="594"/><column name="name" value="QUIMBAYA"/></insert>
+        <insert tableName="city"><column name="department_code" value="63"/><column name="code" value="690"/><column name="name" value="SALENTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="001"/><column name="name" value="PEREIRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="045"/><column name="name" value="APIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="075"/><column name="name" value="BALBOA "/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="088"/><column name="name" value="BELEN DE UMBRIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="170"/><column name="name" value="DOSQUEBRADAS "/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="318"/><column name="name" value="GUATICA"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="383"/><column name="name" value="LA CELIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="400"/><column name="name" value="LA VIRGINIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="440"/><column name="name" value="MARSELLA"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="456"/><column name="name" value="MISTRATO"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="572"/><column name="name" value="PUEBLO RICO"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="594"/><column name="name" value="QUINCHIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="682"/><column name="name" value="SANTA ROSA DE CABAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="66"/><column name="code" value="687"/><column name="name" value="SANTUARIO "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="001"/><column name="name" value="BUCARAMANGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="013"/><column name="name" value="AGUADA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="020"/><column name="name" value="ALBANIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="051"/><column name="name" value="ARATOCA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="077"/><column name="name" value="BARBOSA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="079"/><column name="name" value="BARICHARA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="081"/><column name="name" value="BARRANCABERMEJA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="092"/><column name="name" value="BETULIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="101"/><column name="name" value="BOLIVAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="121"/><column name="name" value="CABRERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="132"/><column name="name" value="CALIFORNIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="147"/><column name="name" value="CAPITANEJO"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="152"/><column name="name" value="CARCASI"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="160"/><column name="name" value="CEPITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="162"/><column name="name" value="CERRITO"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="167"/><column name="name" value="CHARALA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="169"/><column name="name" value="CHARTA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="176"/><column name="name" value="CHIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="179"/><column name="name" value="CHIPATA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="190"/><column name="name" value="CIMITARRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="207"/><column name="name" value="CONCEPCION"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="209"/><column name="name" value="CONFINES"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="211"/><column name="name" value="CONTRATACION "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="217"/><column name="name" value="COROMORO"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="229"/><column name="name" value="CURITI "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="235"/><column name="name" value="EL CARMEN DE CHUCURI"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="245"/><column name="name" value="EL GUACAMAYO "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="250"/><column name="name" value="EL PEÑON"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="255"/><column name="name" value="EL PLAYON "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="264"/><column name="name" value="ENCINO "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="266"/><column name="name" value="ENCISO "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="271"/><column name="name" value="FLORIAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="276"/><column name="name" value="FLORIDABLANCA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="296"/><column name="name" value="GALAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="298"/><column name="name" value="GAMBITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="307"/><column name="name" value="GIRON"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="318"/><column name="name" value="GUACA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="320"/><column name="name" value="GUADALUPE "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="322"/><column name="name" value="GUAPOTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="324"/><column name="name" value="GUAVATA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="327"/><column name="name" value="GsEPSA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="344"/><column name="name" value="HATO"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="368"/><column name="name" value="JESUS MARIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="370"/><column name="name" value="JORDAN "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="377"/><column name="name" value="LA BELLEZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="385"/><column name="name" value="LANDAZURI "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="397"/><column name="name" value="LA PAZ "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="406"/><column name="name" value="LEBRIJA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="418"/><column name="name" value="LOS SANTOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="425"/><column name="name" value="MACARAVITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="432"/><column name="name" value="MALAGA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="444"/><column name="name" value="MATANZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="464"/><column name="name" value="MOGOTES"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="468"/><column name="name" value="MOLAGAVITA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="498"/><column name="name" value="OCAMONTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="500"/><column name="name" value="OIBA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="502"/><column name="name" value="ONZAGA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="522"/><column name="name" value="PALMAR "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="524"/><column name="name" value="PALMAS DEL SOCORRO "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="533"/><column name="name" value="PARAMO "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="547"/><column name="name" value="PIEDECUESTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="549"/><column name="name" value="PINCHOTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="572"/><column name="name" value="PUENTE NACIONAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="573"/><column name="name" value="PUERTO PARRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="575"/><column name="name" value="PUERTO WILCHES"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="615"/><column name="name" value="RIONEGRO"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="655"/><column name="name" value="SABANA DE TORRES"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="669"/><column name="name" value="SAN ANDRES"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="673"/><column name="name" value="SAN BENITO"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="679"/><column name="name" value="SAN GIL"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="682"/><column name="name" value="SAN JOAQUIN"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="684"/><column name="name" value="SAN JOSE DE MIRANDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="686"/><column name="name" value="SAN MIGUEL"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="689"/><column name="name" value="SAN VICENTE DE CHUCURI"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="705"/><column name="name" value="SANTA BARBARA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="720"/><column name="name" value="SANTA HELENA DEL OPON "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="745"/><column name="name" value="SIMACOTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="755"/><column name="name" value="SOCORRO"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="770"/><column name="name" value="SUAITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="773"/><column name="name" value="SUCRE"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="780"/><column name="name" value="SURATA "/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="820"/><column name="name" value="TONA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="855"/><column name="name" value="VALLE DE SAN JOSE"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="861"/><column name="name" value="VELEZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="867"/><column name="name" value="VETAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="872"/><column name="name" value="VILLANUEVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="68"/><column name="code" value="895"/><column name="name" value="ZAPATOCA"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="001"/><column name="name" value="SINCELEJO "/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="110"/><column name="name" value="BUENAVISTA"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="124"/><column name="name" value="CAIMITO"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="204"/><column name="name" value="COLOSO "/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="215"/><column name="name" value="COROZAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="221"/><column name="name" value="COVEÑAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="230"/><column name="name" value="CHALAN "/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="233"/><column name="name" value="EL ROBLE"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="235"/><column name="name" value="GALERAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="265"/><column name="name" value="GUARANDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="400"/><column name="name" value="LA UNION"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="418"/><column name="name" value="LOS PALMITOS "/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="429"/><column name="name" value="MAJAGUAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="473"/><column name="name" value="MORROA "/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="508"/><column name="name" value="OVEJAS "/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="523"/><column name="name" value="PALMITO"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="670"/><column name="name" value="SAMPUES"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="678"/><column name="name" value="SAN BENITO ABAD "/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="702"/><column name="name" value="SAN JUAN DE BETULIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="708"/><column name="name" value="SAN MARCOS"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="713"/><column name="name" value="SAN ONOFRE"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="717"/><column name="name" value="SAN PEDRO "/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="742"/><column name="name" value="SAN LUIS DE SINCE"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="771"/><column name="name" value="SUCRE"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="820"/><column name="name" value="SANTIAGO DE TOLU"/></insert>
+        <insert tableName="city"><column name="department_code" value="70"/><column name="code" value="823"/><column name="name" value="TOLU VIEJO"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="001"/><column name="name" value="IBAGUE "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="024"/><column name="name" value="ALPUJARRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="026"/><column name="name" value="ALVARADO"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="030"/><column name="name" value="AMBALEMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="043"/><column name="name" value="ANZOATEGUI"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="055"/><column name="name" value="ARMERO "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="067"/><column name="name" value="ATACO"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="124"/><column name="name" value="CAJAMARCA "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="148"/><column name="name" value="CARMEN DE APICALA"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="152"/><column name="name" value="CASABIANCA"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="168"/><column name="name" value="CHAPARRAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="200"/><column name="name" value="COELLO "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="217"/><column name="name" value="COYAIMA"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="226"/><column name="name" value="CUNDAY "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="236"/><column name="name" value="DOLORES"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="268"/><column name="name" value="ESPINAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="270"/><column name="name" value="FALAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="275"/><column name="name" value="FLANDES"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="283"/><column name="name" value="FRESNO "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="319"/><column name="name" value="GUAMO"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="347"/><column name="name" value="HERVEO "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="349"/><column name="name" value="HONDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="352"/><column name="name" value="ICONONZO"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="408"/><column name="name" value="LERIDA "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="411"/><column name="name" value="LIBANO "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="443"/><column name="name" value="MARIQUITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="449"/><column name="name" value="MELGAR "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="461"/><column name="name" value="MURILLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="483"/><column name="name" value="NATAGAIMA "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="504"/><column name="name" value="ORTEGA "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="520"/><column name="name" value="PALOCABILDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="547"/><column name="name" value="PIEDRAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="555"/><column name="name" value="PLANADAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="563"/><column name="name" value="PRADO"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="585"/><column name="name" value="PURIFICACION "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="616"/><column name="name" value="RIOBLANCO "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="622"/><column name="name" value="RONCESVALLES "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="624"/><column name="name" value="ROVIRA "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="671"/><column name="name" value="SALDAÑA"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="675"/><column name="name" value="SAN ANTONIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="678"/><column name="name" value="SAN LUIS"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="686"/><column name="name" value="SANTA ISABEL "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="770"/><column name="name" value="SUAREZ "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="854"/><column name="name" value="VALLE DE SAN JUAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="861"/><column name="name" value="VENADILLO "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="870"/><column name="name" value="VILLAHERMOSA "/></insert>
+        <insert tableName="city"><column name="department_code" value="73"/><column name="code" value="873"/><column name="name" value="VILLARRICA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="001"/><column name="name" value="CALI"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="020"/><column name="name" value="ALCALA "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="036"/><column name="name" value="ANDALUCIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="041"/><column name="name" value="ANSERMANUEVO "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="054"/><column name="name" value="ARGELIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="100"/><column name="name" value="BOLIVAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="109"/><column name="name" value="BUENAVENTURA "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="111"/><column name="name" value="GUADALAJARA DE BUGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="113"/><column name="name" value="BUGALAGRANDE "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="122"/><column name="name" value="CAICEDONIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="126"/><column name="name" value="CALIMA "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="130"/><column name="name" value="CANDELARIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="147"/><column name="name" value="CARTAGO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="233"/><column name="name" value="DAGUA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="243"/><column name="name" value="EL AGUILA "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="246"/><column name="name" value="EL CAIRO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="248"/><column name="name" value="EL CERRITO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="250"/><column name="name" value="EL DOVIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="275"/><column name="name" value="FLORIDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="306"/><column name="name" value="GINEBRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="318"/><column name="name" value="GUACARI"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="364"/><column name="name" value="JAMUNDI"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="377"/><column name="name" value="LA CUMBRE "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="400"/><column name="name" value="LA UNION"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="403"/><column name="name" value="LA VICTORIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="497"/><column name="name" value="OBANDO "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="520"/><column name="name" value="PALMIRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="563"/><column name="name" value="PRADERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="606"/><column name="name" value="RESTREPO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="616"/><column name="name" value="RIOFRIO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="622"/><column name="name" value="ROLDANILLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="670"/><column name="name" value="SAN PEDRO "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="736"/><column name="name" value="SEVILLA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="823"/><column name="name" value="TORO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="828"/><column name="name" value="TRUJILLO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="834"/><column name="name" value="TULUA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="845"/><column name="name" value="ULLOA"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="863"/><column name="name" value="VERSALLES "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="869"/><column name="name" value="VIJES"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="890"/><column name="name" value="YOTOCO "/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="892"/><column name="name" value="YUMBO"/></insert>
+        <insert tableName="city"><column name="department_code" value="76"/><column name="code" value="895"/><column name="name" value="ZARZAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="81"/><column name="code" value="001"/><column name="name" value="ARAUCA "/></insert>
+        <insert tableName="city"><column name="department_code" value="81"/><column name="code" value="065"/><column name="name" value="ARAUQUITA "/></insert>
+        <insert tableName="city"><column name="department_code" value="81"/><column name="code" value="220"/><column name="name" value="CRAVO NORTE"/></insert>
+        <insert tableName="city"><column name="department_code" value="81"/><column name="code" value="300"/><column name="name" value="FORTUL "/></insert>
+        <insert tableName="city"><column name="department_code" value="81"/><column name="code" value="591"/><column name="name" value="PUERTO RONDON"/></insert>
+        <insert tableName="city"><column name="department_code" value="81"/><column name="code" value="736"/><column name="name" value="SARAVENA"/></insert>
+        <insert tableName="city"><column name="department_code" value="81"/><column name="code" value="794"/><column name="name" value="TAME"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="001"/><column name="name" value="YOPAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="010"/><column name="name" value="AGUAZUL"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="015"/><column name="name" value="CHAMEZA"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="125"/><column name="name" value="HATO COROZAL "/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="136"/><column name="name" value="LA SALINA "/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="139"/><column name="name" value="MANI"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="162"/><column name="name" value="MONTERREY "/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="225"/><column name="name" value="NUNCHIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="230"/><column name="name" value="OROCUE "/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="250"/><column name="name" value="PAZ DE ARIPORO"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="263"/><column name="name" value="PORE"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="279"/><column name="name" value="RECETOR"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="300"/><column name="name" value="SABANALARGA"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="315"/><column name="name" value="SACAMA "/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="325"/><column name="name" value="SAN LUIS DE PALENQUE"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="400"/><column name="name" value="TAMARA "/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="410"/><column name="name" value="TAURAMENA "/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="430"/><column name="name" value="TRINIDAD"/></insert>
+        <insert tableName="city"><column name="department_code" value="85"/><column name="code" value="440"/><column name="name" value="VILLANUEVA"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="001"/><column name="name" value="MOCOA"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="219"/><column name="name" value="COLON"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="320"/><column name="name" value="ORITO"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="568"/><column name="name" value="PUERTO ASIS"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="569"/><column name="name" value="PUERTO CAICEDO"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="571"/><column name="name" value="PUERTO GUZMAN"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="573"/><column name="name" value="LEGUIZAMO "/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="749"/><column name="name" value="SIBUNDOY"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="755"/><column name="name" value="SAN FRANCISCO"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="757"/><column name="name" value="SAN MIGUEL"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="760"/><column name="name" value="SANTIAGO"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="865"/><column name="name" value="VALLE DEL GUAMUEZ"/></insert>
+        <insert tableName="city"><column name="department_code" value="86"/><column name="code" value="885"/><column name="name" value="VILLAGARZON"/></insert>
+        <insert tableName="city"><column name="department_code" value="88"/><column name="code" value="001"/><column name="name" value="SAN ANDRES"/></insert>
+        <insert tableName="city"><column name="department_code" value="88"/><column name="code" value="564"/><column name="name" value="PROVIDENCIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="001"/><column name="name" value="LETICIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="263"/><column name="name" value="EL ENCANTO"/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="405"/><column name="name" value="LA CHORRERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="407"/><column name="name" value="LA PEDRERA"/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="430"/><column name="name" value="LA VICTORIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="460"/><column name="name" value="MIRITI - PARANA "/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="530"/><column name="name" value="PUERTO ALEGRIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="536"/><column name="name" value="PUERTO ARICA "/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="540"/><column name="name" value="PUERTO NARIÑO"/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="669"/><column name="name" value="PUERTO SANTANDER"/></insert>
+        <insert tableName="city"><column name="department_code" value="91"/><column name="code" value="798"/><column name="name" value="TARAPACA"/></insert>
+        <insert tableName="city"><column name="department_code" value="94"/><column name="code" value="001"/><column name="name" value="INIRIDA"/></insert>
+        <insert tableName="city"><column name="department_code" value="94"/><column name="code" value="343"/><column name="name" value="BARRANCO MINAS"/></insert>
+        <insert tableName="city"><column name="department_code" value="94"/><column name="code" value="663"/><column name="name" value="MAPIRIPANA"/></insert>
+        <insert tableName="city"><column name="department_code" value="94"/><column name="code" value="883"/><column name="name" value="SAN FELIPE"/></insert>
+        <insert tableName="city"><column name="department_code" value="94"/><column name="code" value="884"/><column name="name" value="PUERTO COLOMBIA "/></insert>
+        <insert tableName="city"><column name="department_code" value="94"/><column name="code" value="885"/><column name="name" value="LA GUADALUPE "/></insert>
+        <insert tableName="city"><column name="department_code" value="94"/><column name="code" value="886"/><column name="name" value="CACAHUAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="94"/><column name="code" value="887"/><column name="name" value="PANA PANA "/></insert>
+        <insert tableName="city"><column name="department_code" value="94"/><column name="code" value="888"/><column name="name" value="MORICHAL"/></insert>
+        <insert tableName="city"><column name="department_code" value="95"/><column name="code" value="001"/><column name="name" value="SAN JOSE DEL GUAVIARE "/></insert>
+        <insert tableName="city"><column name="department_code" value="95"/><column name="code" value="015"/><column name="name" value="CALAMAR"/></insert>
+        <insert tableName="city"><column name="department_code" value="95"/><column name="code" value="025"/><column name="name" value="EL RETORNO"/></insert>
+        <insert tableName="city"><column name="department_code" value="95"/><column name="code" value="200"/><column name="name" value="MIRAFLORES"/></insert>
+        <insert tableName="city"><column name="department_code" value="97"/><column name="code" value="001"/><column name="name" value="MITU"/></insert>
+        <insert tableName="city"><column name="department_code" value="97"/><column name="code" value="161"/><column name="name" value="CARURU "/></insert>
+        <insert tableName="city"><column name="department_code" value="97"/><column name="code" value="511"/><column name="name" value="PACOA"/></insert>
+        <insert tableName="city"><column name="department_code" value="97"/><column name="code" value="666"/><column name="name" value="TARAIRA"/></insert>
+        <insert tableName="city"><column name="department_code" value="97"/><column name="code" value="777"/><column name="name" value="PAPUNAUA"/></insert>
+        <insert tableName="city"><column name="department_code" value="97"/><column name="code" value="889"/><column name="name" value="YAVARATE"/></insert>
+        <insert tableName="city"><column name="department_code" value="99"/><column name="code" value="001"/><column name="name" value="PUERTO CARREÑO"/></insert>
+        <insert tableName="city"><column name="department_code" value="99"/><column name="code" value="524"/><column name="name" value="LA PRIMAVERA "/></insert>
+        <insert tableName="city"><column name="department_code" value="99"/><column name="code" value="624"/><column name="name" value="SANTA ROSALIA"/></insert>
+        <insert tableName="city"><column name="department_code" value="99"/><column name="code" value="773"/><column name="name" value="CUMARIBO"/></insert>
+    </changeSet>
+    <changeSet id="4" author="admin">
+        <addForeignKeyConstraint baseTableName="city" baseColumnNames="department_code" constraintName="fk_city_department" referencedTableName="department" referencedColumnNames="code"/>
+    </changeSet>
+</databaseChangeLog>
