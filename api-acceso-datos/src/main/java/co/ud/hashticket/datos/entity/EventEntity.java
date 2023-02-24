@@ -9,13 +9,10 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "event")
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class EventEntity {
     @Id
     @GeneratedValue(generator = "sequence-generator")
@@ -32,8 +29,6 @@ public class EventEntity {
     private Long id;
     @Column(name="place")
     private String place;
-    @Column(name = "city")
-    private String city;
     @Column(name = "date")
     private LocalDate date;
     @Column(name = "time")
@@ -50,4 +45,115 @@ public class EventEntity {
     private String address;
     @Column(name = "opening_doors")
     private String openingDoors;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "city_code", referencedColumnName = "code"),
+            @JoinColumn(name = "department_code", referencedColumnName = "department_code")
+    })
+    private CityEntity city;
+
+    public EventEntity() {
+    }
+
+    public EventEntity(Long id, String place, LocalDate date, String time, String category, int minimumAge, String responsible, String nit, String address, String openingDoors, CityEntity city) {
+        this.id = id;
+        this.place = place;
+        this.date = date;
+        this.time = time;
+        this.category = category;
+        this.minimumAge = minimumAge;
+        this.responsible = responsible;
+        this.nit = nit;
+        this.address = address;
+        this.openingDoors = openingDoors;
+        this.city = city;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getMinimumAge() {
+        return minimumAge;
+    }
+
+    public void setMinimumAge(int minimumAge) {
+        this.minimumAge = minimumAge;
+    }
+
+    public String getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getOpeningDoors() {
+        return openingDoors;
+    }
+
+    public void setOpeningDoors(String openingDoors) {
+        this.openingDoors = openingDoors;
+    }
+
+    public CityEntity getCity() {
+        return city;
+    }
+
+    public void setCity(CityEntity city) {
+        this.city = city;
+    }
 }

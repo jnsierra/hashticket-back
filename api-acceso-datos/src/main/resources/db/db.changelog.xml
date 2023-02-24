@@ -6,8 +6,8 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <property name="sequence.country"    value="(SELECT nextval('country_seq'))" dbms="postgresql"/>
 
-    <include file="/db/changelog/changes/create-event-table-changelog.xml" />
     <include file="/db/changelog/changes/create-country-table-changelog.xml" />
     <include file="/db/changelog/changes/create-department-table-changelog.xml" />
     <include file="/db/changelog/changes/create-city-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-event-table-changelog.xml" />
 </databaseChangeLog>

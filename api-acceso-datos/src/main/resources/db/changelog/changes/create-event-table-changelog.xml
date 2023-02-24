@@ -12,9 +12,6 @@
             <column name="place" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="city" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="date" type="datetime">
                 <constraints nullable="false"/>
             </column>
@@ -39,6 +36,12 @@
             <column name="opening_doors" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="city_code" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="department_code" type="INT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <rollback>
             <dropTable tableName="admin"/>
@@ -46,5 +49,13 @@
     </changeSet>
     <changeSet author="admin" id="2">
         <createSequence sequenceName="event_seq" startValue="1" incrementBy="1" />
+    </changeSet>
+    <changeSet id="admin" author="3">
+        <addForeignKeyConstraint
+                baseTableName="event"
+                baseColumnNames="department_code, city_code"
+                constraintName="fk_event_city"
+                referencedTableName="city"
+                referencedColumnNames="department_code, code"/>
     </changeSet>
 </databaseChangeLog>

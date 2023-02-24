@@ -6,7 +6,7 @@
 
     <changeSet author="admin" id="1">
         <createTable tableName="country">
-            <column name="id" type="INT">
+            <column name="code" type="INT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(255)">
@@ -25,7 +25,7 @@
     </changeSet>
     <changeSet id="3" author="admin">
         <insert tableName="country">
-            <column name="id" valueComputed="${sequence.country}"/>
+            <column name="code" valueComputed="57"/>
             <column name="name" value="COLOMBIA"/>
             <column name="diminutive_alpha3" value="COL"/>
         </insert>

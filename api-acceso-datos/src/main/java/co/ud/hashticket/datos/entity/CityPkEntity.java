@@ -1,25 +1,39 @@
 package co.ud.hashticket.datos.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-@Builder
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CityPkEntity implements Serializable {
+    public CityPkEntity() {
+    }
+    public CityPkEntity(Long code, Long departmentCode) {
+        this.code = code;
+        this.departmentCode = departmentCode;
+    }
+
     @Column(name = "code")
     private Long code;
     @Column(name = "department_code")
     private Long departmentCode;
+
+    public Long getCode() {
+        return code;
+    }
+
+    public void setCode(Long code) {
+        this.code = code;
+    }
+
+    public Long getDepartmentCode() {
+        return departmentCode;
+    }
+
+    public void setDepartmentCode(Long departmentCode) {
+        this.departmentCode = departmentCode;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,22 +1,12 @@
 package co.ud.hashticket.datos.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "city")
 @NamedQueries({
         @NamedQuery(name="CityEntity.findByDepartment", query = "from CityEntity city inner join fetch city.department as dep where dep.code = :departmentCode ")
 })
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class CityEntity {
     @EmbeddedId
     private CityPkEntity cityPk;
@@ -26,16 +16,36 @@ public class CityEntity {
     @JoinColumn(name = "department_code", insertable = false, updatable = false)
     private DepartmentEntity department;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CityEntity that = (CityEntity) o;
-        return Objects.equals(cityPk, that.cityPk) && Objects.equals(name, that.name) && Objects.equals(department, that.department);
+    public CityEntity() {
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(cityPk, name, department);
+    public CityEntity(CityPkEntity cityPk, String name, DepartmentEntity department) {
+        this.cityPk = cityPk;
+        this.name = name;
+        this.department = department;
+    }
+
+    public CityPkEntity getCityPk() {
+        return cityPk;
+    }
+
+    public void setCityPk(CityPkEntity cityPk) {
+        this.cityPk = cityPk;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public DepartmentEntity getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(DepartmentEntity department) {
+        this.department = department;
     }
 }

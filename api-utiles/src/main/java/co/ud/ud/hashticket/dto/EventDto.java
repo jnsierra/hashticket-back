@@ -9,7 +9,6 @@ public class EventDto {
 
     private Long id;
     private String place;
-    private String city;
     private LocalDate date;
     private String time;
     private String category;
@@ -18,4 +17,6 @@ public class EventDto {
     private String nit;
     private String address;
     private String openingDoors;
+    private Long cityCode;
+    private Long departmentCode;
 }

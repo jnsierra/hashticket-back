@@ -1,12 +1,11 @@
 package co.ud.hashticket.datos.controller;
 
 import co.ud.hashticket.datos.entity.CityEntity;
+import co.ud.hashticket.datos.mapper.CityMapper;
 import co.ud.hashticket.datos.service.CityService;
 import co.ud.ud.hashticket.dto.CityDto;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,19 +21,17 @@ import java.util.Set;
 @Slf4j
 public class CityController {
     private final CityService cityService;
-    private final ModelMapper modelMapper;
     @Autowired
-    public CityController(CityService cityService,@Qualifier("cityMapper") ModelMapper modelMapper) {
+    public CityController(CityService cityService) {
         this.cityService = cityService;
-        this.modelMapper = modelMapper;
     }
     @GetMapping(value = "/{code}/{departmentCode}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CityDto> get(@PathVariable(value = "code") Long code, @PathVariable(value = "departmentCode") Long departmentCode){
         Optional<CityEntity> response = cityService.getById(code, departmentCode);
-        if(response.isEmpty()){
+        if(!response.isPresent()){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(modelMapper.map(response.get(), CityDto.class));
+        return ResponseEntity.ok(CityMapper.INSTANCE.map(response.get()));
     }
     @GetMapping(value = "/department/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CityDto[]> getByDepartment(@PathVariable(value = "id") Long departmentCode){
@@ -43,6 +40,7 @@ public class CityController {
             return ResponseEntity
                     .noContent().build();
         }
-        return ResponseEntity.ok(modelMapper.map(response, CityDto[].class));
+        //return ResponseEntity.ok(modelMapper.map(response, CityDto[].class));
+        return null;
     }
 }

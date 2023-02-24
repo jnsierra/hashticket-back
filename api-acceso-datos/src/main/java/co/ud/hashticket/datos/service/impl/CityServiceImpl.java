@@ -19,10 +19,7 @@ public class CityServiceImpl implements CityService {
     }
     @Override
     public Optional<CityEntity> getById(Long cityCode,Long departmentCode) {
-        return cityRepository.findById(CityPkEntity.builder()
-                .code(cityCode)
-                .departmentCode(departmentCode)
-                .build());
+        return cityRepository.findById(new CityPkEntity(cityCode,departmentCode));
     }
     @Override
     public Set<CityEntity> getCitiesByDepartment(Long departmentCode) {
