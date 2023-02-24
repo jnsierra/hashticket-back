@@ -34,13 +34,12 @@ public class CityController {
         return ResponseEntity.ok(CityMapper.INSTANCE.map(response.get()));
     }
     @GetMapping(value = "/department/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CityDto[]> getByDepartment(@PathVariable(value = "id") Long departmentCode){
+    public ResponseEntity<Set<CityDto>> getByDepartment(@PathVariable(value = "id") Long departmentCode){
         Set<CityEntity> response = cityService.getCitiesByDepartment(departmentCode);
         if(response.isEmpty()){
             return ResponseEntity
                     .noContent().build();
         }
-        //return ResponseEntity.ok(modelMapper.map(response, CityDto[].class));
-        return null;
+        return ResponseEntity.ok(CityMapper.INSTANCE.map(response));
     }
 }
