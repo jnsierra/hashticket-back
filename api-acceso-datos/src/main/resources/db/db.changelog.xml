@@ -10,4 +10,8 @@
     <include file="/db/changelog/changes/create-department-table-changelog.xml" />
     <include file="/db/changelog/changes/create-city-table-changelog.xml" />
     <include file="/db/changelog/changes/create-event-table-changelog.xml" />
+
+    <include file="/db/changelog/changes/create-presentation-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-music-band-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-artist-table-changelog.xml" />
 </databaseChangeLog>

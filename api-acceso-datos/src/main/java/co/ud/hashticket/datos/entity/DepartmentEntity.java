@@ -22,7 +22,6 @@ public class DepartmentEntity implements Serializable {
     private Set<CityEntity> cities;
 
     public DepartmentEntity() {
-        System.out.println("Llego al constructor vacio");
     }
 
     public DepartmentEntity(Long code, String name, CountryEntity country, Set<CityEntity> cities) {

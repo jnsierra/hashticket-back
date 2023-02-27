@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="admin" id="1">
+        <createTable tableName="music_band">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="presentation_id" type="INT">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="presentation"/>
+        </rollback>
+    </changeSet>
+    <changeSet author="admin" id="2">
+        <createSequence sequenceName="music_band_seq" startValue="1" incrementBy="1" />
+    </changeSet>
+    <changeSet id="4" author="admin">
+        <addForeignKeyConstraint baseTableName="music_band" baseColumnNames="presentation_id" constraintName="fk_musicband_presentation" referencedTableName="presentation" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

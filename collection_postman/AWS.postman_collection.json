@@ -9,81 +9,6 @@
 			"name": "datos",
 			"item": [
 				{
-					"name": "Event Insert",
-					"request": {
-						"auth": {
-							"type": "oauth2",
-							"oauth2": [
-								{
-									"key": "redirect_uri",
-									"value": "http://localhost:5002",
-									"type": "string"
-								},
-								{
-									"key": "grant_type",
-									"value": "authorization_code",
-									"type": "string"
-								},
-								{
-									"key": "client_authentication",
-									"value": "body",
-									"type": "string"
-								},
-								{
-									"key": "authUrl",
-									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-									"type": "string"
-								},
-								{
-									"key": "clientId",
-									"value": "28rcicqk03l31rmukko9q8tufb",
-									"type": "string"
-								},
-								{
-									"key": "accessTokenUrl",
-									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-									"type": "string"
-								},
-								{
-									"key": "tokenName",
-									"value": "token",
-									"type": "string"
-								},
-								{
-									"key": "addTokenTo",
-									"value": "header",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"place\": \"Movistar Arena\",\n    \"date\": \"2023-10-12\",\n    \"time\": \"24:00\",\n    \"category\": \"concierto\",\n    \"minimumAge\" : 18,\n    \"responsible\" : \"Jesus Nicolas Sierra Chaparro\",\n    \"nit\": \"12345678\",\n    \"address\" : \"Cra 73 a bis No 38 c 72 sur\",\n    \"openingDoors\": \"23:00\",\n    \"cityCode\": 1,\n    \"departmentCode\":5\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:5003/api-acceso-datos/v.1/event/",
-							"host": [
-								"localhost"
-							],
-							"port": "5003",
-							"path": [
-								"api-acceso-datos",
-								"v.1",
-								"event",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get Country",
 					"request": {
 						"auth": {
@@ -411,6 +336,372 @@
 								"city",
 								"department",
 								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Presentation",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:5002",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "28rcicqk03l31rmukko9q8tufb",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5003/api-acceso-datos/v.1/presentation/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api-acceso-datos",
+								"v.1",
+								"presentation",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Event Insert",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:5002",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "28rcicqk03l31rmukko9q8tufb",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"place\": \"Movistar Arena\",\n    \"date\": \"2023-10-12\",\n    \"time\": \"24:00\",\n    \"category\": \"concierto\",\n    \"minimumAge\" : 18,\n    \"responsible\" : \"Jesus Nicolas Sierra Chaparro\",\n    \"nit\": \"12345678\",\n    \"address\" : \"Cra 73 a bis No 38 c 72 sur\",\n    \"openingDoors\": \"23:00\",\n    \"cityCode\": 1,\n    \"departmentCode\":5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5003/api-acceso-datos/v.1/event/",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api-acceso-datos",
+								"v.1",
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Presentation Insert",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:5002",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "28rcicqk03l31rmukko9q8tufb",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Concierto Bogota\",\n    \"eventId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5003/api-acceso-datos/v.1/presentation/",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api-acceso-datos",
+								"v.1",
+								"presentation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Music Band Insert",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:5002",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "28rcicqk03l31rmukko9q8tufb",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Los 50 de Joselito\",\n    \"presentationId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5003/api-acceso-datos/v.1/musicBand/",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api-acceso-datos",
+								"v.1",
+								"musicBand",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Artist Insert",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:5002",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "28rcicqk03l31rmukko9q8tufb",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Joselito\",\n    \"description\":\"Cantante principal\",\n    \"musicBandId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5003/api-acceso-datos/v.1/artist/",
+							"host": [
+								"localhost"
+							],
+							"port": "5003",
+							"path": [
+								"api-acceso-datos",
+								"v.1",
+								"artist",
+								""
 							]
 						}
 					},

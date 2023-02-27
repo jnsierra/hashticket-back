@@ -1,15 +1,11 @@
 package co.ud.hashticket.datos.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "event")
@@ -51,11 +47,13 @@ public class EventEntity {
             @JoinColumn(name = "department_code", referencedColumnName = "department_code")
     })
     private CityEntity city;
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    private Set<PresentationEntity> presentation;
 
     public EventEntity() {
     }
 
-    public EventEntity(Long id, String place, LocalDate date, String time, String category, int minimumAge, String responsible, String nit, String address, String openingDoors, CityEntity city) {
+    public EventEntity(Long id, String place, LocalDate date, String time, String category, int minimumAge, String responsible, String nit, String address, String openingDoors, CityEntity city, Set<PresentationEntity> presentation) {
         this.id = id;
         this.place = place;
         this.date = date;
@@ -67,6 +65,7 @@ public class EventEntity {
         this.address = address;
         this.openingDoors = openingDoors;
         this.city = city;
+        this.presentation = presentation;
     }
 
     public Long getId() {
@@ -155,5 +154,13 @@ public class EventEntity {
 
     public void setCity(CityEntity city) {
         this.city = city;
+    }
+
+    public Set<PresentationEntity> getPresentation() {
+        return presentation;
+    }
+
+    public void setPresentation(Set<PresentationEntity> presentation) {
+        this.presentation = presentation;
     }
 }

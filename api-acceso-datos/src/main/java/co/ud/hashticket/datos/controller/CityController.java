@@ -4,7 +4,6 @@ import co.ud.hashticket.datos.entity.CityEntity;
 import co.ud.hashticket.datos.mapper.CityMapper;
 import co.ud.hashticket.datos.service.CityService;
 import co.ud.ud.hashticket.dto.CityDto;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/v.1/city")
-@Slf4j
 public class CityController {
     private final CityService cityService;
     @Autowired
