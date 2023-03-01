@@ -1,0 +1,28 @@
+package co.ud.hashticket.datos.controller;
+
+import co.ud.hashticket.datos.entity.ZoneEntity;
+import co.ud.hashticket.datos.mapper.ZoneMapper;
+import co.ud.hashticket.datos.service.ZoneService;
+import co.ud.ud.hashticket.dto.ZoneDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/v.1/zone")
+public class ZoneController {
+    private final ZoneService zoneService;
+    @Autowired
+    public ZoneController(ZoneService zoneService) {
+        this.zoneService = zoneService;
+    }
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<ZoneDto> save(@RequestBody ZoneDto zoneDto){
+        ZoneEntity entity = ZoneMapper.INSTANCE.map(zoneDto);
+        return ResponseEntity.ok(ZoneMapper.INSTANCE.map( zoneService.save(entity) ));
+    }
+}

@@ -14,4 +14,5 @@
     <include file="/db/changelog/changes/create-presentation-table-changelog.xml" />
     <include file="/db/changelog/changes/create-music-band-table-changelog.xml" />
     <include file="/db/changelog/changes/create-artist-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-zone-table-changelog.xml" />
 </databaseChangeLog>
