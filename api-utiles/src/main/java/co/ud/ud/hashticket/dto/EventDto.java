@@ -1,5 +1,6 @@
 package co.ud.ud.hashticket.dto;
 
+import co.ud.ud.hashticket.enumeration.EventStatus;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -19,4 +20,5 @@ public class EventDto {
     private String openingDoors;
     private Long cityCode;
     private Long departmentCode;
+    private EventStatus eventStatus;
 }

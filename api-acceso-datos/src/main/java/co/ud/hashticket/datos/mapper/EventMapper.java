@@ -10,6 +10,7 @@ public interface EventMapper {
     EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
     @Mapping(source = "cityCode", target = "city.cityPk.code")
     @Mapping(source = "departmentCode", target = "city.cityPk.departmentCode")
+    @Mapping(source = "eventStatus", target = "eventStatus")
     EventEntity map(EventDto eventDto);
     @Mapping(source = "city.cityPk.code", target = "cityCode")
     @Mapping(source = "city.cityPk.departmentCode", target = "departmentCode")

@@ -26,4 +26,11 @@
     <changeSet id="4" author="admin">
         <addForeignKeyConstraint baseTableName="presentation" baseColumnNames="event_id" constraintName="fk_presentation_event" referencedTableName="event" referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="5" author="admin">
+        <insert tableName="presentation">
+            <column name="id"       valueComputed="${sequence.presentation}"></column>
+            <column name="name"     value="ANDRES CEPEDA"/>
+            <column name="event_id" value="1"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

@@ -1,5 +1,6 @@
 package co.ud.hashticket.datos.entity;
 
+import co.ud.ud.hashticket.enumeration.EventStatus;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -53,6 +54,10 @@ public class EventEntity implements Serializable {
     private Set<PresentationEntity> presentation;
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private Set<ConfigEventEntity> configEvents;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", length = 8)
+    private EventStatus eventStatus;
+
     public Long getId() {
         return id;
     }
@@ -155,5 +160,13 @@ public class EventEntity implements Serializable {
 
     public void setConfigEvents(Set<ConfigEventEntity> configEvents) {
         this.configEvents = configEvents;
+    }
+
+    public EventStatus getEventStatus() {
+        return eventStatus;
+    }
+
+    public void setEventStatus(EventStatus eventStatus) {
+        this.eventStatus = eventStatus;
     }
 }

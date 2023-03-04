@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v.1/event")
@@ -28,6 +27,13 @@ public class EventController {
         EventEntity entity = EventMapper.INSTANCE.map(eventDto);
         return new ResponseEntity<>(EventMapper.INSTANCE.map( eventService.save( entity ) ), HttpStatus.CREATED);
     }
-
-
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EventDto> get(@PathVariable(value = "id")Long id){
+        Optional<EventEntity> entity = eventService.findById(id);
+        if(!entity.isPresent()){
+            return ResponseEntity.noContent()
+                    .build();
+        }
+        return ResponseEntity.ok(EventMapper.INSTANCE.map(entity.get()));
+    }
 }

@@ -7,10 +7,9 @@ import co.ud.ud.hashticket.dto.ZoneDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v.1/zone")
@@ -24,5 +23,13 @@ public class ZoneController {
     public ResponseEntity<ZoneDto> save(@RequestBody ZoneDto zoneDto){
         ZoneEntity entity = ZoneMapper.INSTANCE.map(zoneDto);
         return ResponseEntity.ok(ZoneMapper.INSTANCE.map( zoneService.save(entity) ));
+    }
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ZoneDto> getById(@PathVariable(value = "id")Long id){
+        Optional<ZoneEntity> entity = zoneService.getById(id);
+        if(!entity.isPresent()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(ZoneMapper.INSTANCE.map(entity.get()));
     }
 }

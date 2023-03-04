@@ -4,10 +4,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <property name="sequence.country" value="(SELECT nextval('country_seq'))" dbms="postgresql"/>
-    <property name="sequence.event"   value="(SELECT nextval('event_seq'))"   dbms="postgresql"/>
-    <property name="sequence.config_event"   value="(SELECT nextval('config_event_seq'))"   dbms="postgresql"/>
-
+    <property name="sequence.country"       value="(SELECT nextval('country_seq'))" dbms="postgresql"/>
+    <property name="sequence.event"         value="(SELECT nextval('event_seq'))"   dbms="postgresql"/>
+    <property name="sequence.config_event"  value="(SELECT nextval('config_event_seq'))"   dbms="postgresql"/>
+    <property name="sequence.presentation"  value="(SELECT nextval('country_seq'))" dbms="postgresql"/>
     <property name="now" value="now()" dbms="postgresql"/>
 
     <include file="/db/changelog/changes/create-country-table-changelog.xml" />

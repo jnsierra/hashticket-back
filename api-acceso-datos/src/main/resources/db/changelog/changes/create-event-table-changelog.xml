@@ -42,6 +42,9 @@
             <column name="department_code" type="INT">
                 <constraints nullable="false"/>
             </column>
+            <column name="status" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <rollback>
             <dropTable tableName="admin"/>
@@ -72,6 +75,7 @@
             <column name="opening_doors" value="8:00 PM" />
             <column name="city_code" value="001" />
             <column name="department_code" value="11" />
+            <column name="status" value="CREATED" />
         </insert>
     </changeSet>
 </databaseChangeLog>
