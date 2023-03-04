@@ -4,16 +4,18 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
 @Table(name = "event")
-public class EventEntity {
+public class EventEntity implements Serializable {
+    private static final long serialVersionUID = 1234567L;
     @Id
-    @GeneratedValue(generator = "sequence-generator")
+    @GeneratedValue(generator = "sequence-generator-event")
     @GenericGenerator(
-            name = "sequence-generator",
+            name = "sequence-generator-event",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @Parameter(name = "sequence_name", value = "event_seq"),
@@ -49,25 +51,8 @@ public class EventEntity {
     private CityEntity city;
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private Set<PresentationEntity> presentation;
-
-    public EventEntity() {
-    }
-
-    public EventEntity(Long id, String place, LocalDate date, String time, String category, int minimumAge, String responsible, String nit, String address, String openingDoors, CityEntity city, Set<PresentationEntity> presentation) {
-        this.id = id;
-        this.place = place;
-        this.date = date;
-        this.time = time;
-        this.category = category;
-        this.minimumAge = minimumAge;
-        this.responsible = responsible;
-        this.nit = nit;
-        this.address = address;
-        this.openingDoors = openingDoors;
-        this.city = city;
-        this.presentation = presentation;
-    }
-
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    private Set<ConfigEventEntity> configEvents;
     public Long getId() {
         return id;
     }
@@ -162,5 +147,13 @@ public class EventEntity {
 
     public void setPresentation(Set<PresentationEntity> presentation) {
         this.presentation = presentation;
+    }
+
+    public Set<ConfigEventEntity> getConfigEvents() {
+        return configEvents;
+    }
+
+    public void setConfigEvents(Set<ConfigEventEntity> configEvents) {
+        this.configEvents = configEvents;
     }
 }

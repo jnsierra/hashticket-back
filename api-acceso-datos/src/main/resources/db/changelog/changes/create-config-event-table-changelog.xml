@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="admin" id="1">
+        <createTable tableName="config_event">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="event_id" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="door_opening" type="time">
+                <constraints nullable="false" />
+            </column>
+            <column name="event_date" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="number_of_tickets" type="number">
+                <constraints nullable="false" />
+            </column>
+            <column name="number_of_tickets_sold" type="number" defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="config_event"/>
+        </rollback>
+    </changeSet>
+    <changeSet author="admin" id="2">
+        <createSequence sequenceName="config_event_seq" startValue="1" incrementBy="1" />
+    </changeSet>
+    <changeSet id="3" author="admin">
+        <insert tableName="config_event">
+            <column name="id"  valueComputed="${sequence.config_event}"></column>
+            <column name="event_id" value="1"/>
+            <column name="door_opening" value="${now}"/>
+            <column name="event_date" value="${now}" />
+            <column name="number_of_tickets" value="1000" />
+        </insert>
+    </changeSet>
+    <changeSet id="5" author="admin">
+        <addForeignKeyConstraint baseTableName="config_event" baseColumnNames="event_id" constraintName="fk_event_config_event" referencedTableName="event" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

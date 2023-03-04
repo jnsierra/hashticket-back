@@ -1,13 +1,13 @@
 package co.ud.hashticket.datos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "city")
-@NamedQueries({
-        @NamedQuery(name="CityEntity.findByDepartment", query = "from CityEntity city inner join fetch city.department as dep where dep.code = :departmentCode ")
-})
-public class CityEntity {
+@NamedQuery(name="CityEntity.findByDepartment", query = "from CityEntity city inner join fetch city.department as dep where dep.code = :departmentCode ")
+public class CityEntity implements Serializable {
+    private static final long serialVersionUID = 1234567L;
     @EmbeddedId
     private CityPkEntity cityPk;
     @Column(name = "name")

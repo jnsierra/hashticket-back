@@ -7,6 +7,7 @@ import java.util.Objects;
 
 @Embeddable
 public class CityPkEntity implements Serializable {
+    private static final long serialVersionUID = 1234567L;
     public CityPkEntity() {
     }
     public CityPkEntity(Long code, Long departmentCode) {

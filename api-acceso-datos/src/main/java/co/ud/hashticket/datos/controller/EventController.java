@@ -4,7 +4,6 @@ import co.ud.hashticket.datos.entity.EventEntity;
 import co.ud.hashticket.datos.mapper.EventMapper;
 import co.ud.hashticket.datos.service.EventService;
 import co.ud.ud.hashticket.dto.EventDto;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,4 +28,6 @@ public class EventController {
         EventEntity entity = EventMapper.INSTANCE.map(eventDto);
         return new ResponseEntity<>(EventMapper.INSTANCE.map( eventService.save( entity ) ), HttpStatus.CREATED);
     }
+
+
 }

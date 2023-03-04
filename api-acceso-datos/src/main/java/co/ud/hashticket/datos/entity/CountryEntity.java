@@ -1,12 +1,14 @@
 package co.ud.hashticket.datos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "country")
-public class CountryEntity {
+public class CountryEntity implements Serializable {
+    private static final long serialVersionUID = 1234567L;
     @Id
     @Column(name = "code", nullable = false, updatable = false)
     private Long code;

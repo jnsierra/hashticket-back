@@ -5,17 +5,17 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="admin" id="1">
-        <createTable tableName="zone">
+        <createTable tableName="zone_config_event">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="name" type="VARCHAR(255)">
+            <column name="zone_id" type="INT">
                 <constraints nullable="false" />
             </column>
-            <column name="description" type="VARCHAR(255)">
+            <column name="config_event_id" type="INT">
                 <constraints nullable="false" />
             </column>
-            <column name="category_id" type="INT">
+            <column name="number_of_tickets" type="INT">
                 <constraints nullable="false" />
             </column>
         </createTable>
@@ -24,14 +24,10 @@
         </rollback>
     </changeSet>
     <changeSet author="admin" id="2">
-        <createSequence sequenceName="zone_seq" startValue="1" incrementBy="1" />
+        <createSequence sequenceName="zone_config_event_seq" startValue="1" incrementBy="1" />
     </changeSet>
     <changeSet id="admin" author="3">
-        <addForeignKeyConstraint
-                baseTableName="zone"
-                baseColumnNames="category_id"
-                constraintName="fk_zone_category"
-                referencedTableName="category"
-                referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="zone_config_event" baseColumnNames="zone_id" constraintName="fk_zone_config_event_zone" referencedTableName="zone" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="zone_config_event" baseColumnNames="config_event_id" constraintName="fk_zone_config_event_config_event" referencedTableName="config_event" referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

@@ -58,4 +58,20 @@
                 referencedTableName="city"
                 referencedColumnNames="department_code, code"/>
     </changeSet>
+    <changeSet id="admin" author="4">
+        <insert tableName="event">
+            <column name="id"  valueComputed="${sequence.event}"></column>
+            <column name="place" value="Movistar Arena"/>
+            <column name="date" value="${now}"/>
+            <column name="time" value="${now}" />
+            <column name="category" value="Concert" />
+            <column name="minimum_age" value="10" />
+            <column name="responsible" value="Jesus Sierra" />
+            <column name="nit" value="1234" />
+            <column name="address" value="Cra 30 # 53" />
+            <column name="opening_doors" value="8:00 PM" />
+            <column name="city_code" value="001" />
+            <column name="department_code" value="11" />
+        </insert>
+    </changeSet>
 </databaseChangeLog>

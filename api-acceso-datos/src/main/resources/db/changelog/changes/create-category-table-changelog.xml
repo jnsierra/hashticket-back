@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="admin" id="1">
-        <createTable tableName="zone">
+        <createTable tableName="category">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -15,23 +15,12 @@
             <column name="description" type="VARCHAR(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="category_id" type="INT">
-                <constraints nullable="false" />
-            </column>
         </createTable>
         <rollback>
-            <dropTable tableName="zone"/>
+            <dropTable tableName="category"/>
         </rollback>
     </changeSet>
     <changeSet author="admin" id="2">
-        <createSequence sequenceName="zone_seq" startValue="1" incrementBy="1" />
-    </changeSet>
-    <changeSet id="admin" author="3">
-        <addForeignKeyConstraint
-                baseTableName="zone"
-                baseColumnNames="category_id"
-                constraintName="fk_zone_category"
-                referencedTableName="category"
-                referencedColumnNames="id"/>
+        <createSequence sequenceName="category_seq" startValue="1" incrementBy="1" />
     </changeSet>
 </databaseChangeLog>

@@ -4,11 +4,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "presentation")
-public class PresentationEntity {
+public class PresentationEntity implements Serializable {
+    private static final long serialVersionUID = 1234567L;
     @Id
     @GeneratedValue(generator = "sequence-generator")
     @GenericGenerator(

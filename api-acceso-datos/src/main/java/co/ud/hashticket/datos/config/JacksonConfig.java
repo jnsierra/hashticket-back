@@ -17,7 +17,6 @@ import java.time.format.DateTimeFormatter;
 public class JacksonConfig {
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-        //log.info("Initializing Jackson configuration");
         return builder -> {
 
             // formatter

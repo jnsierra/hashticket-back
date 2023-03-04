@@ -4,10 +4,14 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "zone")
-public class ZoneEntity {
+public class ZoneEntity implements Serializable {
+    private static final long serialVersionUID = 1234567L;
     @Id
     @GeneratedValue(generator = "sequence-generator")
     @GenericGenerator(
@@ -25,13 +29,18 @@ public class ZoneEntity {
     private String name;
     @Column(name = "description", nullable = false, unique = true)
     private String description;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
+    @OneToMany(mappedBy = "zone")
+    private Set<ZoneConfigEventEntity> zoneConfigEvents = new HashSet<>();
     public ZoneEntity() {
     }
-
-    public ZoneEntity(Long id, String name, String description) {
+    public ZoneEntity(Long id, String name, String description, CategoryEntity category) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.category = category;
     }
 
     public Long getId() {
@@ -56,5 +65,17 @@ public class ZoneEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
+    }
+    public void addZoneConfigEvents(ZoneConfigEventEntity zoneConfigEvent) {
+        this.zoneConfigEvents.add(zoneConfigEvent);
+        zoneConfigEvent.setZone(this);
     }
 }

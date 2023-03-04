@@ -6,10 +6,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "department")
-@NamedQueries({
-        @NamedQuery(name="DepartmentEntity.findByCountry", query = "FROM DepartmentEntity dep inner join dep.country as country WHERE country.code = :idCountry ")
-})
+@NamedQuery(name="DepartmentEntity.findByCountry", query = "FROM DepartmentEntity dep inner join dep.country as country WHERE country.code = :idCountry ")
 public class DepartmentEntity implements Serializable {
+    private static final long serialVersionUID = 1234567L;
     @Id
     @Column(name = "code", nullable = false, updatable = false)
     private Long code;

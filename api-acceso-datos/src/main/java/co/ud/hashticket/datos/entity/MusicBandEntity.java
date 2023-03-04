@@ -3,15 +3,17 @@ package co.ud.hashticket.datos.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "music_band")
-public class MusicBandEntity {
+public class MusicBandEntity implements Serializable {
+    private static final long serialVersionUID = 2405172041950251807L;
     @Id
-    @GeneratedValue(generator = "sequence-generator")
+    @GeneratedValue(generator = "sequence-generator-music")
     @GenericGenerator(
-            name = "sequence-generator",
+            name = "sequence-generator-music",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "music_band_seq"),
@@ -28,11 +30,6 @@ public class MusicBandEntity {
     private PresentationEntity presentation;
     @OneToMany(mappedBy = "musicBand")
     private Set<ArtistEntity> artists;
-
-
-    public MusicBandEntity() {
-    }
-
     public Long getId() {
         return id;
     }

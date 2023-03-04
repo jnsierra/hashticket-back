@@ -3,14 +3,16 @@ package co.ud.hashticket.datos.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "artist")
-public class ArtistEntity {
+public class ArtistEntity implements Serializable {
+    private static final long serialVersionUID = 1234567L;
     @Id
-    @GeneratedValue(generator = "sequence-generator")
+    @GeneratedValue(generator = "sequence-generator-artist")
     @GenericGenerator(
-            name = "sequence-generator",
+            name = "sequence-generator-artist",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "artist_seq"),
