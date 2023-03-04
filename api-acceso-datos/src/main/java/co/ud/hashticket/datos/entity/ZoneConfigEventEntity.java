@@ -31,9 +31,6 @@ public class ZoneConfigEventEntity implements Serializable {
     private ConfigEventEntity configEvent;
     @Column( name = "number_of_tickets")
     private Long numberOfTickets;
-
-
-
     public Long getId() {
         return id;
     }
