@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,8 +36,11 @@ public class ConfigEventEntity implements Serializable {
     private BigDecimal numberOfTickets;
     @Column(name = "number_of_tickets_sold")
     private BigDecimal numberOfTicketsSold;
+    @Column(name = "event_date")
+    private LocalDate eventDate;
     @OneToMany(mappedBy = "configEvent")
     private Set<ZoneConfigEventEntity> zoneConfigEvents = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -76,6 +80,23 @@ public class ConfigEventEntity implements Serializable {
     public void setNumberOfTicketsSold(BigDecimal numberOfTicketsSold) {
         this.numberOfTicketsSold = numberOfTicketsSold;
     }
+
+    public LocalDate getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public Set<ZoneConfigEventEntity> getZoneConfigEvents() {
+        return zoneConfigEvents;
+    }
+
+    public void setZoneConfigEvents(Set<ZoneConfigEventEntity> zoneConfigEvents) {
+        this.zoneConfigEvents = zoneConfigEvents;
+    }
+
     public void addZoneConfigEvents(ZoneConfigEventEntity zoneConfigEvent) {
         this.zoneConfigEvents.add(zoneConfigEvent);
         zoneConfigEvent.setConfigEvent(this);
