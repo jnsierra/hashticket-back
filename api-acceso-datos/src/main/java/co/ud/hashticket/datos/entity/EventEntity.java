@@ -1,6 +1,9 @@
 package co.ud.hashticket.datos.entity;
 
 import co.ud.ud.hashticket.enumeration.EventStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -9,6 +12,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "event")
 public class EventEntity implements Serializable {
@@ -57,8 +63,8 @@ public class EventEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 8)
     private EventStatus eventStatus;
-    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
-    private Set<TicketsEntity> tickets;
+    @OneToMany(mappedBy = "ticketPk.event", fetch = FetchType.LAZY)
+    private Set<TicketEntity> tickets;
 
     public Long getId() {
         return id;
@@ -172,11 +178,11 @@ public class EventEntity implements Serializable {
         this.eventStatus = eventStatus;
     }
 
-    public Set<TicketsEntity> getTickets() {
+    public Set<TicketEntity> getTickets() {
         return tickets;
     }
 
-    public void setTickets(Set<TicketsEntity> tickets) {
+    public void setTickets(Set<TicketEntity> tickets) {
         this.tickets = tickets;
     }
 }

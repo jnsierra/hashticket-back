@@ -1,0 +1,42 @@
+package co.ud.hashticket.datos.controller;
+
+import co.ud.hashticket.datos.entity.TicketEntity;
+import co.ud.hashticket.datos.entity.TicketPkEntity;
+import co.ud.hashticket.datos.mapper.TicketMapper;
+import co.ud.hashticket.datos.mapper.TicketPkMapper;
+import co.ud.hashticket.datos.service.TicketService;
+import co.ud.ud.hashticket.dto.TicketDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/v.1/ticket")
+public class TicketController {
+    private final TicketService ticketService;
+    @Autowired
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<TicketDto> save(@RequestBody TicketDto ticketDto){
+        TicketEntity entity = TicketMapper.INSTANCE.map(ticketDto);
+        return ResponseEntity.ok(TicketMapper.INSTANCE.map( ticketService.save(entity) ));
+    }
+    @GetMapping(value = "/event/{event_id}/zone/{zone_id}/category/{category_id}/presentation/{presentation_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TicketDto> getById(@PathVariable("event_id")Long eventId
+            ,@PathVariable("zone_id")Long zoneId
+            ,@PathVariable("category_id")Long categoryId
+            ,@PathVariable("presentation_id")Long presentationId
+    ){
+        TicketPkEntity entityPk = TicketPkMapper.INSTANCE.map(eventId, zoneId, categoryId, presentationId);
+        Optional<TicketEntity> entity = ticketService.getById(entityPk);
+        if(!entity.isPresent()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(TicketMapper.INSTANCE.map(entity.get()));
+    }
+}

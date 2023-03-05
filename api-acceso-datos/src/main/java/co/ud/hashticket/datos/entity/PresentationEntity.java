@@ -1,5 +1,8 @@
 package co.ud.hashticket.datos.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -7,15 +10,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "presentation")
 public class PresentationEntity implements Serializable {
     private static final long serialVersionUID = 1234567L;
     @Id
-    @GeneratedValue(generator = "sequence-generator")
+    @GeneratedValue(generator = "sequence-generator-presentation")
     @GenericGenerator(
-            name = "sequence-generator",
+            name = "sequence-generator-presentation",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @Parameter(name = "sequence_name", value = "presentation_seq"),
@@ -32,17 +37,8 @@ public class PresentationEntity implements Serializable {
     private EventEntity event;
     @OneToMany(mappedBy = "presentation", fetch = FetchType.LAZY)
     private Set<MusicBandEntity> musicBand = new HashSet<>();
-    @OneToMany(mappedBy = "presentation", fetch = FetchType.LAZY)
-    private Set<TicketsEntity> tickets = new HashSet<>();
-
-    public PresentationEntity() {
-    }
-
-    public PresentationEntity(Long id, String name, EventEntity event) {
-        this.id = id;
-        this.name = name;
-        this.event = event;
-    }
+    @OneToMany(mappedBy = "ticketPk.presentation", fetch = FetchType.LAZY)
+    private Set<TicketEntity> tickets = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -76,11 +72,11 @@ public class PresentationEntity implements Serializable {
         this.musicBand = musicBand;
     }
 
-    public Set<TicketsEntity> getTickets() {
+    public Set<TicketEntity> getTickets() {
         return tickets;
     }
 
-    public void setTickets(Set<TicketsEntity> tickets) {
+    public void setTickets(Set<TicketEntity> tickets) {
         this.tickets = tickets;
     }
 }

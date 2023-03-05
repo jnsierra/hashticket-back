@@ -1,14 +1,28 @@
 package co.ud.hashticket.datos.entity;
 
-import co.ud.ud.hashticket.enumeration.StatusTicket;
+import lombok.Builder;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "tickets")
-public class TicketsEntity implements Serializable {
-    private static final long serialVersionUID = 1234567L;
+@Builder
+@Embeddable
+public class TicketPkEntity implements Serializable {
+    private static final long serialVersionUID = 1234568L;
+
+    public TicketPkEntity() {
+    }
+
+    public TicketPkEntity(EventEntity event, ZoneEntity zone, CategoryEntity category, PresentationEntity presentation) {
+        this.event = event;
+        this.zone = zone;
+        this.category = category;
+        this.presentation = presentation;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     private EventEntity event;
@@ -21,12 +35,6 @@ public class TicketsEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "presentation_id")
     private PresentationEntity presentation;
-    @Column(name = "number_ticket")
-    private Long numberTicket;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", length = 8)
-    private StatusTicket state;
-
     public EventEntity getEvent() {
         return event;
     }
@@ -57,21 +65,5 @@ public class TicketsEntity implements Serializable {
 
     public void setPresentation(PresentationEntity presentation) {
         this.presentation = presentation;
-    }
-
-    public Long getNumberTicket() {
-        return numberTicket;
-    }
-
-    public void setNumberTicket(Long numberTicket) {
-        this.numberTicket = numberTicket;
-    }
-
-    public StatusTicket getState() {
-        return state;
-    }
-
-    public void setState(StatusTicket state) {
-        this.state = state;
     }
 }

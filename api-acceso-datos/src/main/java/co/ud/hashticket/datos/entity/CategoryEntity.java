@@ -1,12 +1,17 @@
 package co.ud.hashticket.datos.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "category")
 public class CategoryEntity implements Serializable {
@@ -29,17 +34,8 @@ public class CategoryEntity implements Serializable {
     private String description;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private Set<ZoneEntity> zones = new HashSet<>();
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private Set<TicketsEntity> tickets = new HashSet<>();
-    public CategoryEntity() {
-    }
-    public CategoryEntity(Long id, String name, String description, Set<ZoneEntity> zones) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.zones = zones;
-    }
-
+    @OneToMany(mappedBy = "ticketPk.category", fetch = FetchType.LAZY)
+    private Set<TicketEntity> tickets = new HashSet<>();
     public Long getId() {
         return id;
     }
@@ -72,11 +68,11 @@ public class CategoryEntity implements Serializable {
         this.zones = zones;
     }
 
-    public Set<TicketsEntity> getTickets() {
+    public Set<TicketEntity> getTickets() {
         return tickets;
     }
 
-    public void setTickets(Set<TicketsEntity> tickets) {
+    public void setTickets(Set<TicketEntity> tickets) {
         this.tickets = tickets;
     }
 }
