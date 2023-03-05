@@ -5,6 +5,7 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,7 +31,9 @@ public class PresentationEntity implements Serializable {
     @JoinColumn(name = "event_id")
     private EventEntity event;
     @OneToMany(mappedBy = "presentation", fetch = FetchType.LAZY)
-    private Set<MusicBandEntity> musicBand;
+    private Set<MusicBandEntity> musicBand = new HashSet<>();
+    @OneToMany(mappedBy = "presentation", fetch = FetchType.LAZY)
+    private Set<TicketsEntity> tickets = new HashSet<>();
 
     public PresentationEntity() {
     }
@@ -63,5 +66,21 @@ public class PresentationEntity implements Serializable {
 
     public void setEvent(EventEntity event) {
         this.event = event;
+    }
+
+    public Set<MusicBandEntity> getMusicBand() {
+        return musicBand;
+    }
+
+    public void setMusicBand(Set<MusicBandEntity> musicBand) {
+        this.musicBand = musicBand;
+    }
+
+    public Set<TicketsEntity> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<TicketsEntity> tickets) {
+        this.tickets = tickets;
     }
 }

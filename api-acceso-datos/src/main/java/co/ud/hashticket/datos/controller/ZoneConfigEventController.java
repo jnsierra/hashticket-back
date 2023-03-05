@@ -1,12 +1,9 @@
 package co.ud.hashticket.datos.controller;
 
 import co.ud.hashticket.datos.entity.ZoneConfigEventEntity;
-import co.ud.hashticket.datos.entity.ZoneEntity;
 import co.ud.hashticket.datos.mapper.ZoneConfigEventMapper;
-import co.ud.hashticket.datos.mapper.ZoneMapper;
 import co.ud.hashticket.datos.service.ZoneConfigEventService;
 import co.ud.ud.hashticket.dto.ZoneConfigEventDto;
-import co.ud.ud.hashticket.dto.ZoneDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -22,4 +22,5 @@
     <include file="/db/changelog/changes/create-category-table-changelog.xml" />
     <include file="/db/changelog/changes/create-zone-table-changelog.xml" />
     <include file="/db/changelog/changes/create-zone-config-event-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-tickets-table-changelog.xml" />
 </databaseChangeLog>

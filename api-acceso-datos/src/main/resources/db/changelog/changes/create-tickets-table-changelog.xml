@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="admin" id="1">
+        <createTable tableName="tickets">
+            <column name="event_id" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TICKET"/>
+            </column>
+            <column name="zone_id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TICKET"/>
+            </column>
+            <column name="category_id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TICKET"/>
+            </column>
+            <column name="presentation_id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TICKET"/>
+            </column>
+            <column name="number_ticket" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TICKET"/>
+            </column>
+            <column name="state" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="user" type="VARCHAR(255)">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="tickets"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="admin" author="3">
+        <addForeignKeyConstraint
+                baseTableName="tickets"
+                baseColumnNames="event_id"
+                constraintName="fk_tickets_event"
+                referencedTableName="event"
+                referencedColumnNames="id"/>
+        <addForeignKeyConstraint
+                baseTableName="tickets"
+                baseColumnNames="zone_id"
+                constraintName="fk_tickets_zone"
+                referencedTableName="zone"
+                referencedColumnNames="id"/>
+        <addForeignKeyConstraint
+                baseTableName="tickets"
+                baseColumnNames="category_id"
+                constraintName="fk_tickets_category"
+                referencedTableName="category"
+                referencedColumnNames="id"/>
+        <addForeignKeyConstraint
+                baseTableName="tickets"
+                baseColumnNames="presentation_id"
+                constraintName="fk_tickets_presentation"
+                referencedTableName="presentation"
+                referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

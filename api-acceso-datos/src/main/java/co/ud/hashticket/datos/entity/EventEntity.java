@@ -57,6 +57,8 @@ public class EventEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 8)
     private EventStatus eventStatus;
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    private Set<TicketsEntity> tickets;
 
     public Long getId() {
         return id;
@@ -168,5 +170,13 @@ public class EventEntity implements Serializable {
 
     public void setEventStatus(EventStatus eventStatus) {
         this.eventStatus = eventStatus;
+    }
+
+    public Set<TicketsEntity> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<TicketsEntity> tickets) {
+        this.tickets = tickets;
     }
 }

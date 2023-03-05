@@ -32,8 +32,10 @@ public class ZoneEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
-    @OneToMany(mappedBy = "zone")
+    @OneToMany(mappedBy = "zone", fetch = FetchType.LAZY)
     private Set<ZoneConfigEventEntity> zoneConfigEvents = new HashSet<>();
+    @OneToMany(mappedBy = "zone", fetch = FetchType.LAZY)
+    private Set<TicketsEntity> tickets = new HashSet<>();
     public ZoneEntity() {
     }
     public ZoneEntity(Long id, String name, String description, CategoryEntity category) {
@@ -74,6 +76,23 @@ public class ZoneEntity implements Serializable {
     public void setCategory(CategoryEntity category) {
         this.category = category;
     }
+
+    public Set<ZoneConfigEventEntity> getZoneConfigEvents() {
+        return zoneConfigEvents;
+    }
+
+    public void setZoneConfigEvents(Set<ZoneConfigEventEntity> zoneConfigEvents) {
+        this.zoneConfigEvents = zoneConfigEvents;
+    }
+
+    public Set<TicketsEntity> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<TicketsEntity> tickets) {
+        this.tickets = tickets;
+    }
+
     public void addZoneConfigEvents(ZoneConfigEventEntity zoneConfigEvent) {
         this.zoneConfigEvents.add(zoneConfigEvent);
         zoneConfigEvent.setZone(this);

@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,7 +28,9 @@ public class CategoryEntity implements Serializable {
     @Column(name = "description", nullable = false, unique = true)
     private String description;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private Set<ZoneEntity> zones;
+    private Set<ZoneEntity> zones = new HashSet<>();
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    private Set<TicketsEntity> tickets = new HashSet<>();
     public CategoryEntity() {
     }
     public CategoryEntity(Long id, String name, String description, Set<ZoneEntity> zones) {
@@ -67,5 +70,13 @@ public class CategoryEntity implements Serializable {
 
     public void setZones(Set<ZoneEntity> zones) {
         this.zones = zones;
+    }
+
+    public Set<TicketsEntity> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<TicketsEntity> tickets) {
+        this.tickets = tickets;
     }
 }
