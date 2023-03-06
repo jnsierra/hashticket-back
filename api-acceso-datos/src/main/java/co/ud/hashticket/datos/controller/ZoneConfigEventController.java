@@ -9,7 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/v.1/zone_config_event")
@@ -33,5 +35,13 @@ public class ZoneConfigEventController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(ZoneConfigEventMapper.INSTANCE.map(entity.get()));
+    }
+    @GetMapping(value = "/event/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<ZoneConfigEventDto>> getByIdEvent(@PathVariable(value = "id")Long idEvent){
+        Set<ZoneConfigEventEntity> response = zoneConfigEventService.getZoneConfigByEvent(idEvent);
+        if(response.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(ZoneConfigEventMapper.INSTANCE.map(response));
     }
 }

@@ -6,7 +6,10 @@ import co.ud.hashticket.datos.service.ZoneConfigEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 @Service
 public class ZoneConfigEventServiceImpl implements ZoneConfigEventService {
     private ZoneConfigEventRepository zoneConfigEventRepository;
@@ -21,5 +24,10 @@ public class ZoneConfigEventServiceImpl implements ZoneConfigEventService {
     @Override
     public Optional<ZoneConfigEventEntity> getById(Long id) {
         return zoneConfigEventRepository.findById(id);
+    }
+
+    @Override
+    public Set<ZoneConfigEventEntity> getZoneConfigByEvent(Long id) {
+        return zoneConfigEventRepository.getZoneConfigByEvent(id);
     }
 }

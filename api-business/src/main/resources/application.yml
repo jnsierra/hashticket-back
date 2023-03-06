@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: api-rest-client
+  profiles:
+    active: dev
+#  config:
+#    import: optional:configserver:http://localhost:8888
+server:
+  servlet:
+    context-path: /api-business
+  port: 5004
