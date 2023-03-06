@@ -137,7 +137,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/event/3",
+									"raw": "localhost:5003/api-acceso-datos/v.1/event/1",
 									"host": [
 										"localhost"
 									],
@@ -146,7 +146,7 @@
 										"api-acceso-datos",
 										"v.1",
 										"event",
-										"3"
+										"1"
 									]
 								}
 							},
@@ -283,7 +283,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/presentation/2",
+									"raw": "localhost:5003/api-acceso-datos/v.1/presentation/1",
 									"host": [
 										"localhost"
 									],
@@ -292,7 +292,7 @@
 										"api-acceso-datos",
 										"v.1",
 										"presentation",
-										"2"
+										"1"
 									]
 								}
 							},
@@ -1167,7 +1167,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"Norte Uno\",\n    \"description\":\"Zona uno de norte\",\n    \"categoryId\": \"1\"\n}",
+									"raw": "{\n    \"name\": \"Sur Uno\",\n    \"description\":\"Zona uno de Sur\",\n    \"categoryId\": \"1\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1253,7 +1253,7 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/zone/3",
+									"raw": "localhost:5003/api-acceso-datos/v.1/zone/2",
 									"host": [
 										"localhost"
 									],
@@ -1262,7 +1262,7 @@
 										"api-acceso-datos",
 										"v.1",
 										"zone",
-										"3"
+										"2"
 									]
 								}
 							},
@@ -1421,6 +1421,490 @@
 										"v.1",
 										"config_event",
 										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Zone Config Event",
+					"item": [
+						{
+							"name": "Zone Config Event Insert",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:5002",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "28rcicqk03l31rmukko9q8tufb",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"zoneId\": \"3\",\n    \"configEventId\":\"1\",\n    \"numberOfTickets\": \"1000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5003/api-acceso-datos/v.1/zone_config_event/",
+									"host": [
+										"localhost"
+									],
+									"port": "5003",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"zone_config_event",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Zone Config Event Insert Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:5002",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "28rcicqk03l31rmukko9q8tufb",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"zoneId\": \"3\",\n    \"configEventId\":\"4\",\n    \"numberOfTickets\": \"1000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5003/api-acceso-datos/v.1/zone_config_event/",
+									"host": [
+										"localhost"
+									],
+									"port": "5003",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"zone_config_event",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Zone Config Event By Event",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:5002",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "28rcicqk03l31rmukko9q8tufb",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"zoneId\": \"3\",\n    \"configEventId\":\"4\",\n    \"numberOfTickets\": \"1000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5003/api-acceso-datos/v.1/zone_config_event/event/1",
+									"host": [
+										"localhost"
+									],
+									"port": "5003",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"zone_config_event",
+										"event",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ticket",
+					"item": [
+						{
+							"name": "Ticket",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:5002",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "28rcicqk03l31rmukko9q8tufb",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"eventId\": \"1\",\n    \"zoneId\": \"2\",\n    \"categoryId\": \"1\",\n    \"presentationId\": \"1\",\n    \"numberTicket\": \"1\",\n    \"state\": \"CREATED\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5003/api-acceso-datos/v.1/ticket/",
+									"host": [
+										"localhost"
+									],
+									"port": "5003",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"ticket",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Ticket By Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:5002",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "28rcicqk03l31rmukko9q8tufb",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"eventId\": \"1\",\n    \"zoneId\": \"2\",\n    \"categoryId\": \"1\",\n    \"presentationId\": \"1\",\n    \"numberTicket\": \"1\",\n    \"state\": \"CREATED\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5003/api-acceso-datos/v.1/ticket/event/1/zone/2/category/1/presentation/1",
+									"host": [
+										"localhost"
+									],
+									"port": "5003",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"ticket",
+										"event",
+										"1",
+										"zone",
+										"2",
+										"category",
+										"1",
+										"presentation",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "business",
+					"item": [
+						{
+							"name": "Generate Ticket",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:5002",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "28rcicqk03l31rmukko9q8tufb",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"eventId\": \"1\",\n    \"zoneId\": \"2\",\n    \"categoryId\": \"1\",\n    \"presentationId\": \"1\",\n    \"numberTicket\": \"1\",\n    \"state\": \"CREATED\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5004/api-business/v.1/ticket/generate/event/1",
+									"host": [
+										"localhost"
+									],
+									"port": "5004",
+									"path": [
+										"api-business",
+										"v.1",
+										"ticket",
+										"generate",
+										"event",
+										"1"
 									]
 								}
 							},

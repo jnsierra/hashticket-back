@@ -3,11 +3,9 @@ package co.ud.hashticket.config;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 
 @Component
 public class FeignConfigInterceptor implements RequestInterceptor {
