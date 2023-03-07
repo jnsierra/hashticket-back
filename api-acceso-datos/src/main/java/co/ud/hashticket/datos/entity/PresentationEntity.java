@@ -1,8 +1,6 @@
 package co.ud.hashticket.datos.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -13,6 +11,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 @Entity
 @Table(name = "presentation")
 public class PresentationEntity implements Serializable {
@@ -39,44 +38,6 @@ public class PresentationEntity implements Serializable {
     private Set<MusicBandEntity> musicBand = new HashSet<>();
     @OneToMany(mappedBy = "ticketPk.presentation", fetch = FetchType.LAZY)
     private Set<TicketEntity> tickets = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public EventEntity getEvent() {
-        return event;
-    }
-
-    public void setEvent(EventEntity event) {
-        this.event = event;
-    }
-
-    public Set<MusicBandEntity> getMusicBand() {
-        return musicBand;
-    }
-
-    public void setMusicBand(Set<MusicBandEntity> musicBand) {
-        this.musicBand = musicBand;
-    }
-
-    public Set<TicketEntity> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(Set<TicketEntity> tickets) {
-        this.tickets = tickets;
-    }
+    @OneToMany(mappedBy = "presentation", fetch = FetchType.LAZY)
+    private Set<ConfigEventEntity> configEvents;
 }

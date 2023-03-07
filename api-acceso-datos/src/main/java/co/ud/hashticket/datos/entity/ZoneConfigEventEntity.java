@@ -8,7 +8,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "zone_config_event")
-@NamedQuery(name = "ZoneConfigEventEntity.getZoneConfigByEvent", query = "from ZoneConfigEventEntity znCon inner join fetch znCon.configEvent as conEvent inner join fetch conEvent.zoneConfigEvents as znCnf where conEvent.event.id =  ?1 ")
+@NamedQuery(name = "ZoneConfigEventEntity.getZoneConfigByEvent"               , query = "from ZoneConfigEventEntity znCon inner join fetch znCon.configEvent as conEvent inner join fetch conEvent.zoneConfigEvents as znCnf where conEvent.event.id =  ?1 ")
+@NamedQuery(name = "ZoneConfigEventEntity.getZoneConfigByEventAndPresentation", query = "from ZoneConfigEventEntity znCon inner join fetch znCon.configEvent as conEvent where conEvent.event.id =  ?1 and conEvent.presentation.id = ?2 ")
 public class ZoneConfigEventEntity implements Serializable {
     private static final long serialVersionUID = 1234567L;
     @Id

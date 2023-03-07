@@ -9,4 +9,5 @@ public interface ZoneConfigEventService {
     ZoneConfigEventEntity save(ZoneConfigEventEntity zoneConfigEvent);
     Optional<ZoneConfigEventEntity> getById(Long id);
     Set<ZoneConfigEventEntity> getZoneConfigByEvent(Long id);
+    Set<ZoneConfigEventEntity> getZoneConfigByEventAndPresentation(Long idEvent, Long idPresentation);
 }

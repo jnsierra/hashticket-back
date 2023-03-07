@@ -1,5 +1,5 @@
 package co.ud.hashticket.rest.services;
 
 public interface TicketService {
-    Boolean generateTicket(Long idEvent);
+    Boolean generateTicket(Long idEvent, Long presentation);
 }

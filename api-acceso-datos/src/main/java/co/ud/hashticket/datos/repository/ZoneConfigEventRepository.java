@@ -10,4 +10,5 @@ import java.util.Set;
 @Repository
 public interface ZoneConfigEventRepository extends JpaRepository<ZoneConfigEventEntity, Long>, CrudRepository<ZoneConfigEventEntity, Long> {
     Set<ZoneConfigEventEntity> getZoneConfigByEvent(Long idEvent);
+    Set<ZoneConfigEventEntity> getZoneConfigByEventAndPresentation(Long idEvent, Long idPresentation);
 }

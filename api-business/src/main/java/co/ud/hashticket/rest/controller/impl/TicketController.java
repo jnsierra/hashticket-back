@@ -17,9 +17,9 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @PostMapping("/generate/event/{event_id}")
-    public String generate(@PathVariable(value = "event_id") Long id) {
-        ticketService.generateTicket(id);
+    @PostMapping("/generate/event/{event_id}/presentation/{presentation_id}")
+    public String generate(@PathVariable(value = "event_id") Long idEvent, @PathVariable(value = "presentation_id") Long idPresentation ) {
+        ticketService.generateTicket(idEvent, idPresentation);
         return "Este es el servicio de eventos";
     }
 

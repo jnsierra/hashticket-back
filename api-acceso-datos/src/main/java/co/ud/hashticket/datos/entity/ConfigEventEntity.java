@@ -1,5 +1,7 @@
 package co.ud.hashticket.datos.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "config_event")
 public class ConfigEventEntity implements Serializable {
@@ -30,6 +34,9 @@ public class ConfigEventEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     private EventEntity event;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "presentation_id")
+    private PresentationEntity presentation;
     @Column(name = "door_opening")
     private LocalTime doorOpening;
     @Column(name = "number_of_tickets")
@@ -40,62 +47,6 @@ public class ConfigEventEntity implements Serializable {
     private LocalDate eventDate;
     @OneToMany(mappedBy = "configEvent")
     private Set<ZoneConfigEventEntity> zoneConfigEvents = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public EventEntity getEvent() {
-        return event;
-    }
-
-    public void setEvent(EventEntity event) {
-        this.event = event;
-    }
-
-    public LocalTime getDoorOpening() {
-        return doorOpening;
-    }
-
-    public void setDoorOpening(LocalTime doorOpening) {
-        this.doorOpening = doorOpening;
-    }
-
-    public BigDecimal getNumberOfTickets() {
-        return numberOfTickets;
-    }
-
-    public void setNumberOfTickets(BigDecimal numberOfTickets) {
-        this.numberOfTickets = numberOfTickets;
-    }
-
-    public BigDecimal getNumberOfTicketsSold() {
-        return numberOfTicketsSold;
-    }
-
-    public void setNumberOfTicketsSold(BigDecimal numberOfTicketsSold) {
-        this.numberOfTicketsSold = numberOfTicketsSold;
-    }
-
-    public LocalDate getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(LocalDate eventDate) {
-        this.eventDate = eventDate;
-    }
-
-    public Set<ZoneConfigEventEntity> getZoneConfigEvents() {
-        return zoneConfigEvents;
-    }
-
-    public void setZoneConfigEvents(Set<ZoneConfigEventEntity> zoneConfigEvents) {
-        this.zoneConfigEvents = zoneConfigEvents;
-    }
 
     public void addZoneConfigEvents(ZoneConfigEventEntity zoneConfigEvent) {
         this.zoneConfigEvents.add(zoneConfigEvent);

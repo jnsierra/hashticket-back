@@ -12,4 +12,6 @@ import java.util.Set;
 public interface ZoneConfigEventClient {
     @GetMapping(value = "/event/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     Set<ZoneConfigEventDto> getByIdEvent(@PathVariable(value = "id")Long idEvent);
+    @GetMapping(value = "/event/{event_id}/presentation/{presentation_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    Set<ZoneConfigEventDto> getByIdEventAndPresentation(@PathVariable(value = "event_id")Long idEvent, @PathVariable(value = "presentation_id")Long idPresentation );
 }

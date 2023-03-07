@@ -29,4 +29,8 @@ public class ZoneConfigEventServiceImpl implements ZoneConfigEventService {
     public Set<ZoneConfigEventEntity> getZoneConfigByEvent(Long id) {
         return zoneConfigEventRepository.getZoneConfigByEvent(id);
     }
+    @Override
+    public Set<ZoneConfigEventEntity> getZoneConfigByEventAndPresentation(Long idEvent, Long idPresentation) {
+        return zoneConfigEventRepository.getZoneConfigByEventAndPresentation(idEvent, idPresentation);
+    }
 }

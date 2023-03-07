@@ -43,4 +43,12 @@ public class ZoneConfigEventController {
         }
         return ResponseEntity.ok(ZoneConfigEventMapper.INSTANCE.map(response));
     }
+    @GetMapping(value = "/event/{event_id}/presentation/{presentation_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<ZoneConfigEventDto>> getByIdEventAndPresentation(@PathVariable(value = "event_id")Long idEvent, @PathVariable(value = "presentation_id")Long idPresentation ){
+        Set<ZoneConfigEventEntity> response = zoneConfigEventService.getZoneConfigByEventAndPresentation(idEvent, idPresentation);
+        if(response.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(ZoneConfigEventMapper.INSTANCE.map(response));
+    }
 }

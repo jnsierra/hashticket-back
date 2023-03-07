@@ -12,6 +12,9 @@
             <column name="event_id" type="INT">
                 <constraints nullable="false" />
             </column>
+            <column name="presentation_id" type="INT">
+                <constraints nullable="false" />
+            </column>
             <column name="door_opening" type="time">
                 <constraints nullable="false" />
             </column>
@@ -36,6 +39,7 @@
         <insert tableName="config_event">
             <column name="id"  valueComputed="${sequence.config_event}"></column>
             <column name="event_id" value="1"/>
+            <column name="presentation_id" value="1" />
             <column name="door_opening" value="${now}"/>
             <column name="event_date" value="${now}" />
             <column name="number_of_tickets" value="1000" />
@@ -43,5 +47,6 @@
     </changeSet>
     <changeSet id="5" author="admin">
         <addForeignKeyConstraint baseTableName="config_event" baseColumnNames="event_id" constraintName="fk_event_config_event" referencedTableName="event" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="config_event" baseColumnNames="presentation_id" constraintName="fk_event_config_presentation" referencedTableName="presentation" referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>
