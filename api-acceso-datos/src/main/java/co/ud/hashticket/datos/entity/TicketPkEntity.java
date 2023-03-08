@@ -1,28 +1,18 @@
 package co.ud.hashticket.datos.entity;
 
-import lombok.Builder;
+import lombok.*;
 
-import javax.persistence.Embeddable;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Builder
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class TicketPkEntity implements Serializable {
     private static final long serialVersionUID = 1234568L;
-
-    public TicketPkEntity() {
-    }
-
-    public TicketPkEntity(EventEntity event, ZoneEntity zone, CategoryEntity category, PresentationEntity presentation) {
-        this.event = event;
-        this.zone = zone;
-        this.category = category;
-        this.presentation = presentation;
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     private EventEntity event;
@@ -35,35 +25,30 @@ public class TicketPkEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "presentation_id")
     private PresentationEntity presentation;
-    public EventEntity getEvent() {
-        return event;
+    @Column(name = "number_ticket")
+    private Long numberTicket;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TicketPkEntity that = (TicketPkEntity) o;
+
+        if (!event.equals(that.event)) return false;
+        if (!zone.equals(that.zone)) return false;
+        if (!category.equals(that.category)) return false;
+        if (!presentation.equals(that.presentation)) return false;
+        return numberTicket.equals(that.numberTicket);
     }
 
-    public void setEvent(EventEntity event) {
-        this.event = event;
-    }
-
-    public ZoneEntity getZone() {
-        return zone;
-    }
-
-    public void setZone(ZoneEntity zone) {
-        this.zone = zone;
-    }
-
-    public CategoryEntity getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryEntity category) {
-        this.category = category;
-    }
-
-    public PresentationEntity getPresentation() {
-        return presentation;
-    }
-
-    public void setPresentation(PresentationEntity presentation) {
-        this.presentation = presentation;
+    @Override
+    public int hashCode() {
+        int result = event.hashCode();
+        result = 31 * result + zone.hashCode();
+        result = 31 * result + category.hashCode();
+        result = 31 * result + presentation.hashCode();
+        result = 31 * result + numberTicket.hashCode();
+        return result;
     }
 }

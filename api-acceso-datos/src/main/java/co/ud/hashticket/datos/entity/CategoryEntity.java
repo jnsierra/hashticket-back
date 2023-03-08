@@ -1,8 +1,6 @@
 package co.ud.hashticket.datos.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,6 +10,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 @Entity
 @Table(name = "category")
 public class CategoryEntity implements Serializable {
@@ -36,43 +35,19 @@ public class CategoryEntity implements Serializable {
     private Set<ZoneEntity> zones = new HashSet<>();
     @OneToMany(mappedBy = "ticketPk.category", fetch = FetchType.LAZY)
     private Set<TicketEntity> tickets = new HashSet<>();
-    public Long getId() {
-        return id;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CategoryEntity that = (CategoryEntity) o;
+
+        return id.equals(that.id);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<ZoneEntity> getZones() {
-        return zones;
-    }
-
-    public void setZones(Set<ZoneEntity> zones) {
-        this.zones = zones;
-    }
-
-    public Set<TicketEntity> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(Set<TicketEntity> tickets) {
-        this.tickets = tickets;
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

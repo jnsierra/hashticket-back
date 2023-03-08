@@ -40,4 +40,19 @@ public class PresentationEntity implements Serializable {
     private Set<TicketEntity> tickets = new HashSet<>();
     @OneToMany(mappedBy = "presentation", fetch = FetchType.LAZY)
     private Set<ConfigEventEntity> configEvents;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PresentationEntity entity = (PresentationEntity) o;
+
+        return id.equals(entity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

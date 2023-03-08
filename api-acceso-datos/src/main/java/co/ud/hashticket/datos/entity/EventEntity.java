@@ -1,20 +1,20 @@
 package co.ud.hashticket.datos.entity;
 
 import co.ud.ud.hashticket.enumeration.EventStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 @Entity
 @Table(name = "event")
 public class EventEntity implements Serializable {
@@ -66,123 +66,20 @@ public class EventEntity implements Serializable {
     @OneToMany(mappedBy = "ticketPk.event", fetch = FetchType.LAZY)
     private Set<TicketEntity> tickets;
 
-    public Long getId() {
-        return id;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EventEntity that = (EventEntity) o;
+
+        return Objects.equals(id, that.id);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public int getMinimumAge() {
-        return minimumAge;
-    }
-
-    public void setMinimumAge(int minimumAge) {
-        this.minimumAge = minimumAge;
-    }
-
-    public String getResponsible() {
-        return responsible;
-    }
-
-    public void setResponsible(String responsible) {
-        this.responsible = responsible;
-    }
-
-    public String getNit() {
-        return nit;
-    }
-
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getOpeningDoors() {
-        return openingDoors;
-    }
-
-    public void setOpeningDoors(String openingDoors) {
-        this.openingDoors = openingDoors;
-    }
-
-    public CityEntity getCity() {
-        return city;
-    }
-
-    public void setCity(CityEntity city) {
-        this.city = city;
-    }
-
-    public Set<PresentationEntity> getPresentation() {
-        return presentation;
-    }
-
-    public void setPresentation(Set<PresentationEntity> presentation) {
-        this.presentation = presentation;
-    }
-
-    public Set<ConfigEventEntity> getConfigEvents() {
-        return configEvents;
-    }
-
-    public void setConfigEvents(Set<ConfigEventEntity> configEvents) {
-        this.configEvents = configEvents;
-    }
-
-    public EventStatus getEventStatus() {
-        return eventStatus;
-    }
-
-    public void setEventStatus(EventStatus eventStatus) {
-        this.eventStatus = eventStatus;
-    }
-
-    public Set<TicketEntity> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(Set<TicketEntity> tickets) {
-        this.tickets = tickets;
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

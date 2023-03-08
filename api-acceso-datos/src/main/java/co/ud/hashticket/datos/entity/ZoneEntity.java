@@ -1,8 +1,6 @@
 package co.ud.hashticket.datos.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -13,6 +11,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 @Entity
 @Table(name = "zone")
 public class ZoneEntity implements Serializable {
@@ -41,56 +40,23 @@ public class ZoneEntity implements Serializable {
     private Set<ZoneConfigEventEntity> zoneConfigEvents = new HashSet<>();
     @OneToMany(mappedBy = "ticketPk.zone", fetch = FetchType.LAZY)
     private Set<TicketEntity> tickets = new HashSet<>();
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public CategoryEntity getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryEntity category) {
-        this.category = category;
-    }
-
-    public Set<ZoneConfigEventEntity> getZoneConfigEvents() {
-        return zoneConfigEvents;
-    }
-
-    public void setZoneConfigEvents(Set<ZoneConfigEventEntity> zoneConfigEvents) {
-        this.zoneConfigEvents = zoneConfigEvents;
-    }
-
-    public Set<TicketEntity> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(Set<TicketEntity> tickets) {
-        this.tickets = tickets;
-    }
-
     public void addZoneConfigEvents(ZoneConfigEventEntity zoneConfigEvent) {
         this.zoneConfigEvents.add(zoneConfigEvent);
         zoneConfigEvent.setZone(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ZoneEntity that = (ZoneEntity) o;
+
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
