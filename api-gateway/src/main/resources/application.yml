@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: gateway-app
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      routes:
+        - id: api-acceso-datos
+          uri: lb://api-acceso-datos
+          predicates:
+            - Path=/api-acceso-datos/**
+          filters:
+            - RemoveRequestHeader=Cookie
+        - id: api-business
+          uri: lb://api-business
+          predicates:
+            - Path=/api-business/**
+          filters:
+            - RemoveRequestHeader=Cookie
+
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG
+    reactor.netty: DEBUG
+#  config:
+#    import: optional:configserver:http://localhost:8888
+server:
+  servlet:
+    context-path: /api-business
+  port: 5004
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka

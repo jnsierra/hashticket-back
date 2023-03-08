@@ -57,5 +57,7 @@
 		<module>api-acceso-datos</module>
 		<module>api-utiles</module>
 		<module>api-rest-client</module>
-	</modules>
+        <module>api-gateway</module>
+        <module>api-service-discovery</module>
+    </modules>
 </project>
