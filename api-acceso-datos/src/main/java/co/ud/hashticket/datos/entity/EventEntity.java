@@ -17,7 +17,7 @@ import java.util.Set;
 @Getter @Setter
 @Entity
 @Table(name = "event")
-public class EventEntity implements Serializable {
+public class EventEntity extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1234567L;
     @Id
     @GeneratedValue(generator = "sequence-generator-event")
