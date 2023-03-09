@@ -11,11 +11,9 @@ public class AuditorAwareImpl implements AuditorAware<String> {
     public Optional<String> getCurrentAuditor() {
         String usuario = "";
         try {
-            log.info("Llega a la auditoria");
             usuario = SecurityContextHolder.getContext().getAuthentication().getName();
-            log.info("Este es el usuario {}", usuario);
         }catch (Exception e){
-            usuario = "jnsierrac";
+            usuario = "publico";
         }
         return Optional.of(usuario);
     }

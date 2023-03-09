@@ -12,6 +12,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/tickets
     username: hashticket
     password: 12345678
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: pool-tickets
+      maximum-pool-size: 10
+      connection-timeout: 60000
   liquibase:
     change-log: classpath:/db/db.changelog.xml
   jpa:
