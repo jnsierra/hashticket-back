@@ -71,11 +71,11 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/event/",
+									"raw": "localhost:5004/api-acceso-datos/v.1/event/",
 									"host": [
 										"localhost"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -137,11 +137,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/event/1",
+									"raw": "localhost:5004/api-acceso-datos/v.1/event/1",
 									"host": [
 										"localhost"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -1483,85 +1483,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"zoneId\": \"3\",\n    \"configEventId\":\"1\",\n    \"numberOfTickets\": \"1000\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/zone_config_event/",
-									"host": [
-										"localhost"
-									],
-									"port": "5003",
-									"path": [
-										"api-acceso-datos",
-										"v.1",
-										"zone_config_event",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Zone Config Event Insert Copy",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "oauth2",
-									"oauth2": [
-										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"zoneId\": \"3\",\n    \"configEventId\":\"4\",\n    \"numberOfTickets\": \"1000\"\n}",
+									"raw": "{\n    \"zoneId\": \"1\",\n    \"configEventId\":\"1\",\n    \"numberOfTickets\": \"1000\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1657,6 +1579,87 @@
 										"v.1",
 										"zone_config_event",
 										"event",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Zone Config Event By Event and Presentation",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:5002",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "28rcicqk03l31rmukko9q8tufb",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"zoneId\": \"3\",\n    \"configEventId\":\"4\",\n    \"numberOfTickets\": \"1000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5003/api-acceso-datos/v.1/zone_config_event/event/1/presentation/1",
+									"host": [
+										"localhost"
+									],
+									"port": "5003",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"zone_config_event",
+										"event",
+										"1",
+										"presentation",
 										"1"
 									]
 								}
@@ -1893,7 +1896,7 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5004/api-business/v.1/ticket/generate/event/1",
+									"raw": "localhost:5004/api-business/v.1/ticket/generate/event/1/presentation/1",
 									"host": [
 										"localhost"
 									],
@@ -1904,6 +1907,8 @@
 										"ticket",
 										"generate",
 										"event",
+										"1",
+										"presentation",
 										"1"
 									]
 								}
