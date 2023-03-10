@@ -71,9 +71,9 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5004/api-acceso-datos/v.1/event/",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/event/",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
 									"port": "5004",
 									"path": [
@@ -137,9 +137,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5004/api-acceso-datos/v.1/event/1",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/event/1",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
 									"port": "5004",
 									"path": [
@@ -936,11 +936,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/city/department/5",
+									"raw": "localhost:5004/api-acceso-datos/v.1/city/department/5",
 									"host": [
 										"localhost"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
