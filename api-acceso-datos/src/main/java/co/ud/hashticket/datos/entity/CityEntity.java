@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "city")
-@NamedQuery(name="CityEntity.findByDepartment", query = "from CityEntity city inner join fetch city.department as dep where dep.code = :departmentCode ")
+@NamedQuery(name="CityEntity.findByDepartment", query = "from CityEntity city inner join fetch city.department as dep where dep.code = ?1 ")
 public class CityEntity implements Serializable {
     private static final long serialVersionUID = 1234567L;
     @EmbeddedId

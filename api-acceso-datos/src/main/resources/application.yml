@@ -5,6 +5,9 @@ server:
 
 
 spring:
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
   application:
     name: api-acceso-datos
   datasource:

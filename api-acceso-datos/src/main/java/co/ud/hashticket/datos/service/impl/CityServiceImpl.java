@@ -4,13 +4,16 @@ import co.ud.hashticket.datos.entity.CityEntity;
 import co.ud.hashticket.datos.entity.CityPkEntity;
 import co.ud.hashticket.datos.repository.CityRepository;
 import co.ud.hashticket.datos.service.CityService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class CityServiceImpl implements CityService {
     private final CityRepository cityRepository;
     @Autowired
@@ -22,6 +25,7 @@ public class CityServiceImpl implements CityService {
         return cityRepository.findById(new CityPkEntity(cityCode,departmentCode));
     }
     @Override
+    @Cacheable(cacheNames = "listCities", key="listCities")
     public Set<CityEntity> getCitiesByDepartment(Long departmentCode) {
         return cityRepository.findByDepartment(departmentCode);
     }
