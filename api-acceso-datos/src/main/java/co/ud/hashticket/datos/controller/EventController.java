@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/v.1/event")
@@ -35,5 +36,13 @@ public class EventController {
                     .build();
         }
         return ResponseEntity.ok(EventMapper.INSTANCE.map(entity.get()));
+    }
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<EventDto>> getAll(){
+        Set<EventEntity> entities = eventService.getAll();
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(EventMapper.INSTANCE.map(entities));
     }
 }

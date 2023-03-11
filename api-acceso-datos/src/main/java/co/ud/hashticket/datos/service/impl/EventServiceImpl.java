@@ -6,7 +6,9 @@ import co.ud.hashticket.datos.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -24,5 +26,9 @@ public class EventServiceImpl implements EventService {
     @Override
     public Optional<EventEntity> findById(Long id) {
         return eventRepository.findById(id);
+    }
+    @Override
+    public Set<EventEntity> getAll(){
+        return new HashSet<>(eventRepository.findAll());
     }
 }

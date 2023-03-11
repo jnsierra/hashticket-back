@@ -151,6 +151,72 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get Event All",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "redirect_uri",
+											"value": "http://localhost:5002",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "string"
+										},
+										{
+											"key": "client_authentication",
+											"value": "body",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "28rcicqk03l31rmukko9q8tufb",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/event/",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"event",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
