@@ -2,3 +2,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka
+
+business:
+  pathRepo: /Users/nicolas/Documents/repo_images/
