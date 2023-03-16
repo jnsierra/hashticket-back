@@ -1,8 +1,6 @@
 package co.ud.hashticket.datos.mapper;
 
-import co.ud.hashticket.datos.entity.DepartmentEntity;
 import co.ud.hashticket.datos.entity.EventEntity;
-import co.ud.ud.hashticket.dto.DepartmentDto;
 import co.ud.ud.hashticket.dto.EventDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,11 +14,14 @@ public interface EventMapper {
     @Mapping(source = "cityCode", target = "city.cityPk.code")
     @Mapping(source = "departmentCode", target = "city.cityPk.departmentCode")
     @Mapping(source = "eventStatus", target = "eventStatus")
+    @Mapping(source = "categoryEventId", target = "categoryEvent.id")
     EventEntity map(EventDto eventDto);
     @Mapping(source = "city.cityPk.code", target = "cityCode")
     @Mapping(source = "city.cityPk.departmentCode", target = "departmentCode")
+    @Mapping(source = "categoryEvent.id", target = "categoryEventId")
     EventDto map(EventEntity event);
     @Mapping(source = "city.cityPk.code", target = "cityCode")
     @Mapping(source = "city.cityPk.departmentCode", target = "departmentCode")
+    @Mapping(source = "categoryEvent.id", target = "categoryEventId")
     Set<EventDto> map(Set<EventEntity> department);
 }

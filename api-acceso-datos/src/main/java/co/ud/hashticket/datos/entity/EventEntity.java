@@ -65,6 +65,9 @@ public class EventEntity extends Auditable<String> implements Serializable {
     private EventStatus eventStatus;
     @OneToMany(mappedBy = "ticketPk.event", fetch = FetchType.LAZY)
     private Set<TicketEntity> tickets;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private CategoryEventEntity categoryEvent;
 
 
 

@@ -21,4 +21,5 @@ public class EventDto {
     private Long cityCode;
     private Long departmentCode;
     private EventStatus eventStatus;
+    private Long categoryEventId;
 }

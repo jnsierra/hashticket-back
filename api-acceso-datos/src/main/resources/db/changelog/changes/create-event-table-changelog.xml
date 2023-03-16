@@ -45,6 +45,10 @@
             <column name="status" type="VARCHAR(15)">
                 <constraints nullable="false"/>
             </column>
+            <column name="category_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+
 
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -73,6 +77,12 @@
                 constraintName="fk_event_city"
                 referencedTableName="city"
                 referencedColumnNames="department_code, code"/>
+        <addForeignKeyConstraint
+                baseTableName="event"
+                baseColumnNames="category_id"
+                constraintName="fk_event_category"
+                referencedTableName="event_category"
+                referencedColumnNames="id"/>
     </changeSet>
     <changeSet id="admin" author="4">
         <insert tableName="event">
@@ -90,6 +100,7 @@
             <column name="department_code" value="11" />
             <column name="status" value="CREATED" />
             <column name="created_by" value="jnsierra" />
+            <column name="category_id" value="1" />
 
             <column name="created_by" value="jnsierra" />
             <column name="created_date" value="${now}" />
