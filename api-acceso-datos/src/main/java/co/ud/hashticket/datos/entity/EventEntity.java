@@ -68,9 +68,8 @@ public class EventEntity extends Auditable<String> implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private CategoryEventEntity categoryEvent;
-
-
-
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    private Set<EventImagesEntity> eventImagesEntities;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

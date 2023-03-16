@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="admin" id="1">
+        <createTable tableName="event_images">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="event_id" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="location" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="type_image" type="VARCHAR(50)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="zone"/>
+        </rollback>
+    </changeSet>
+    <changeSet author="admin" id="2">
+        <createSequence sequenceName="event_images_seq" startValue="1" incrementBy="1" />
+    </changeSet>
+    <changeSet id="admin" author="3">
+        <addForeignKeyConstraint
+                baseTableName="event_images"
+                baseColumnNames="event_id"
+                constraintName="fk_event_images_event"
+                referencedTableName="event"
+                referencedColumnNames="id" />
+    </changeSet>
+</databaseChangeLog>
