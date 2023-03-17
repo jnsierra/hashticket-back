@@ -18,6 +18,12 @@ spring:
             - Path=/api-business/**
           filters:
             - RemoveRequestHeader=Cookie
+        - id: api-public-users
+          uri: lb://api-public-users
+          predicates:
+            - Path=/api-public-users/**
+          filters:
+            - RemoveRequestHeader=Cookie
 
 server:
   servlet:

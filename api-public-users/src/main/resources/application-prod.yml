@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://service-postgres15:5432/tickets
+    username: hashticket
+    password: 12345678
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: pool-tickets
+      maximum-pool-size: 10
+      connection-timeout: 60000
+  jpa:
+    show-sql: false
+    generate-ddl: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://server-discovery:1111/eureka

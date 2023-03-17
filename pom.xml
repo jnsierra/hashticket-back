@@ -63,5 +63,7 @@
 		<module>api-rest-client</module>
         <module>api-gateway</module>
         <module>api-service-discovery</module>
+        <module>api-entities</module>
+        <module>api-public-users</module>
     </modules>
 </project>

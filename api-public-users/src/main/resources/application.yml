@@ -1,0 +1,15 @@
+server:
+  servlet:
+    context-path: /api-public-users
+  port: 5006
+spring:
+  application:
+    name: api-public-users
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect:  org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
