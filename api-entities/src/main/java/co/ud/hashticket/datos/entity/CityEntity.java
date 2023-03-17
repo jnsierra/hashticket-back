@@ -1,8 +1,17 @@
 package co.ud.hashticket.datos.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
 @Entity
 @Table(name = "city")
 @NamedQuery(name="CityEntity.findByDepartment", query = "from CityEntity city inner join fetch city.department as dep where dep.code = ?1 ")
@@ -16,36 +25,18 @@ public class CityEntity implements Serializable {
     @JoinColumn(name = "department_code", insertable = false, updatable = false)
     private DepartmentEntity department;
 
-    public CityEntity() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CityEntity that = (CityEntity) o;
+
+        return Objects.equals(cityPk, that.cityPk);
     }
 
-    public CityEntity(CityPkEntity cityPk, String name, DepartmentEntity department) {
-        this.cityPk = cityPk;
-        this.name = name;
-        this.department = department;
-    }
-
-    public CityPkEntity getCityPk() {
-        return cityPk;
-    }
-
-    public void setCityPk(CityPkEntity cityPk) {
-        this.cityPk = cityPk;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public DepartmentEntity getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(DepartmentEntity department) {
-        this.department = department;
+    @Override
+    public int hashCode() {
+        return cityPk != null ? cityPk.hashCode() : 0;
     }
 }

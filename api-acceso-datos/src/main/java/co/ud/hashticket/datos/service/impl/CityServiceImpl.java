@@ -25,7 +25,6 @@ public class CityServiceImpl implements CityService {
         return cityRepository.findById(new CityPkEntity(cityCode,departmentCode));
     }
     @Override
-    @Cacheable(cacheNames = "listCities", key="listCities")
     public Set<CityEntity> getCitiesByDepartment(Long departmentCode) {
         return cityRepository.findByDepartment(departmentCode);
     }
