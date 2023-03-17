@@ -803,11 +803,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/country/",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/country/",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -869,11 +869,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/department/8",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/department/8",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -935,11 +935,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/department/country/57",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/department/country/57",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -1002,11 +1002,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/city/1/5",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/city/1/5",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -1069,9 +1069,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:5004/api-acceso-datos/v.1/city/department/5",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/city/department/5",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
 									"port": "5004",
 									"path": [
@@ -2125,7 +2125,7 @@
 					"name": "event images",
 					"item": [
 						{
-							"name": "Event Insert",
+							"name": "Event Images Insert",
 							"request": {
 								"auth": {
 									"type": "oauth2",
@@ -2176,7 +2176,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"place\": \"Movistar Arena\",\n    \"date\": \"2023-10-12\",\n    \"time\": \"24:00\",\n    \"category\": \"concierto\",\n    \"minimumAge\" : 18,\n    \"responsible\" : \"Jesus Nicolas Sierra Chaparro\",\n    \"nit\": \"12345678\",\n    \"address\" : \"Cra 73 a bis No 38 c 72 sur\",\n    \"openingDoors\": \"23:00\",\n    \"cityCode\": 1,\n    \"departmentCode\":5,\n    \"eventStatus\": \"OPENING\",\n    \"categoryEventId\":\"1\"\n}",
+									"raw": "{\n    \"description\": \"Imagen principal\",\n    \"location\": \"/Users/nicolas/Documents/repo_images/8.jpg\",\n    \"typeImages\": \"PRINCIPAL\",\n    \"eventId\": 1,\n    \"base64\": null\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2184,7 +2184,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}:5004/api-acceso-datos/v.1/event/",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/event_images/",
 									"host": [
 										"{{host}}"
 									],
@@ -2192,7 +2192,7 @@
 									"path": [
 										"api-acceso-datos",
 										"v.1",
-										"event",
+										"event_images",
 										""
 									]
 								}
@@ -2342,6 +2342,32 @@
 								"v.1",
 								"event_images",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "Get Events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/api-public-users/v.1/event/active",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"api-public-users",
+								"v.1",
+								"event",
+								"active"
 							]
 						}
 					},
