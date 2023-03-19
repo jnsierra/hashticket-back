@@ -2,6 +2,7 @@ package co.ud.hashticket.datos.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ public class DepartmentEntity implements Serializable {
     @JoinColumn(name = "country_code")
     private CountryEntity country;
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
-    private Set<CityEntity> cities;
+    private Set<CityEntity> cities = new HashSet<>();
 
     public DepartmentEntity() {
     }

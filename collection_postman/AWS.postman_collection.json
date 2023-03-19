@@ -156,46 +156,11 @@
 							"name": "Get Event All",
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE2NzkxOTY1OTEsImV4cCI6MTY3OTIwMDE5MX0.szyVD2_-COdq5YLV4OiTSe7sOuWnssKY0ApTIWPPIPWKO7NA7GzmUVUFG6-wd-9QdfzGSKGVXQEyEvoMdoTTYA",
 											"type": "string"
 										}
 									]
@@ -756,46 +721,11 @@
 							"name": "Get Country",
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE2NzkyNTM4NjQsImV4cCI6MTY3OTI1NzQ2NH0.v3_Tphnbe0vAq1LKVuskwkpcNPg2YQ3wcwFEQ3hzT39jmXhwREAGGRDYFTN4RCJ-DilCtbr7wLR_49ifdshweg",
 											"type": "string"
 										}
 									]
@@ -2368,6 +2298,35 @@
 								"v.1",
 								"event",
 								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"jnsierrac@gmail.com\",\n    \"password\":\"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/login/",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"login",
+								""
 							]
 						}
 					},

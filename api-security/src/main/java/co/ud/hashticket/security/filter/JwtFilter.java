@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class JwtFilter extends OncePerRequestFilter {
     private static final String HEADER = "Authorization";
@@ -22,7 +23,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         try {
-            if (existeJWTToken(request)) {
+            if (existsJWTToken(request)) {
                 Claims claims = validateToken(request);
                 if (claims.get("authorities") != null) {
                     setUpSpringAuthentication(claims);
@@ -60,8 +61,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
     }
 
-    private boolean existeJWTToken(HttpServletRequest request) {
+    private boolean existsJWTToken(HttpServletRequest request) {
         String authenticationHeader = request.getHeader(HEADER);
-        return (authenticationHeader == null || !authenticationHeader.startsWith(PREFIX));
+        return (Objects.nonNull(authenticationHeader) && authenticationHeader.startsWith(PREFIX) );
     }
 }

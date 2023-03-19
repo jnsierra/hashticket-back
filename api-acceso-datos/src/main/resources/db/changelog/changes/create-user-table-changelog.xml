@@ -6,7 +6,7 @@
 
 
     <changeSet author="admin" id="1">
-        <createTable tableName="user">
+        <createTable tableName="user_tickets">
             <column name="id" type="INT" >
                 <constraints primaryKey="true"/>
             </column>
@@ -45,21 +45,21 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="user"/>
+            <dropTable tableName="user_tickets"/>
         </rollback>
     </changeSet>
     <changeSet id="2" author="admin">
         <createSequence sequenceName="user_seq" startValue="1" incrementBy="1" />
     </changeSet>
     <changeSet id="3" author="admin">
-        <addUniqueConstraint tableName="user" columnNames="email" />
+        <addUniqueConstraint tableName="user_tickets" columnNames="email" />
     </changeSet>
     <changeSet id="4" author="admin">
-        <addForeignKeyConstraint baseTableName="user" baseColumnNames="user_type_id" constraintName="fk_user_user_type" referencedTableName="user_type"
+        <addForeignKeyConstraint baseTableName="user_tickets" baseColumnNames="user_type_id" constraintName="fk_user_tickets_user_type" referencedTableName="user_type"
                                  referencedColumnNames="id"/>
     </changeSet>
     <changeSet author="admin" id="5" >
-        <insert tableName="user">
+        <insert tableName="user_tickets">
             <column name="id" valueComputed="${sequence.user}"></column>
             <column name="email" value="jnsierrac@gmail.com"></column>
             <column name="code" value="20172678021"></column>
@@ -76,7 +76,7 @@
             <column name="last_modified_by" value="jsierra"></column>
             <column name="last_modified_date" valueDate="${now}"></column>
         </insert>
-        <insert tableName="user">
+        <insert tableName="user_tickets">
             <column name="id" valueComputed="${sequence.user}"></column>
             <column name="email" value="hgomezm@gmail.com"></column>
             <column name="code" value="20172678022"></column>

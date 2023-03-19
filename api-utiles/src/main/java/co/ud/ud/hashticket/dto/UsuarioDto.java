@@ -11,14 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class UsuarioDto {
-
     private Long id;
-    private String correo;
-    private String codigo;
-    private String contrasena;
-    private String nombre;
-    private String cambioContra;
-    private Integer intentos;
-    private USER_STATE estado;
-    private TipoUsuarioDto tipoUsuario;
+    private String email;
+    private String code;
+    private String password;
+    private String name;
+    private String changePassword;
+    private String attempts;
+    private USER_STATE state;
 }
