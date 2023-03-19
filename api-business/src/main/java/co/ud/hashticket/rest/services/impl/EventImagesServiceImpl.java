@@ -21,8 +21,8 @@ public class EventImagesServiceImpl implements EventImagesService {
     public EventImagesDto save(EventImagesDto eventImages) {
         //Save the images
         EventImagesDto entity = eventImagesClient.save(eventImages);
-        Boolean guardar = Base64Utilities.saveFile(eventImages.getBase64(), pathRepo, entity.getId() + ".jpg");
-        if(guardar){
+        boolean keep = Base64Utilities.saveFile(eventImages.getBase64(), pathRepo, entity.getId() + ".jpg");
+        if(keep){
             String location = pathRepo + entity.getId() + ".jpg";
             //Update url
             entity.setLocation(location);

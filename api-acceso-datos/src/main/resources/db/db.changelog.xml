@@ -8,10 +8,13 @@
     <property name="sequence.event"         value="(SELECT nextval('event_seq'))"   dbms="postgresql"/>
     <property name="sequence.config_event"  value="(SELECT nextval('config_event_seq'))"   dbms="postgresql"/>
     <property name="sequence.presentation"  value="(SELECT nextval('country_seq'))" dbms="postgresql"/>
-    <property name="sequence.event_category"  value="(SELECT nextval('event_category_seq'))" dbms="postgresql"/>
+    <property name="sequence.event_category" value="(SELECT nextval('event_category_seq'))" dbms="postgresql"/>
+    <property name="sequence.user_type"      value="(SELECT nextval('user_type_seq'))" dbms="postgresql"/>
+    <property name="sequence.user"      value="(SELECT nextval('user_seq'))" dbms="postgresql"/>
 
     <property name="now" value="now()" dbms="postgresql"/>
-
+    <include file="/db/changelog/changes/create-type-user-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-user-table-changelog.xml" />
     <include file="/db/changelog/changes/create-country-table-changelog.xml" />
     <include file="/db/changelog/changes/create-department-table-changelog.xml" />
     <include file="/db/changelog/changes/create-city-table-changelog.xml" />

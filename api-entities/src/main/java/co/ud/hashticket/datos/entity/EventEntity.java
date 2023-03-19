@@ -51,10 +51,8 @@ public class EventEntity extends Auditable<String> implements Serializable {
     @Column(name = "opening_doors")
     private String openingDoors;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(name = "city_code", referencedColumnName = "code"),
-            @JoinColumn(name = "department_code", referencedColumnName = "department_code")
-    })
+    @JoinColumn(name = "city_code", referencedColumnName = "code")
+    @JoinColumn(name = "department_code", referencedColumnName = "department_code")
     private CityEntity city;
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private Set<PresentationEntity> presentation;

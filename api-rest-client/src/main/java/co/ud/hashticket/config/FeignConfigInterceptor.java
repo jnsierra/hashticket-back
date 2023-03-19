@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class FeignConfigInterceptor implements RequestInterceptor {
-    private final String AUTHORIZATION_HEADER_NAME= "authorization";
+    private static final  String AUTHORIZATION_HEADER_NAME = "authorization";
     @Autowired
     private HttpServletRequest request;
     @Override

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet author="admin" id="1">
+        <createTable tableName="user">
+            <column name="id" type="INT" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="change_password" type="VARCHAR(255)"/>
+            <column name="user_type_id" type="INT">
+            </column>
+            <column name="attempts" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="user"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="2" author="admin">
+        <createSequence sequenceName="user_seq" startValue="1" incrementBy="1" />
+    </changeSet>
+    <changeSet id="3" author="admin">
+        <addUniqueConstraint tableName="user" columnNames="email" />
+    </changeSet>
+    <changeSet id="4" author="admin">
+        <addForeignKeyConstraint baseTableName="user" baseColumnNames="user_type_id" constraintName="fk_user_user_type" referencedTableName="user_type"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet author="admin" id="5" >
+        <insert tableName="user">
+            <column name="id" valueComputed="${sequence.user}"></column>
+            <column name="email" value="jnsierrac@gmail.com"></column>
+            <column name="code" value="20172678021"></column>
+            <column name="password" value="12345678"></column>
+            <column name="name" value="jesus nicolas sierra"></column>
+            <column name="user_type_id" value="1"></column>
+            <column name="change_password" value="N"></column>
+            <column name="attempts" value="0"></column>
+            <column name="state" value="ACTIVE"></column>
+
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+        <insert tableName="user">
+            <column name="id" valueComputed="${sequence.user}"></column>
+            <column name="email" value="hgomezm@gmail.com"></column>
+            <column name="code" value="20172678022"></column>
+            <column name="password" value="12345678"></column>
+            <column name="name" value="Hector Gomez Amaya"></column>
+            <column name="user_type_id" value="2"></column>
+            <column name="change_password" value="N"></column>
+            <column name="attempts" value="0"></column>
+            <column name="state" value="ACTIVE"></column>
+
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
