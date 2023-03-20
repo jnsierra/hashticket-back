@@ -5,3 +5,9 @@ eureka:
 
 business:
   pathRepo: /Users/nicolas/Documents/repo_images/
+
+endpoint:
+  ms-data-access:
+    protocol: http
+    host: localhost
+    port: 5003
