@@ -10,4 +10,4 @@ endpoint:
   ms-data-access:
     protocol: http
     host: localhost
-    port: 5004
+    port: 5005
