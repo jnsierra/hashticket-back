@@ -725,7 +725,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE2NzkyNTM4NjQsImV4cCI6MTY3OTI1NzQ2NH0.v3_Tphnbe0vAq1LKVuskwkpcNPg2YQ3wcwFEQ3hzT39jmXhwREAGGRDYFTN4RCJ-DilCtbr7wLR_49ifdshweg",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE2NzkyNTQ2MjcsImV4cCI6MTY3OTI1ODIyN30.8VdxJDI7wxPdAT8aVg23okU8eYdeGnxOu88gSxmbjIIxQuhiIceuzzhAVOaGUS3EvAadxjjw1b02FUR4ETBwU",
 											"type": "string"
 										}
 									]
@@ -2206,46 +2206,11 @@
 					"name": "Event Images Insert",
 					"request": {
 						"auth": {
-							"type": "oauth2",
-							"oauth2": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "redirect_uri",
-									"value": "http://localhost:5002",
-									"type": "string"
-								},
-								{
-									"key": "grant_type",
-									"value": "authorization_code",
-									"type": "string"
-								},
-								{
-									"key": "client_authentication",
-									"value": "body",
-									"type": "string"
-								},
-								{
-									"key": "authUrl",
-									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-									"type": "string"
-								},
-								{
-									"key": "clientId",
-									"value": "28rcicqk03l31rmukko9q8tufb",
-									"type": "string"
-								},
-								{
-									"key": "accessTokenUrl",
-									"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-									"type": "string"
-								},
-								{
-									"key": "tokenName",
-									"value": "token",
-									"type": "string"
-								},
-								{
-									"key": "addTokenTo",
-									"value": "header",
+									"key": "token",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -2305,6 +2270,27 @@
 				},
 				{
 					"name": "login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"pm.environment.set(\"token\", responseJson.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -2331,8 +2317,42 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Events Images by IdEvent and Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/event_images/event/1?typeImages=PRINCIPAL",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"event_images",
+								"event",
+								"1"
+							],
+							"query": [
+								{
+									"key": "typeImages",
+									"value": "PRINCIPAL"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
 		}
 	]
 }

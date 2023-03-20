@@ -37,14 +37,14 @@ public class LoginServiceImpl implements LoginService {
         return LOGIN_ACTION.SUCCESS;
     }
 
-    private Boolean validateStateUser(UserEntity user) {
+    private boolean validateStateUser(UserEntity user) {
         if( USER_STATE.ACTIVE.equals(user.getState()) ){
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
     }
 
-    private Boolean validatePassword(String email, String pass, UserEntity userEntity) {
+    private boolean validatePassword(String email, String pass, UserEntity userEntity) {
         Optional<UserEntity> user = userRepository.findByEmailAndPassword(email, pass);
         if(user.isPresent()){
             return Boolean.TRUE;
@@ -54,7 +54,7 @@ public class LoginServiceImpl implements LoginService {
         return Boolean.FALSE;
     }
 
-    private Boolean validateChagePass(UserEntity user) {
+    private boolean validateChagePass(UserEntity user) {
         if("S".equals(user.getChangePassword())){
             return Boolean.TRUE;
         }

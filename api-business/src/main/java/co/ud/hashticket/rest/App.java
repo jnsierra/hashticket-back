@@ -6,7 +6,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("co.ud.hashticket")
+@ComponentScan("co.ud")
 @EnableEurekaClient
 public class App {
 

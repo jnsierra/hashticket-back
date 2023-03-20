@@ -9,8 +9,6 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "user_type")
@@ -34,8 +32,9 @@ public class UserTypeEntity implements Serializable {
     private String type;
     @Column(name = "description", nullable = false)
     private String description;
-    @OneToMany(mappedBy = "userType", fetch = FetchType.LAZY)
-    private Set<UserEntity> users = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @Override
     public boolean equals(Object o) {

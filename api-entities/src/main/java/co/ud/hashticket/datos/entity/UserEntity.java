@@ -9,6 +9,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 
 @Getter
@@ -18,7 +20,9 @@ import javax.persistence.*;
 @NamedQuery(name = "UserEntity.updateAttempts", query = "update UserEntity usu set usu.attempts = :attempts WHERE usu.id = :id")
 @Entity
 @Table(name = "user_tickets")
-public class UserEntity extends Auditable<String> {
+public class UserEntity  extends Auditable<String> implements Serializable {
+
+    private static final long serialVersionUID = 2405172041950251807L;
     @Id
     @GeneratedValue(generator = "sequence-generator-user")
     @GenericGenerator(
@@ -46,9 +50,8 @@ public class UserEntity extends Auditable<String> {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private USER_STATE state;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_type_id")
-    private UserTypeEntity userType;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<UserTypeEntity> userTypes;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

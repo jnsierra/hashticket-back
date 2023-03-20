@@ -23,8 +23,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="change_password" type="VARCHAR(255)"/>
-            <column name="user_type_id" type="INT">
-            </column>
             <column name="attempts" type="INT">
                 <constraints nullable="false"/>
             </column>
@@ -54,10 +52,6 @@
     <changeSet id="3" author="admin">
         <addUniqueConstraint tableName="user_tickets" columnNames="email" />
     </changeSet>
-    <changeSet id="4" author="admin">
-        <addForeignKeyConstraint baseTableName="user_tickets" baseColumnNames="user_type_id" constraintName="fk_user_tickets_user_type" referencedTableName="user_type"
-                                 referencedColumnNames="id"/>
-    </changeSet>
     <changeSet author="admin" id="5" >
         <insert tableName="user_tickets">
             <column name="id" valueComputed="${sequence.user}"></column>
@@ -65,7 +59,6 @@
             <column name="code" value="20172678021"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="jesus nicolas sierra"></column>
-            <column name="user_type_id" value="1"></column>
             <column name="change_password" value="N"></column>
             <column name="attempts" value="0"></column>
             <column name="state" value="ACTIVE"></column>
@@ -82,7 +75,6 @@
             <column name="code" value="20172678022"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="Hector Gomez Amaya"></column>
-            <column name="user_type_id" value="2"></column>
             <column name="change_password" value="N"></column>
             <column name="attempts" value="0"></column>
             <column name="state" value="ACTIVE"></column>
