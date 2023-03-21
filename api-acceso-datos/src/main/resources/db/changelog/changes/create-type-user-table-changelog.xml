@@ -62,8 +62,8 @@
         </insert>
         <insert tableName="user_type">
             <column name="id"  valueComputed="${sequence.user_type}"></column>
-            <column name="type" value="ROLE_MANAGER"></column>
-            <column name="description" value="Persona encargada de administrar los eventos"></column>
+            <column name="type" value="ROLE_USER_GENERIC"></column>
+            <column name="description" value="Personas que desean comprar tickets"></column>
             <column name="user_id" value="2"></column>
 
             <column name="created_by" value="jsierra"></column>
