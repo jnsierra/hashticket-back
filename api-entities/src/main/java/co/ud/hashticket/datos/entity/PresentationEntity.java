@@ -11,6 +11,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedQuery(name = "PresentationEntity.findByEvent", query = "from PresentationEntity pre inner join fetch pre.event as eve  WHERE eve.id = :idEvent ")
 @Getter @Setter
 @Entity
 @Table(name = "presentation")

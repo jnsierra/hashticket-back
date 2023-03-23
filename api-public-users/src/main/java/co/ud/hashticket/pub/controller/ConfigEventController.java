@@ -23,7 +23,6 @@ public class ConfigEventController {
     public ConfigEventController(ConfigEventService configEventService) {
         this.configEventService = configEventService;
     }
-
     @GetMapping(value = "/event/{idEvent}/presentation/{idPresentation}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ConfigEventDto> get(@PathVariable(value = "idEvent")Long idEvent, @PathVariable(value = "idPresentation")Long idPresentation){
         Optional<ConfigEventEntity> entity = configEventService.findByEventIdAndPresentationId(idEvent, idPresentation);
