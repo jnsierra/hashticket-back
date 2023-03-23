@@ -14,6 +14,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NamedQuery(name = "UserEntity.findByEventId", query = "from ConfigEventEntity cEvent inner join fetch cEvent.event as eve inner join fetch cEvent.presentation as pr  WHERE eve.id = :idEvent and pr.id = :idPresentation")
 @Entity
 @Table(name = "config_event")
 public class ConfigEventEntity implements Serializable {

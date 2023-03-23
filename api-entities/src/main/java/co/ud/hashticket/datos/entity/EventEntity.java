@@ -38,8 +38,6 @@ public class EventEntity extends Auditable<String> implements Serializable {
     private LocalDate date;
     @Column(name = "time")
     private String time;
-    @Column(name = "category")
-    private String category;
     @Column(name = "minimum_age")
     private int minimumAge;
     @Column(name = "responsible")
@@ -48,8 +46,6 @@ public class EventEntity extends Auditable<String> implements Serializable {
     private String nit;
     @Column(name = "address")
     private String address;
-    @Column(name = "opening_doors")
-    private String openingDoors;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_code", referencedColumnName = "code")
     @JoinColumn(name = "department_code", referencedColumnName = "department_code")

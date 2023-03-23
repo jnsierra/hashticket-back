@@ -14,4 +14,5 @@ public class ConfigEventDto {
     private BigDecimal numberOfTickets;
     private BigDecimal numberOfTicketsSold;
     private LocalDate eventDate;
+    private Long presentationId;
 }

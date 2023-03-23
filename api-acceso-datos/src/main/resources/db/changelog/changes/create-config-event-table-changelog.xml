@@ -45,6 +45,9 @@
             <column name="number_of_tickets" value="1000" />
         </insert>
     </changeSet>
+    <changeSet id="4" author="admin">
+        <addUniqueConstraint tableName="config_event" columnNames="event_id,presentation_id" />
+    </changeSet>
     <changeSet id="5" author="admin">
         <addForeignKeyConstraint baseTableName="config_event" baseColumnNames="event_id" constraintName="fk_event_config_event" referencedTableName="event" referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="config_event" baseColumnNames="presentation_id" constraintName="fk_event_config_presentation" referencedTableName="presentation" referencedColumnNames="id"/>

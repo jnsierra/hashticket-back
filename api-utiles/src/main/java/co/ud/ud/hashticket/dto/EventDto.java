@@ -12,12 +12,10 @@ public class EventDto {
     private String place;
     private LocalDate date;
     private String time;
-    private String category;
     private int minimumAge;
     private String responsible;
     private String nit;
     private String address;
-    private String openingDoors;
     private Long cityCode;
     private Long departmentCode;
     private EventStatus eventStatus;

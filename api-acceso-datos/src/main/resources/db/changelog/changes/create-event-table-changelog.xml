@@ -18,9 +18,6 @@
             <column name="time" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="category" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="minimum_age" type="int">
                 <constraints nullable="false"/>
             </column>
@@ -31,9 +28,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="address" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="opening_doors" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="city_code" type="INT">
@@ -90,12 +84,10 @@
             <column name="place" value="Movistar Arena"/>
             <column name="date" value="${now}"/>
             <column name="time" value="${now}" />
-            <column name="category" value="Concert" />
             <column name="minimum_age" value="10" />
             <column name="responsible" value="Jesus Sierra" />
             <column name="nit" value="1234" />
             <column name="address" value="Cra 30 # 53" />
-            <column name="opening_doors" value="8:00 PM" />
             <column name="city_code" value="001" />
             <column name="department_code" value="11" />
             <column name="status" value="CREATED" />
