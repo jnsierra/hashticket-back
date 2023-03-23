@@ -2210,6 +2210,70 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Category Event By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/category_event/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"category_event",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Category Event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/category_event/",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"category_event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Presentation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/presentation/event/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"presentation",
+								"event",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
