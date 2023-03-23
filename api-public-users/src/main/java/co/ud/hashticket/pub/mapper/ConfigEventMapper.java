@@ -11,7 +11,9 @@ public interface ConfigEventMapper {
 
     ConfigEventMapper INSTANCE = Mappers.getMapper(ConfigEventMapper.class);
     @Mapping(source = "eventId", target = "event.id")
+    @Mapping(source = "presentationId", target = "presentation.id")
     ConfigEventEntity map(ConfigEventDto configEventDto);
     @Mapping(source = "event.id", target = "eventId")
+    @Mapping(source = "presentation.id", target = "presentationId")
     ConfigEventDto map(ConfigEventEntity configEvent);
 }
