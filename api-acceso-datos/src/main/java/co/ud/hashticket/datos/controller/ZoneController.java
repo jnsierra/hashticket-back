@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/v.1/zone")
@@ -31,5 +32,13 @@ public class ZoneController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(ZoneMapper.INSTANCE.map(entity.get()));
+    }
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<ZoneDto>> getAll(){
+        Set<ZoneEntity> entities = zoneService.getAll();
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(ZoneMapper.INSTANCE.map(entities));
     }
 }

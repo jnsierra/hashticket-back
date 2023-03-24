@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/v.1/config_event")
 public class ConfigEventController {
@@ -31,5 +33,14 @@ public class ConfigEventController {
                     .build();
         }
         return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(entity.get()));
+    }
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<ConfigEventDto>> get(){
+        Set<ConfigEventEntity> entities = configEventService.getAll();
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent()
+                    .build();
+        }
+        return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(entities));
     }
 }

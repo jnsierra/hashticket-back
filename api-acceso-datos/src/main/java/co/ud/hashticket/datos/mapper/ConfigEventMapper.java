@@ -6,6 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.Set;
+
 @Mapper
 public interface ConfigEventMapper {
     ConfigEventMapper INSTANCE = Mappers.getMapper(ConfigEventMapper.class);
@@ -15,4 +17,8 @@ public interface ConfigEventMapper {
     @Mapping(source = "event.id", target = "eventId")
     @Mapping(source = "presentation.id", target = "presentationId")
     ConfigEventDto map(ConfigEventEntity configEvent);
+
+    @Mapping(source = "event.id", target = "eventId")
+    @Mapping(source = "presentation.id", target = "presentationId")
+    Set<ConfigEventDto> map(Set<ConfigEventEntity> configEvent);
 }

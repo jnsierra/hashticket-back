@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/v.1/category")
@@ -32,5 +33,13 @@ public class CategoryController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(CategoryMapper.INSTANCE.map( entity.get() ));
+    }
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<CategoryDto>> getById(){
+        Set<CategoryEntity> entities = categoryService.findAll();
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(CategoryMapper.INSTANCE.map( entities ));
     }
 }

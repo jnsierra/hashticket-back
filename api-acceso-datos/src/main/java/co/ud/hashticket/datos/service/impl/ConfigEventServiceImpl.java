@@ -6,7 +6,9 @@ import co.ud.hashticket.datos.service.ConfigEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ConfigEventServiceImpl implements ConfigEventService {
@@ -22,5 +24,9 @@ public class ConfigEventServiceImpl implements ConfigEventService {
     @Override
     public Optional<ConfigEventEntity> findById(Long id) {
         return configEventRepository.findById(id);
+    }
+    @Override
+    public Set<ConfigEventEntity> getAll() {
+        return new HashSet<>(configEventRepository.findAll());
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/v.1/artist")
@@ -27,6 +28,14 @@ public class ArtistController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(ArtistMapper.INSTANCE.map(response.get()));
+    }
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<ArtistDto>> get(){
+        Set<ArtistEntity> response = artistService.getAll();
+        if(response.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(ArtistMapper.INSTANCE.map(response));
     }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArtistDto> save(@RequestBody ArtistDto artistDto){

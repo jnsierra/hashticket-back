@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/v.1/presentation")
@@ -27,7 +28,14 @@ public class PresentationController {
         }
         return ResponseEntity.ok(PresentationMapper.INSTANCE.map(entity.get()));
     }
-
+    @GetMapping( value = "/")
+    public ResponseEntity<Set<PresentationDto>> getAll(){
+        Set<PresentationEntity> entities = presentationService.getAll();
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(PresentationMapper.INSTANCE.map(entities));
+    }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PresentationDto> save(@RequestBody PresentationDto presentationDto){
         PresentationEntity entity = PresentationMapper.INSTANCE.map(presentationDto);

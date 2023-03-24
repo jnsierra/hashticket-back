@@ -6,7 +6,9 @@ import co.ud.hashticket.datos.service.PresentationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PresentationServiceImpl implements PresentationService {
@@ -23,5 +25,9 @@ public class PresentationServiceImpl implements PresentationService {
     @Override
     public Optional<PresentationEntity> getById(Long id) {
         return presentationRepository.findById(id);
+    }
+    @Override
+    public Set<PresentationEntity> getAll() {
+        return new HashSet<>(presentationRepository.findAll());
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/v.1/musicBand")
@@ -27,7 +28,14 @@ public class MusicBandController {
         }
         return ResponseEntity.ok(MusicBandMapper.INSTANCE.map(entity.get()));
     }
-
+    @GetMapping( value = "/")
+    public ResponseEntity<Set<MusicBandDto>> getAll(){
+        Set<MusicBandEntity> entities = musicBandService.getAll();
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(MusicBandMapper.INSTANCE.map(entities));
+    }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MusicBandDto> save(@RequestBody MusicBandDto musicBandDto){
         MusicBandEntity entity = MusicBandMapper.INSTANCE.map(musicBandDto);

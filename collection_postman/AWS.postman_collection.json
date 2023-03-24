@@ -28,7 +28,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"place\": \"Movistar Arena 2\",\n    \"date\": \"2023-03-20\",\n    \"time\": \"2023-03-20 18:38:09.241941+00\",\n    \"category\": \"Concert\",\n    \"minimumAge\": 10,\n    \"responsible\": \"Jesus Sierra\",\n    \"nit\": \"1234\",\n    \"address\": \"Cra 30 # 53\",\n    \"openingDoors\": \"8:00 PM\",\n    \"cityCode\": 1,\n    \"departmentCode\": 11,\n    \"eventStatus\": \"CREATED\",\n    \"categoryEventId\": 1\n}",
+									"raw": "{\n  \"id\": 0,\n  \"place\": \"Teatro\",\n  \"date\": \"2023-06-29\",\n  \"time\": \"10:00\",\n  \"minimumAge\": 15,\n  \"responsible\": \"Jesus Sierra\",\n  \"nit\": \"123432\",\n  \"address\": \"Cra 24 \",\n  \"cityCode\": 1,\n  \"departmentCode\": 5,\n  \"eventStatus\": \"CREATED\",\n  \"categoryEventId\": 0\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -290,6 +290,37 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get All Presentation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/presentation/",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"presentation",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -300,46 +331,11 @@
 							"name": "Music Band Insert",
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -356,11 +352,11 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/musicBand/",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/musicBand/",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -378,46 +374,11 @@
 							},
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -448,6 +409,37 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get All Music Band",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/musicBand/",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"musicBand",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -458,46 +450,11 @@
 							"name": "Artist Insert",
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -514,11 +471,11 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/artist/",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/artist/",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -606,6 +563,49 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Artist  Get All",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Andres Cepeda\",\n    \"description\":\"Cantante principal\",\n    \"musicBandId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/artist/",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"artist",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -620,7 +620,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE2NzkyNTQ2MjcsImV4cCI6MTY3OTI1ODIyN30.8VdxJDI7wxPdAT8aVg23okU8eYdeGnxOu88gSxmbjIIxQuhiIceuzzhAVOaGUS3EvAadxjjw1b02FUR4ETBwU",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -777,46 +777,11 @@
 							"name": "Get City By Id Department",
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -824,7 +789,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{host}}:5004/api-acceso-datos/v.1/city/department/5",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/city/department/57",
 									"host": [
 										"{{host}}"
 									],
@@ -834,7 +799,7 @@
 										"v.1",
 										"city",
 										"department",
-										"5"
+										"57"
 									]
 								}
 							},
@@ -849,46 +814,11 @@
 							"name": "Category Insert",
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -905,11 +835,11 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/category/",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/category/",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -997,6 +927,49 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get All Category",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Norte\",\n    \"description\":\"Norte Estadio\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/category/",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"category",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1007,46 +980,11 @@
 							"name": "Zone Insert",
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -1063,11 +1001,11 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/zone/",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/zone/",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -1155,6 +1093,49 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Zone Get All",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Norte Uno\",\n    \"description\":\"Zona uno de norte\",\n    \"categoryId\": \"1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/zone/",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"zone",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1203,77 +1184,61 @@
 						},
 						{
 							"name": "Config Event Get By Id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
 								},
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"eventId\": \"1\",\n    \"doorOpening\":\"10:00:00\",\n    \"numberOfTickets\": \"1000\",\n    \"numberOfTicketsSold\": \"0\",\n    \"eventDate\": \"2023-08-01\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/config_event/4",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/config_event/1",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
 										"config_event",
-										"4"
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Config Event Get All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/config_event/",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"config_event",
+										""
 									]
 								}
 							},
@@ -1777,46 +1742,11 @@
 							"name": "Get Event All",
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
