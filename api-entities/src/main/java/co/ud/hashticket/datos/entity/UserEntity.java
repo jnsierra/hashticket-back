@@ -50,7 +50,12 @@ public class UserEntity  extends Auditable<String> implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private USER_STATE state;
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_tickets_user_type",
+            joinColumns = { @JoinColumn(name = "user_tickets_id") },
+            inverseJoinColumns = { @JoinColumn( name = "user_type_id")}
+
+    )
     private Set<UserTypeEntity> userTypes;
     @Override
     public boolean equals(Object o) {

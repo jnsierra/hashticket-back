@@ -15,8 +15,6 @@
             <column name="description" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="user_id" type="INT">
-            </column>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -42,7 +40,6 @@
             <column name="id"  valueComputed="${sequence.user_type}"></column>
             <column name="type" value="ROLE_ADMIN"></column>
             <column name="description" value="Administracion del aplictivo"></column>
-            <column name="user_id" value="1"></column>
 
             <column name="created_by" value="jsierra"></column>
             <column name="created_date" valueDate="${now}"></column>
@@ -53,7 +50,6 @@
             <column name="id"  valueComputed="${sequence.user_type}"></column>
             <column name="type" value="ROLE_MANAGER"></column>
             <column name="description" value="Persona encargada de administrar los eventos"></column>
-            <column name="user_id" value="1"></column>
 
             <column name="created_by" value="jsierra"></column>
             <column name="created_date" valueDate="${now}"></column>
@@ -64,16 +60,11 @@
             <column name="id"  valueComputed="${sequence.user_type}"></column>
             <column name="type" value="ROLE_USER_GENERIC"></column>
             <column name="description" value="Personas que desean comprar tickets"></column>
-            <column name="user_id" value="2"></column>
 
             <column name="created_by" value="jsierra"></column>
             <column name="created_date" valueDate="${now}"></column>
             <column name="last_modified_by" value="jsierra"></column>
             <column name="last_modified_date" valueDate="${now}"></column>
         </insert>
-    </changeSet>
-    <changeSet id="4" author="admin">
-        <addForeignKeyConstraint baseTableName="user_type" baseColumnNames="user_id" constraintName="fk_user_user_type" referencedTableName="user_tickets"
-                                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

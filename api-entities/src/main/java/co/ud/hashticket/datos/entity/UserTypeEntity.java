@@ -1,18 +1,17 @@
 package co.ud.hashticket.datos.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_type")
 @Getter @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserTypeEntity implements Serializable {
@@ -32,9 +31,8 @@ public class UserTypeEntity implements Serializable {
     private String type;
     @Column(name = "description", nullable = false)
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @ManyToMany(mappedBy = "userTypes", fetch = FetchType.LAZY)
+    private Set<UserEntity> users;
 
     @Override
     public boolean equals(Object o) {
