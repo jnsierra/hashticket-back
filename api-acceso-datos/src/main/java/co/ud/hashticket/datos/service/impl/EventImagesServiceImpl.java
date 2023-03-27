@@ -29,4 +29,8 @@ public class EventImagesServiceImpl implements EventImagesService {
     public Optional<EventImagesEntity> findById(Long id) {
         return eventImagesRepository.findById(id);
     }
+    @Override
+    public Set<EventImagesEntity> findByEvent(Long idEvent) {
+        return eventImagesRepository.findByEvent(idEvent);
+    }
 }

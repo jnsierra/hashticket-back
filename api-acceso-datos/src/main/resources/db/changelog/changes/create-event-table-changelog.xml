@@ -43,7 +43,6 @@
                 <constraints nullable="false"/>
             </column>
 
-
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -83,7 +82,7 @@
             <column name="id"  valueComputed="${sequence.event}"></column>
             <column name="place" value="Movistar Arena"/>
             <column name="date" value="${now}"/>
-            <column name="time" value="${now}" />
+            <column name="time" value="23:00" />
             <column name="minimum_age" value="10" />
             <column name="responsible" value="Jesus Sierra" />
             <column name="nit" value="1234" />

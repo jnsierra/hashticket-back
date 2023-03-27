@@ -9,4 +9,5 @@ public interface EventImagesService {
     EventImagesEntity save(EventImagesEntity eventImage);
     Set<EventImagesEntity> findAll();
     Optional<EventImagesEntity> findById(Long id);
+    Set<EventImagesEntity> findByEvent(Long idEvent);
 }

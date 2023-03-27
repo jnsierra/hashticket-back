@@ -37,8 +37,6 @@ public class UserEntity  extends Auditable<String> implements Serializable {
     private Long id;
     @Column(name = "email")
     private String email;
-    @Column(name = "code")
-    private String code;
     @Column(name = "password")
     private String password;
     @Column(name = "name")

@@ -11,4 +11,5 @@ import java.util.Set;
 @Repository
 public interface EventImagesRepository extends JpaRepository< EventImagesEntity, Long >, CrudRepository<EventImagesEntity, Long> {
     Set<EventImagesEntity> findByEventAndTypeImages(Long idEvent, TypeImages typeImages);
+    Set<EventImagesEntity> findByEvent(Long idEvent);
 }

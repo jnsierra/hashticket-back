@@ -5,4 +5,5 @@ import co.ud.ud.hashticket.dto.EventImagesDto;
 public interface EventImagesService {
 
     EventImagesDto save(EventImagesDto eventImages);
+    EventImagesDto getById(Long id);
 }

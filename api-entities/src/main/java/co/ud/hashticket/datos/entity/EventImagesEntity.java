@@ -19,6 +19,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "event_images")
 @NamedQuery(name = "EventImagesEntity.findByEventAndTypeImages" , query = "from EventImagesEntity eveIm inner join eveIm.event as eve where eve.id = :idEvent and eveIm.typeImages = :typeImages ")
+@NamedQuery(name = "EventImagesEntity.findByEvent", query = "from EventImagesEntity eveIm inner join eveIm.event as eve where eve.id = :idEvent ")
 public class EventImagesEntity implements Serializable {
     private static final long serialVersionUID = 2405172041950251807L;
     @Id

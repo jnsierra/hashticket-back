@@ -13,9 +13,6 @@
             <column name="email" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="code" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="password" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -56,7 +53,6 @@
         <insert tableName="user_tickets">
             <column name="id" valueComputed="${sequence.user}"></column>
             <column name="email" value="jnsierrac@gmail.com"></column>
-            <column name="code" value="20172678021"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="jesus nicolas sierra"></column>
             <column name="change_password" value="N"></column>
@@ -72,7 +68,6 @@
         <insert tableName="user_tickets">
             <column name="id" valueComputed="${sequence.user}"></column>
             <column name="email" value="hgomezm@gmail.com"></column>
-            <column name="code" value="20172678022"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="Hector Gomez Amaya"></column>
             <column name="change_password" value="N"></column>

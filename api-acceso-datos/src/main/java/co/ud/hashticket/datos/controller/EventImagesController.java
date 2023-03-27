@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -28,6 +29,23 @@ public class EventImagesController {
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Set<EventImagesDto>> getAll(){
         Set<EventImagesEntity> entities = eventImagesService.findAll();
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(EventImagesMapper.INSTANCE.map(entities));
+    }
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EventImagesDto> getById(@PathVariable(value = "id")Long id){
+        Optional<EventImagesEntity> entity = eventImagesService.findById(id);
+        if(!entity.isPresent()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(EventImagesMapper.INSTANCE.map(entity.get()));
+    }
+
+    @GetMapping(value = "/event/{idEvent}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<EventImagesDto>> getFindById(@PathVariable(value = "idEvent")Long idEvent){
+        Set<EventImagesEntity> entities = eventImagesService.findByEvent(idEvent);
         if(entities.isEmpty()){
             return ResponseEntity.noContent().build();
         }
