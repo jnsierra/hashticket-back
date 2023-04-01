@@ -15,9 +15,8 @@ public class ConfigEventServiceImpl implements ConfigEventService {
     public ConfigEventServiceImpl(ConfigEventRepository configEventRepository) {
         this.configEventRepository = configEventRepository;
     }
-
     @Override
     public Optional<ConfigEventEntity> findByEventIdAndPresentationId(Long idEvent, Long idPresentation) {
-        return configEventRepository.findByEventIdAndPresentationId(idEvent, idPresentation);
+        return configEventRepository.findByEventIdAndPresentation(idEvent, idPresentation);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -28,5 +29,13 @@ public class CategoryEventController {
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Set<CategoryEventDto>> get(){
         return new ResponseEntity<>(CategoryEventMapper.INSTANCE.map(categoryEventService.findAll()), HttpStatus.OK);
+    }
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CategoryEventDto> getById(@PathVariable(value = "id")Long id){
+        Optional<CategoryEventEntity> entity = categoryEventService.findById(id);
+        if(!entity.isPresent()){
+            return ResponseEntity.noContent().build();
+        }
+        return new ResponseEntity<>(CategoryEventMapper.INSTANCE.map(entity.get()), HttpStatus.OK);
     }
 }

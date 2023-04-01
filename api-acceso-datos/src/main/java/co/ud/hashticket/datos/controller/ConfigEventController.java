@@ -35,8 +35,17 @@ public class ConfigEventController {
         return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(entity.get()));
     }
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<ConfigEventDto>> get(){
+    public ResponseEntity<Set<ConfigEventDto>> getAllç(){
         Set<ConfigEventEntity> entities = configEventService.getAll();
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent()
+                    .build();
+        }
+        return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(entities));
+    }
+    @GetMapping(value = "/event/{idEvent}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<ConfigEventDto>> getByEvent(@PathVariable(value = "idEvent")Long idEvent){
+        Set<ConfigEventEntity> entities = configEventService.findByEventId(idEvent);
         if(entities.isEmpty()){
             return ResponseEntity.noContent()
                     .build();

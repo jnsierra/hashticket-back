@@ -21,7 +21,6 @@ public class PresentationServiceImpl implements PresentationService {
     public PresentationEntity save(PresentationEntity presentation) {
         return presentationRepository.save(presentation);
     }
-
     @Override
     public Optional<PresentationEntity> getById(Long id) {
         return presentationRepository.findById(id);
@@ -29,5 +28,9 @@ public class PresentationServiceImpl implements PresentationService {
     @Override
     public Set<PresentationEntity> getAll() {
         return new HashSet<>(presentationRepository.findAll());
+    }
+    @Override
+    public Set<PresentationEntity> findByEvent(Long eventId) {
+        return new HashSet<>(presentationRepository.findByEvent(eventId));
     }
 }

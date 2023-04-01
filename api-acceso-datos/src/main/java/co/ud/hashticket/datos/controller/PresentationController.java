@@ -36,6 +36,14 @@ public class PresentationController {
         }
         return ResponseEntity.ok(PresentationMapper.INSTANCE.map(entities));
     }
+    @GetMapping( value = "/event/{idEvent}")
+    public ResponseEntity<Set<PresentationDto>> getByEvent(@PathVariable("idEvent")Long idEvent){
+        Set<PresentationEntity> entities = presentationService.findByEvent(idEvent);
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(PresentationMapper.INSTANCE.map(entities));
+    }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PresentationDto> save(@RequestBody PresentationDto presentationDto){
         PresentationEntity entity = PresentationMapper.INSTANCE.map(presentationDto);

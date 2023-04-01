@@ -29,4 +29,8 @@ public class ConfigEventServiceImpl implements ConfigEventService {
     public Set<ConfigEventEntity> getAll() {
         return new HashSet<>(configEventRepository.findAll());
     }
+    @Override
+    public Set<ConfigEventEntity> findByEventId(Long eventId) {
+        return configEventRepository.findByEventId(eventId);
+    }
 }

@@ -6,8 +6,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface ConfigEventRepository extends JpaRepository<ConfigEventEntity, Long>, CrudRepository<ConfigEventEntity, Long> {
-    Optional<ConfigEventEntity> findByEventIdAndPresentationId(Long idEvent, Long idPresentation);
+    Optional<ConfigEventEntity> findByEventIdAndPresentation(Long idEvent, Long idPresentation);
+
+    Set<ConfigEventEntity> findByEventId(Long idEvent);
 }

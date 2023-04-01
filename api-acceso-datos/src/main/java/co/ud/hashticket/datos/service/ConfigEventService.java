@@ -9,4 +9,5 @@ public interface ConfigEventService {
     ConfigEventEntity save(ConfigEventEntity entity);
     Optional<ConfigEventEntity> findById(Long id);
     Set<ConfigEventEntity> getAll();
+    Set<ConfigEventEntity> findByEventId(Long eventId);
 }

@@ -10,4 +10,5 @@ public interface PresentationService {
     PresentationEntity save(PresentationEntity presentation);
     Optional<PresentationEntity> getById(Long id);
     Set<PresentationEntity> getAll();
+    Set<PresentationEntity> findByEvent(Long eventId);
 }
