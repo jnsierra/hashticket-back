@@ -15,8 +15,8 @@ import java.util.Set;
 
 @Getter
 @Setter
-@NamedQuery(name = "UserEntity.findByEventIdAndPresentation", query = "from ConfigEventEntity cEvent inner join fetch cEvent.event as eve inner join fetch cEvent.presentation as pr  WHERE eve.id = :idEvent and pr.id = :idPresentation")
-@NamedQuery(name = "UserEntity.findByEventId", query = "from ConfigEventEntity cEvent inner join fetch cEvent.event as eve WHERE eve.id = :idEvent ")
+@NamedQuery(name = "ConfigEventEntity.getByEventIdAndPresentation", query = "from ConfigEventEntity cEvent inner join fetch cEvent.event as eve inner join fetch cEvent.presentation as pr where pr.id = :idPresentation and eve.id = :idEvent")
+@NamedQuery(name = "ConfigEventEntity.findByEventId", query = "from ConfigEventEntity cEvent inner join fetch cEvent.event as eve WHERE eve.id = :idEvent ")
 @Entity
 @Table(name = "config_event")
 public class ConfigEventEntity implements Serializable {
