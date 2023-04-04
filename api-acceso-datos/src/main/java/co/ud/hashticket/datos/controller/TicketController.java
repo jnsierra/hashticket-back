@@ -6,12 +6,15 @@ import co.ud.hashticket.datos.mapper.TicketMapper;
 import co.ud.hashticket.datos.mapper.TicketPkMapper;
 import co.ud.hashticket.datos.service.TicketService;
 import co.ud.ud.hashticket.dto.TicketDto;
+import co.ud.ud.hashticket.dto.TicketViewDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/v.1/ticket")
@@ -38,5 +41,16 @@ public class TicketController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(TicketMapper.INSTANCE.map(entity.get()));
+    }
+    @GetMapping(value = "/event/{event_id}/presentation/{presentation_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<TicketViewDto>> getByEventAndPresentation(@PathVariable("event_id")Long eventId
+            , @PathVariable("presentation_id")Long presentationId
+            , @RequestParam Integer record
+            , @RequestParam Integer page){
+        Set<TicketViewDto> entities = ticketService.getByEventIdAndPresentationId(eventId, presentationId,record, page);
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(entities);
     }
 }

@@ -2,12 +2,21 @@ package co.ud.hashticket.datos.service.impl;
 
 import co.ud.hashticket.datos.entity.TicketEntity;
 import co.ud.hashticket.datos.entity.TicketPkEntity;
+import co.ud.hashticket.datos.mapper.TicketMapper;
 import co.ud.hashticket.datos.repository.TicketRepository;
 import co.ud.hashticket.datos.service.TicketService;
+import co.ud.ud.hashticket.dto.TicketDto;
+import co.ud.ud.hashticket.dto.TicketViewDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
 public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
@@ -22,5 +31,13 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Optional<TicketEntity> getById(TicketPkEntity id) {
         return ticketRepository.findById(id);
+    }
+    @Override
+    @Transactional
+    public Set<TicketViewDto> getByEventIdAndPresentationId(Long eventId, Long presentationId, Integer records, Integer page) {
+        Pageable pageable = PageRequest.of(page, records);
+        List<TicketEntity> result = ticketRepository.getByEventIdAndPresentationId(eventId, presentationId, pageable);
+        return result.stream().map(TicketMapper.INSTANCE::mapToView)
+                .collect(Collectors.toSet());
     }
 }

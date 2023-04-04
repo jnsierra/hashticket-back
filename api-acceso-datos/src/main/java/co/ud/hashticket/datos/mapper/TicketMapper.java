@@ -2,9 +2,12 @@ package co.ud.hashticket.datos.mapper;
 
 import co.ud.hashticket.datos.entity.TicketEntity;
 import co.ud.ud.hashticket.dto.TicketDto;
+import co.ud.ud.hashticket.dto.TicketViewDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.Set;
 
 @Mapper
 public interface TicketMapper {
@@ -21,4 +24,30 @@ public interface TicketMapper {
     @Mapping(source = "ticketPk.presentation.id", target = "presentationId")
     @Mapping(source = "ticketPk.numberTicket", target = "numberTicket")
     TicketDto map(TicketEntity ticketEntity);
+    @Mapping(source = "ticketPk.event.id", target = "eventId")
+    @Mapping(source = "ticketPk.zone.id", target = "zoneId")
+    @Mapping(source = "ticketPk.category.id", target = "categoryId")
+    @Mapping(source = "ticketPk.presentation.id", target = "presentationId")
+    @Mapping(source = "ticketPk.numberTicket", target = "numberTicket")
+    Set<TicketDto> map(Set<TicketEntity> ticketEntity);
+
+    @Mapping(source = "ticketPk.event.id", target = "eventId")
+    @Mapping(source = "ticketPk.zone.id", target = "zoneId")
+    @Mapping(source = "ticketPk.zone.name", target = "zoneName")
+    @Mapping(source = "ticketPk.category.id", target = "categoryId")
+    @Mapping(source = "ticketPk.category.name", target = "categoryName")
+    @Mapping(source = "ticketPk.presentation.id", target = "presentationId")
+    @Mapping(source = "ticketPk.presentation.name", target = "presentationName")
+    @Mapping(source = "ticketPk.numberTicket", target = "numberTicket")
+    Set<TicketViewDto> mapToView(Set<TicketEntity> ticketEntity);
+
+    @Mapping(source = "ticketPk.event.id", target = "eventId")
+    @Mapping(source = "ticketPk.zone.id", target = "zoneId")
+    @Mapping(source = "ticketPk.zone.name", target = "zoneName")
+    @Mapping(source = "ticketPk.category.id", target = "categoryId")
+    @Mapping(source = "ticketPk.category.name", target = "categoryName")
+    @Mapping(source = "ticketPk.presentation.id", target = "presentationId")
+    @Mapping(source = "ticketPk.presentation.name", target = "presentationName")
+    @Mapping(source = "ticketPk.numberTicket", target = "numberTicket")
+    TicketViewDto mapToView(TicketEntity ticketEntity);
 }

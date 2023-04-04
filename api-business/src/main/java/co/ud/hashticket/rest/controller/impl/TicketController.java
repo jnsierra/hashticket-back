@@ -1,9 +1,11 @@
 package co.ud.hashticket.rest.controller.impl;
 
 import co.ud.hashticket.rest.services.TicketService;
+import co.ud.ud.hashticket.dto.responses.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,10 +19,17 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @PostMapping("/generate/event/{event_id}/presentation/{presentation_id}")
-    public String generate(@PathVariable(value = "event_id") Long idEvent, @PathVariable(value = "presentation_id") Long idPresentation ) {
-        ticketService.generateTicket(idEvent, idPresentation);
-        return "Este es el servicio de eventos";
+    @GetMapping("/generate/event/{event_id}/presentation/{presentation_id}")
+    public ResponseEntity<GenericResponse> generate(@PathVariable(value = "event_id") Long idEvent, @PathVariable(value = "presentation_id") Long idPresentation ) {
+        Boolean resp = ticketService.generateTicket(idEvent, idPresentation);
+        if(!resp){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(GenericResponse.builder()
+                        .code(1L)
+                        .message("Boletas Generadas Correctamente")
+                        .type("SUCCESS")
+                .build());
     }
 
 }
