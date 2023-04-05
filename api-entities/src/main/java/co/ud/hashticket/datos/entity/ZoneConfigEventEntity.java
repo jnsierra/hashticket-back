@@ -1,5 +1,9 @@
 package co.ud.hashticket.datos.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -10,6 +14,9 @@ import java.io.Serializable;
 @Table(name = "zone_config_event")
 @NamedQuery(name = "ZoneConfigEventEntity.getZoneConfigByEvent"               , query = "from ZoneConfigEventEntity znCon inner join fetch znCon.configEvent as conEvent inner join fetch conEvent.zoneConfigEvents as znCnf where conEvent.event.id =  ?1 ")
 @NamedQuery(name = "ZoneConfigEventEntity.getZoneConfigByEventAndPresentation", query = "from ZoneConfigEventEntity znCon inner join fetch znCon.configEvent as conEvent where conEvent.event.id =  ?1 and conEvent.presentation.id = ?2 ")
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ZoneConfigEventEntity implements Serializable {
     private static final long serialVersionUID = 1234567L;
     @Id
@@ -33,35 +40,19 @@ public class ZoneConfigEventEntity implements Serializable {
     private ConfigEventEntity configEvent;
     @Column( name = "number_of_tickets")
     private Long numberOfTickets;
-    public Long getId() {
-        return id;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ZoneConfigEventEntity that = (ZoneConfigEventEntity) o;
+
+        return id.equals(that.id);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public ZoneEntity getZone() {
-        return zone;
-    }
-
-    public void setZone(ZoneEntity zone) {
-        this.zone = zone;
-    }
-
-    public ConfigEventEntity getConfigEvent() {
-        return configEvent;
-    }
-
-    public void setConfigEvent(ConfigEventEntity configEvent) {
-        this.configEvent = configEvent;
-    }
-
-    public Long getNumberOfTickets() {
-        return numberOfTickets;
-    }
-
-    public void setNumberOfTickets(Long numberOfTickets) {
-        this.numberOfTickets = numberOfTickets;
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
