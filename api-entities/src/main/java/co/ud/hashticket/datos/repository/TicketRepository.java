@@ -14,4 +14,6 @@ import java.util.Set;
 public interface TicketRepository extends JpaRepository<TicketEntity, TicketPkEntity>, CrudRepository<TicketEntity, TicketPkEntity> {
 
     List<TicketEntity> getByEventIdAndPresentationId(Long eventId, Long presentationId, Pageable pageable);
+
+    Integer countByEventIdAndPresentationId(Long eventId, Long presentationId);
 }

@@ -33,11 +33,14 @@ public class TicketServiceImpl implements TicketService {
         return ticketRepository.findById(id);
     }
     @Override
-    @Transactional
     public Set<TicketViewDto> getByEventIdAndPresentationId(Long eventId, Long presentationId, Integer records, Integer page) {
         Pageable pageable = PageRequest.of(page, records);
         List<TicketEntity> result = ticketRepository.getByEventIdAndPresentationId(eventId, presentationId, pageable);
         return result.stream().map(TicketMapper.INSTANCE::mapToView)
                 .collect(Collectors.toSet());
+    }
+    @Override
+    public Integer countByEventIdAndPresentationId(Long eventId, Long presentationId) {
+        return ticketRepository.countByEventIdAndPresentationId(eventId, presentationId);
     }
 }

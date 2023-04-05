@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Getter @Setter
 @NamedQuery(name = "TicketEntity.getByEventIdAndPresentationId", query = "from TicketEntity ticket inner join fetch ticket.ticketPk.event as eve inner join fetch ticket.ticketPk.presentation as pr inner join fetch ticket.ticketPk.zone as zone inner join fetch ticket.ticketPk.category as cat inner join fetch ticket.ticketPk.presentation as pr  where  eve.id = :eventId and pr.id = :presentationId order by ticket.ticketPk.numberTicket ")
+@NamedQuery(name = "TicketEntity.countByEventIdAndPresentationId", query = "select count(*) from TicketEntity ticket inner join ticket.ticketPk.event as eve inner join ticket.ticketPk.presentation as pr where eve.id = :eventId and pr.id = :presentationId")
 @Table(name = "tickets")
 public class TicketEntity implements Serializable {
     private static final long serialVersionUID = 1234567L;
