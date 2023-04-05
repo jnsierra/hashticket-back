@@ -286,6 +286,38 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get Presentation By Event Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/presentation/event/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"presentation",
+										"event",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -458,46 +490,11 @@
 							},
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -514,11 +511,11 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/artist/1",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/artist/1",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -1124,7 +1121,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"eventId\": \"1\",\n    \"doorOpening\":\"10:00:00\",\n    \"numberOfTickets\": \"1000\",\n    \"numberOfTicketsSold\": \"0\",\n    \"eventDate\": \"2023-08-01\",\n    \"presentationId\":\"1\"\n}",
+									"raw": "{\n  \"eventId\": 1,\n  \"doorOpening\": \"11:00:00\",\n  \"numberOfTickets\": 1000,\n  \"numberOfTicketsSold\": 100,\n  \"eventDate\": \"2023-06-15\",\n  \"presentationId\": 2\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1645,6 +1642,108 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get Ticket By  Event And presentation",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"eventId\": \"1\",\n    \"zoneId\": \"2\",\n    \"categoryId\": \"1\",\n    \"presentationId\": \"1\",\n    \"numberTicket\": \"1\",\n    \"state\": \"CREATED\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/ticket/event/1/presentation/1?record=10&page=1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"ticket",
+										"event",
+										"1",
+										"presentation",
+										"1"
+									],
+									"query": [
+										{
+											"key": "record",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Count Get Ticket By Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"eventId\": \"1\",\n    \"zoneId\": \"2\",\n    \"categoryId\": \"1\",\n    \"presentationId\": \"1\",\n    \"numberTicket\": \"1\",\n    \"state\": \"CREATED\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/ticket/event/1/presentation/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"ticket",
+										"event",
+										"1",
+										"presentation",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1761,6 +1860,37 @@
 										"v.1",
 										"category_event",
 										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Category Event By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/category_event/2",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"category_event",
+										"2"
 									]
 								}
 							},
@@ -2190,6 +2320,40 @@
 								"presentation",
 								"event",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Config Event Get By Id Event and presentation id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/config_event/event/1/presentation/2",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"config_event",
+								"event",
+								"1",
+								"presentation",
+								"2"
 							]
 						}
 					},
