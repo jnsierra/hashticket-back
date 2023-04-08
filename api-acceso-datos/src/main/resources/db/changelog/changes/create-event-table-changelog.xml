@@ -9,6 +9,9 @@
             <column name="id" type="INT">
                 <constraints primaryKey="true"/>
             </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="place" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -80,6 +83,7 @@
     <changeSet id="admin" author="4">
         <insert tableName="event">
             <column name="id"  valueComputed="${sequence.event}"></column>
+            <column name="name" value="Gira Andres Cepeda Movistar Arena"/>
             <column name="place" value="Movistar Arena"/>
             <column name="date" value="${now}"/>
             <column name="time" value="23:00" />

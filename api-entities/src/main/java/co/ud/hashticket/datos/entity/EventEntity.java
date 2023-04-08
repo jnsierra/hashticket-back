@@ -14,6 +14,19 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedQuery(name = "EventEntity.findByIdAndPresentation", query = """ 
+                                                           from EventEntity event 
+                                                          inner join fetch event.presentation as pr 
+                                                          inner join fetch event.configEvents as conEv
+                                                          inner join fetch event.city as cit
+                                                          inner join fetch cit.department as dep
+                                                          inner join fetch dep.country as coun
+                                                          inner join fetch event.categoryEvent as catEve
+                                                          where  event.id = :eventId 
+                                                            and pr.id = :presentationId
+                                                            and conEv.event.id = event.id
+                                                            and conEv.presentation.id = pr.id
+                                                                """)
 @Getter @Setter
 @Entity
 @Table(name = "event")
@@ -32,6 +45,8 @@ public class EventEntity extends Auditable<String> implements Serializable {
     )
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
+    @Column(name = "name", nullable = false, updatable = false)
+    private String name;
     @Column(name="place")
     private String place;
     @Column(name = "date")

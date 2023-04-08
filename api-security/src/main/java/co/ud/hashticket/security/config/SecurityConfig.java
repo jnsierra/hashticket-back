@@ -20,6 +20,8 @@ public class SecurityConfig {
         http.cors().and().csrf().disable()
                 .addFilterAfter(getJwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
+                .antMatchers("/actuator/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
         return http.build();

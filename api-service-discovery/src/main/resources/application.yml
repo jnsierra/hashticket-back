@@ -16,3 +16,8 @@ server:
 spring:
   thymeleaf:
     enabled: false     # Disable Thymeleaf
+  cloud:
+    consul:
+      discovery:
+        healthCheckPath: ${management.server.servlet.context-path}/actuator/health
+        healthCheckInterval: 15s

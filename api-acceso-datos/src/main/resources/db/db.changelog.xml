@@ -10,7 +10,8 @@
     <property name="sequence.presentation"  value="(SELECT nextval('presentation_seq'))" dbms="postgresql"/>
     <property name="sequence.event_category" value="(SELECT nextval('event_category_seq'))" dbms="postgresql"/>
     <property name="sequence.user_type"      value="(SELECT nextval('user_type_seq'))" dbms="postgresql"/>
-    <property name="sequence.user"      value="(SELECT nextval('user_seq'))" dbms="postgresql"/>
+    <property name="sequence.user"          value="(SELECT nextval('user_seq'))" dbms="postgresql"/>
+    <property name="sequence.category"      value="(SELECT nextval('category_seq'))" dbms="postgresql"/>
 
     <property name="now" value="now()" dbms="postgresql"/>
 

@@ -4,9 +4,10 @@ import co.ud.ud.hashticket.enumeration.EventStatus;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
-public class EventDto {
+public class EventMoreInfoDto {
 
     private Long id;
     private String name;
@@ -17,8 +18,11 @@ public class EventDto {
     private String responsible;
     private String nit;
     private String address;
-    private Long cityCode;
-    private Long departmentCode;
+    private String cityName;
+    private String departmentName;
+    private String countyName;
     private EventStatus eventStatus;
-    private Long categoryEventId;
+    private String categoryEventName;
+    private List<PresentationDto> presentation;
+    private List<ConfigEventDto> configEvents;
 }

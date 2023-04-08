@@ -9,6 +9,7 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "zone_config_event")
@@ -40,6 +41,8 @@ public class ZoneConfigEventEntity implements Serializable {
     private ConfigEventEntity configEvent;
     @Column( name = "number_of_tickets")
     private Long numberOfTickets;
+    @Column(name = "cost")
+    private BigDecimal cost;
 
     @Override
     public boolean equals(Object o) {

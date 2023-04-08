@@ -6,9 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Repository
 public interface EventRepository extends JpaRepository<EventEntity, Long>, CrudRepository<EventEntity, Long> {
     Set<EventEntity> findByEventStatus(EventStatus eventStatus);
+    Optional<EventEntity> findByIdAndPresentation(Long eventId, Long presentationId);
 }

@@ -23,4 +23,11 @@
     <changeSet author="admin" id="2">
         <createSequence sequenceName="category_seq" startValue="1" incrementBy="1" />
     </changeSet>
+    <changeSet id="admin" author="3">
+        <insert tableName="category">
+            <column name="id"  valueComputed="${sequence.category}"></column>
+            <column name="name" value="Palcos "/>
+            <column name="description" value="Palcos del evento"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

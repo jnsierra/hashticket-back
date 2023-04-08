@@ -1247,46 +1247,11 @@
 							"name": "Zone Config Event Insert",
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -1303,11 +1268,11 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/zone_config_event/",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/zone_config_event/",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -1325,46 +1290,11 @@
 							},
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
+									"type": "bearer",
+									"bearer": [
 										{
-											"key": "redirect_uri",
-											"value": "http://localhost:5002",
-											"type": "string"
-										},
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"type": "string"
-										},
-										{
-											"key": "client_authentication",
-											"value": "body",
-											"type": "string"
-										},
-										{
-											"key": "authUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/login",
-											"type": "string"
-										},
-										{
-											"key": "clientId",
-											"value": "28rcicqk03l31rmukko9q8tufb",
-											"type": "string"
-										},
-										{
-											"key": "accessTokenUrl",
-											"value": "https://hashticket.auth.us-east-1.amazoncognito.com/oauth2/token",
-											"type": "string"
-										},
-										{
-											"key": "tokenName",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "addTokenTo",
-											"value": "header",
+											"key": "token",
+											"value": "{{token}}",
 											"type": "string"
 										}
 									]
@@ -1373,7 +1303,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"zoneId\": \"3\",\n    \"configEventId\":\"4\",\n    \"numberOfTickets\": \"1000\"\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1381,11 +1311,11 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:5003/api-acceso-datos/v.1/zone_config_event/event/1",
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/zone_config_event/event/1",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "5003",
+									"port": "5004",
 									"path": [
 										"api-acceso-datos",
 										"v.1",
@@ -2093,12 +2023,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/api-public-users/v.1/event/active",
+							"raw": "{{host}}:5004/api-public-users/v.1/event/active",
 							"host": [
 								"{{host}}"
 							],
+							"port": "5004",
 							"path": [
-								"api",
 								"api-public-users",
 								"v.1",
 								"event",
@@ -2354,6 +2284,29 @@
 								"1",
 								"presentation",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Events By Id and Presentation Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/event/1/presentation/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"event",
+								"1",
+								"presentation",
+								"1"
 							]
 						}
 					},

@@ -18,6 +18,9 @@
             <column name="number_of_tickets" type="INT">
                 <constraints nullable="false" />
             </column>
+            <column name="cost" type="decimal">
+                <constraints nullable="false" />
+            </column>
         </createTable>
         <rollback>
             <dropTable tableName="zone"/>
