@@ -5,16 +5,15 @@ import co.ud.hashticket.datos.entity.TicketPkEntity;
 import co.ud.hashticket.datos.mapper.TicketMapper;
 import co.ud.hashticket.datos.repository.TicketRepository;
 import co.ud.hashticket.datos.service.TicketService;
-import co.ud.ud.hashticket.dto.TicketDto;
 import co.ud.ud.hashticket.dto.TicketViewDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

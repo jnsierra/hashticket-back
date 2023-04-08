@@ -55,4 +55,19 @@ public class ConfigEventEntity implements Serializable {
         this.zoneConfigEvents.add(zoneConfigEvent);
         zoneConfigEvent.setConfigEvent(this);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ConfigEventEntity that = (ConfigEventEntity) o;
+
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

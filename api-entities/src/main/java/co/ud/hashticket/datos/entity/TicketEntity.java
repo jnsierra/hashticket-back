@@ -1,9 +1,7 @@
 package co.ud.hashticket.datos.entity;
 
 import co.ud.ud.hashticket.enumeration.StatusTicket;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;

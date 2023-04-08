@@ -1,9 +1,7 @@
 package co.ud.hashticket.datos.service;
 
-import co.ud.hashticket.datos.entity.PresentationEntity;
 import co.ud.hashticket.datos.entity.TicketEntity;
 import co.ud.hashticket.datos.entity.TicketPkEntity;
-import co.ud.ud.hashticket.dto.TicketDto;
 import co.ud.ud.hashticket.dto.TicketViewDto;
 
 import java.util.Optional;

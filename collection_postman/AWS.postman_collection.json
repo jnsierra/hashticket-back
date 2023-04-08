@@ -2311,6 +2311,40 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Zone Config Event Get By Id Event and presentation id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/zone_config_event/event/1/presentation/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"zone_config_event",
+								"event",
+								"1",
+								"presentation",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
