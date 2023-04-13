@@ -2011,6 +2011,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Buy Tickets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventId\": \"1\",\n    \"presentationId\" : \"1\",\n    \"zonaId\": \"1\",\n    \"categoryId\": \"1\",\n    \"numberOfTickets\": \"1\",\n    \"numberTickets\": [\"1432\"] \n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:5004/api-business/v.1/ticket/",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-business",
+								"v.1",
+								"ticket",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

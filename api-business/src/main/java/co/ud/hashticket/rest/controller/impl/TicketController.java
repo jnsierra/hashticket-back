@@ -2,12 +2,10 @@ package co.ud.hashticket.rest.controller.impl;
 
 import co.ud.hashticket.rest.services.TicketService;
 import co.ud.ud.hashticket.dto.responses.GenericResponse;
+import co.ud.ud.hashticket.dto.ticket.BuyTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v.1/ticket")
@@ -30,6 +28,12 @@ public class TicketController {
                         .message("Boletas Generadas Correctamente")
                         .type("SUCCESS")
                 .build());
+    }
+    @PostMapping("/ticket")
+    public ResponseEntity<GenericResponse> buyTickets(@RequestBody BuyTicket buyTicket){
+        System.out.println(buyTicket.toString());
+
+        return ResponseEntity.noContent().build();
     }
 
 }
