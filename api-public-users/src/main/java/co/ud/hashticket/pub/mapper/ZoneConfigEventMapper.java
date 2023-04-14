@@ -3,7 +3,6 @@ package co.ud.hashticket.pub.mapper;
 import co.ud.hashticket.datos.entity.ZoneConfigEventEntity;
 import co.ud.ud.hashticket.dto.ZoneConfigEventDto;
 import co.ud.ud.hashticket.dto.ZoneConfigEventViewDto;
-import co.ud.ud.hashticket.dto.ZoneViewDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

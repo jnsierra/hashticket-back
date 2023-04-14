@@ -17,4 +17,5 @@ public class TicketDto {
     private Long presentationId;
     private Long numberTicket;
     private StatusTicket state;
+    private String confirmationNumber;
 }

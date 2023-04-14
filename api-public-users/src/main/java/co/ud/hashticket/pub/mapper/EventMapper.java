@@ -27,7 +27,7 @@ public interface EventMapper {
     Set<EventDto> map(Set<EventEntity> department);
     @Mapping(source = "city.name", target = "cityName")
     @Mapping(source = "city.department.name", target = "departmentName")
-    @Mapping(source = "city.department.country.name", target = "countyName")
+    @Mapping(source = "city.department.country.name", target = "countryName")
     @Mapping(source = "categoryEvent.name", target = "categoryEventName")
     EventMoreInfoDto mapMoreInfo(EventEntity event);
 }

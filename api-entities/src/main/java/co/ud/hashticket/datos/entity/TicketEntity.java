@@ -11,6 +11,17 @@ import java.io.Serializable;
 @Getter @Setter
 @NamedQuery(name = "TicketEntity.getByEventIdAndPresentationId", query = "from TicketEntity ticket inner join fetch ticket.ticketPk.event as eve inner join fetch ticket.ticketPk.presentation as pr inner join fetch ticket.ticketPk.zone as zone inner join fetch ticket.ticketPk.category as cat inner join fetch ticket.ticketPk.presentation as pr  where  eve.id = :eventId and pr.id = :presentationId order by ticket.ticketPk.numberTicket ")
 @NamedQuery(name = "TicketEntity.countByEventIdAndPresentationId", query = "select count(*) from TicketEntity ticket inner join ticket.ticketPk.event as eve inner join ticket.ticketPk.presentation as pr where eve.id = :eventId and pr.id = :presentationId")
+@NamedQuery(name = "TicketEntity.updateState", query = """
+        Update TicketEntity tic
+           set state = :state ,
+           confirmationNumber = :confirmationNumber , 
+           userEmail = :user
+         where event_id = :eventId
+           and zone_id = :zoneId
+           and category_id = :categoryId
+           and presentation_id = :presentationId
+           and number_ticket = :numberTicket
+        """)
 @Table(name = "tickets")
 public class TicketEntity implements Serializable {
     private static final long serialVersionUID = 1234567L;
@@ -19,15 +30,17 @@ public class TicketEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 8)
     private StatusTicket state;
+    @Column(name = "user_email")
+    private String userEmail;
+    @Column(name = "confirmation")
+    private String confirmationNumber;
 
     public TicketEntity(TicketPkEntity ticketPk, StatusTicket state) {
-        System.out.println("Llego con parametros");
         this.ticketPk = ticketPk;
         this.state = state;
     }
 
     public TicketEntity() {
-        System.out.println("Llego sin parametros");
     }
 
     @Override

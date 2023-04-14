@@ -8,6 +8,7 @@ import co.ud.hashticket.datos.service.TicketService;
 import co.ud.ud.hashticket.dto.TicketDto;
 import co.ud.ud.hashticket.dto.TicketViewDto;
 import co.ud.ud.hashticket.dto.responses.GenericQuery;
+import co.ud.ud.hashticket.enumeration.StatusTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,20 @@ public class TicketController {
         }
         return ResponseEntity.ok(TicketMapper.INSTANCE.map(entity.get()));
     }
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TicketDto> getByIdNumber(@RequestParam Long eventId
+            ,@RequestParam Long zoneId
+            ,@RequestParam Long categoryId
+            ,@RequestParam Long presentationId
+            ,@RequestParam Long numberTicket
+    ){
+        TicketPkEntity entityPk = TicketPkMapper.INSTANCE.map(eventId, zoneId, categoryId, presentationId, numberTicket);
+        Optional<TicketEntity> entity = ticketService.getById(entityPk);
+        if(!entity.isPresent()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(TicketMapper.INSTANCE.map(entity.get()));
+    }
     @GetMapping(value = "/event/{event_id}/presentation/{presentation_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GenericQuery<TicketViewDto>> getByEventAndPresentation(@PathVariable("event_id")Long eventId
             , @PathVariable("presentation_id")Long presentationId
@@ -57,5 +72,19 @@ public class TicketController {
                         .page(page)
                 .totalRecords(ticketService.countByEventIdAndPresentationId(eventId, presentationId))
                 .build());
+    }
+    @PutMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TicketDto> buyTicket(@RequestParam StatusTicket state
+            , @RequestParam Long eventId
+            , @RequestParam Long zoneId
+            , @RequestParam Long categoryId
+            , @RequestParam Long presentationId
+            , @RequestParam Long numberTicket
+    ) throws Exception {
+        Optional<TicketEntity> entity = ticketService.buyTicket(state, eventId, zoneId, categoryId, presentationId, numberTicket);
+        if(!entity.isPresent()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(TicketMapper.INSTANCE.map(entity.get()));
     }
 }

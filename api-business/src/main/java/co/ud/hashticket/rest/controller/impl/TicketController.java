@@ -3,6 +3,7 @@ package co.ud.hashticket.rest.controller.impl;
 import co.ud.hashticket.rest.services.TicketService;
 import co.ud.ud.hashticket.dto.responses.GenericResponse;
 import co.ud.ud.hashticket.dto.ticket.BuyTicket;
+import co.ud.ud.hashticket.dto.ticket.ConfirmBuyTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +30,9 @@ public class TicketController {
                         .type("SUCCESS")
                 .build());
     }
-    @PostMapping("/ticket")
-    public ResponseEntity<GenericResponse> buyTickets(@RequestBody BuyTicket buyTicket){
-        System.out.println(buyTicket.toString());
-
-        return ResponseEntity.noContent().build();
+    @PostMapping("/buy")
+    public ResponseEntity<GenericResponse<ConfirmBuyTicket>> buyTickets(@RequestBody BuyTicket buyTicket){
+        return ResponseEntity.ok(ticketService.buyTicket(buyTicket));
     }
 
 }

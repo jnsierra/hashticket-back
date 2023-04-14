@@ -8,8 +8,8 @@ import java.util.Set;
 public class BuyTicket {
     private Long eventId;
     private Long presentationId;
-    private Long zonaId;
+    private Long zoneId;
     private Long categoryId;
     private Long numberOfTickets;
-    private Set<String> numberTickets;
+    private Set<Long> numberTickets;
 }

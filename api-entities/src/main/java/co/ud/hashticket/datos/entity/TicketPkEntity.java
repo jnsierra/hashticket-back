@@ -13,18 +13,18 @@ import java.io.Serializable;
 public class TicketPkEntity implements Serializable {
     private static final long serialVersionUID = 1234568L;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "event_id", updatable = false)
     private EventEntity event;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "zone_id")
+    @JoinColumn(name = "zone_id", updatable = false)
     private ZoneEntity zone;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", updatable = false)
     private CategoryEntity category;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "presentation_id")
+    @JoinColumn(name = "presentation_id", updatable = false)
     private PresentationEntity presentation;
-    @Column(name = "number_ticket")
+    @Column(name = "number_ticket", updatable = false)
     private Long numberTicket;
 
     @Override

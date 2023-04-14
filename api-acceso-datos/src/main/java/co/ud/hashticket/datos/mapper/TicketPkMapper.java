@@ -13,4 +13,10 @@ public interface TicketPkMapper {
     @Mapping(source = "categoryId", target = "category.id")
     @Mapping(source = "presentationId", target = "presentation.id")
     TicketPkEntity map(Long eventId, Long zoneId, Long categoryId, Long presentationId);
+    @Mapping(source = "eventId", target = "event.id")
+    @Mapping(source = "zoneId", target = "zone.id")
+    @Mapping(source = "categoryId", target = "category.id")
+    @Mapping(source = "presentationId", target = "presentation.id")
+    @Mapping(source = "numberTicket", target = "numberTicket")
+    TicketPkEntity map(Long eventId, Long zoneId, Long categoryId, Long presentationId, Long numberTicket);
 }

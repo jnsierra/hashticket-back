@@ -20,7 +20,7 @@ public class EventMoreInfoDto {
     private String address;
     private String cityName;
     private String departmentName;
-    private String countyName;
+    private String countryName;
     private EventStatus eventStatus;
     private String categoryEventName;
     private List<PresentationDto> presentation;
