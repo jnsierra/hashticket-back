@@ -22,6 +22,20 @@ import java.io.Serializable;
            and presentation_id = :presentationId
            and number_ticket = :numberTicket
         """)
+@NamedQuery(name = "TicketEntity.getByEventAndPresentationAndZoneAndCategory", query = """
+        SELECT ticket
+        FROM TicketEntity ticket
+        inner join fetch ticket.ticketPk.event as eve
+        inner join fetch ticket.ticketPk.presentation as pr
+        inner join fetch ticket.ticketPk.zone as zone 
+        inner join fetch ticket.ticketPk.category as cat 
+        WHERE eve.id = :eventId 
+          AND pr.id = :presentationId
+          AND zone.id = :zoneId
+          AND cat.id = :categoryId
+          AND ticket.state = 'CREATED'           
+       ORDER BY ticket.ticketPk.numberTicket 
+        """)
 @Table(name = "tickets")
 public class TicketEntity implements Serializable {
     private static final long serialVersionUID = 1234567L;

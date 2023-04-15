@@ -6,6 +6,7 @@ import co.ud.hashticket.datos.service.ConfigEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -33,4 +34,15 @@ public class ConfigEventServiceImpl implements ConfigEventService {
     public Set<ConfigEventEntity> findByEventId(Long eventId) {
         return configEventRepository.findByEventId(eventId);
     }
+
+    @Override
+    public Optional<Long> recordSale(Long eventId, Long presentationId) {
+        Optional<ConfigEventEntity> entity = configEventRepository.getByEventIdAndPresentation(eventId, presentationId);
+        if(!entity.isPresent()){
+            return Optional.empty();
+        }
+        entity.get().setNumberOfTicketsSold(entity.get().getNumberOfTicketsSold().add(BigDecimal.ONE));
+        return Optional.of(entity.get().getId());
+    }
+
 }

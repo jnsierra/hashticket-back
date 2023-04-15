@@ -10,4 +10,5 @@ public interface ConfigEventService {
     Optional<ConfigEventEntity> findById(Long id);
     Set<ConfigEventEntity> getAll();
     Set<ConfigEventEntity> findByEventId(Long eventId);
+    Optional<Long> recordSale(Long eventId, Long presentationId);
 }

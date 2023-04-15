@@ -11,6 +11,15 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
+@NamedQuery(name = "CategoryEntity.getByEventAndPresentation", query = """
+         SELECT cat
+          FROM CategoryEntity cat
+         inner join cat.zones zon
+         inner join zon.zoneConfigEvents zonCon
+         inner join zonCon.configEvent confEvent
+         where confEvent.event.id = :eventId
+           and confEvent.presentation.id = :presentationId         
+        """)
 @Entity
 @Table(name = "category")
 public class CategoryEntity implements Serializable {

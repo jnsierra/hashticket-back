@@ -15,6 +15,14 @@ import java.math.BigDecimal;
 @Table(name = "zone_config_event")
 @NamedQuery(name = "ZoneConfigEventEntity.getZoneConfigByEvent"               , query = "from ZoneConfigEventEntity znCon inner join fetch znCon.configEvent as conEvent inner join fetch conEvent.zoneConfigEvents as znCnf where conEvent.event.id =  ?1 ")
 @NamedQuery(name = "ZoneConfigEventEntity.getZoneConfigByEventAndPresentation", query = "from ZoneConfigEventEntity znCon inner join fetch znCon.configEvent as conEvent where conEvent.event.id =  ?1 and conEvent.presentation.id = ?2 ")
+@NamedQuery(name = "ZoneConfigEventEntity.getByZoneAndConfigEvent", query = """
+        SELECT znCon
+          FROM ZoneConfigEventEntity znCon 
+        inner join znCon.zone zon
+        inner join znCon.configEvent conE
+        WHERE zon.id = :zoneId
+          AND conE.id = :configEventId
+        """)
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,6 +51,8 @@ public class ZoneConfigEventEntity implements Serializable {
     private Long numberOfTickets;
     @Column(name = "cost")
     private BigDecimal cost;
+    @Column(name = "number_of_tickets_sold")
+    private Long numberOfTicketsSold;
 
     @Override
     public boolean equals(Object o) {

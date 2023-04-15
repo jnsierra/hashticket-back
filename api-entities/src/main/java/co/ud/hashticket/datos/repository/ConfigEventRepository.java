@@ -11,6 +11,5 @@ import java.util.Set;
 @Repository
 public interface ConfigEventRepository extends JpaRepository<ConfigEventEntity, Long>, CrudRepository<ConfigEventEntity, Long> {
     Optional<ConfigEventEntity> getByEventIdAndPresentation(Long idPresentation, Long idEvent);
-
     Set<ConfigEventEntity> findByEventId(Long idEvent);
 }

@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
+@NamedQuery(name = "ZoneEntity.findByCategory", query = "from ZoneEntity zo inner join fetch zo.category ca where ca.id = :categoryId  ")
 @Entity
 @Table(name = "zone")
 public class ZoneEntity implements Serializable {

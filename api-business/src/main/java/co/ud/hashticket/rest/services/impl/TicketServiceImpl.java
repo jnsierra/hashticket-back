@@ -2,9 +2,9 @@ package co.ud.hashticket.rest.services.impl;
 
 import co.ud.hashticket.client.TicketClient;
 import co.ud.hashticket.rest.services.TicketService;
-import co.ud.hashticket.security.service.UserLoggerService;
 import co.ud.hashticket.rest.services.ZoneConfigEventService;
 import co.ud.hashticket.rest.services.ZoneService;
+import co.ud.hashticket.security.service.UserLoggerService;
 import co.ud.ud.hashticket.dto.TicketDto;
 import co.ud.ud.hashticket.dto.ZoneConfigEventDto;
 import co.ud.ud.hashticket.dto.ZoneDto;

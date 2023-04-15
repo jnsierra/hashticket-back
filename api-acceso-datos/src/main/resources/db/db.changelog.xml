@@ -35,4 +35,5 @@
     <include file="/db/changelog/changes/create-event-images-table-changelog.xml" />
     <include file="/db/changelog/changes/alter-ticket-table-13-04-2023-changelog.xml" />
     <include file="/db/changelog/changes/alter-ticket-table-14-04-2023-changelog.xml" />
+    <include file="/db/changelog/changes/alter-ticket-table-14-04-2023_01-changelog.xml" />
 </databaseChangeLog>

@@ -3,8 +3,9 @@ package co.ud.hashticket.datos.service.impl;
 import co.ud.hashticket.datos.entity.*;
 import co.ud.hashticket.datos.mapper.TicketMapper;
 import co.ud.hashticket.datos.repository.TicketRepository;
+import co.ud.hashticket.datos.service.ConfigEventService;
 import co.ud.hashticket.datos.service.TicketService;
-import co.ud.hashticket.datos.service.UserService;
+import co.ud.hashticket.datos.service.ZoneConfigEventService;
 import co.ud.hashticket.security.service.UserLoggerService;
 import co.ud.ud.hashticket.dto.TicketViewDto;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
@@ -22,11 +23,15 @@ import java.util.stream.Collectors;
 @Service
 public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
+    private final ConfigEventService configEventService;
+    private final ZoneConfigEventService zoneConfigEventService;
     private final UserLoggerService userLoggerService;
     @Autowired
-    public TicketServiceImpl(TicketRepository ticketRepository, UserLoggerService userLoggerService) {
+    public TicketServiceImpl(TicketRepository ticketRepository, UserLoggerService userLoggerService, ConfigEventService configEventService, ZoneConfigEventService zoneConfigEventService) {
         this.ticketRepository = ticketRepository;
         this.userLoggerService = userLoggerService;
+        this.configEventService = configEventService;
+        this.zoneConfigEventService = zoneConfigEventService;
     }
     @Override
     public TicketEntity save(TicketEntity ticket) {
@@ -75,6 +80,17 @@ public class TicketServiceImpl implements TicketService {
                         .build())
                 .numberTicket(numberTicket)
                 .build());
+        if(!ticketEntity.isPresent()){
+            throw new Exception("No se encontro tickete comprado");
+        }
+        Optional<Long> idConfigEvent = configEventService.recordSale(eventId, presentationId);
+        if(!idConfigEvent.isPresent()){
+            throw new Exception("Imposible actualizar el consolidado en config_event_service");
+        }
+        Boolean valida = zoneConfigEventService.recordSale(zoneId, idConfigEvent.get());
+        if(!valida){
+            throw new Exception("Imposible actualizar el consolidado por zona");
+        }
         return ticketEntity;
     }
 

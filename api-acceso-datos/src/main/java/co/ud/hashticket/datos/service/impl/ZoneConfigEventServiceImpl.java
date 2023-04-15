@@ -1,11 +1,13 @@
 package co.ud.hashticket.datos.service.impl;
 
+import co.ud.hashticket.datos.entity.ConfigEventEntity;
 import co.ud.hashticket.datos.entity.ZoneConfigEventEntity;
 import co.ud.hashticket.datos.repository.ZoneConfigEventRepository;
 import co.ud.hashticket.datos.service.ZoneConfigEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,5 +34,15 @@ public class ZoneConfigEventServiceImpl implements ZoneConfigEventService {
     @Override
     public Set<ZoneConfigEventEntity> getZoneConfigByEventAndPresentation(Long idEvent, Long idPresentation) {
         return zoneConfigEventRepository.getZoneConfigByEventAndPresentation(idEvent, idPresentation);
+    }
+
+    @Override
+    public Boolean recordSale(Long zoneId, Long configEventId) {
+        Optional<ZoneConfigEventEntity> entity = zoneConfigEventRepository.getByZoneAndConfigEvent(zoneId, configEventId);
+        if(!entity.isPresent()){
+            return Boolean.FALSE;
+        }
+        entity.get().setNumberOfTicketsSold(entity.get().getNumberOfTicketsSold() + 1L);
+        return Boolean.TRUE;
     }
 }

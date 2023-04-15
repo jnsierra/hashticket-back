@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface TicketRepository extends JpaRepository<TicketEntity, TicketPkEntity>, CrudRepository<TicketEntity, TicketPkEntity> {
@@ -28,4 +28,5 @@ public interface TicketRepository extends JpaRepository<TicketEntity, TicketPkEn
                         @Param(value = "numberTicket")Long numberTicket,
                         @Param(value = "confirmationNumber")String confirmationNumber,
                         @Param(value = "user")String user);
+    Set<TicketEntity> getByEventAndPresentationAndZoneAndCategory(Long eventId, Long presentationId, Long zoneId, Long categoryId);
 }
