@@ -2029,7 +2029,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"eventId\": \"1\",\n    \"presentationId\" : \"1\",\n    \"zonaId\": \"1\",\n    \"categoryId\": \"1\",\n    \"numberOfTickets\": \"1\",\n    \"numberTickets\": [\"1432\"] \n\n}",
+							"raw": "{\n    \"eventId\": \"1\",\n    \"presentationId\" : \"1\",\n    \"zoneId\": \"1\",\n    \"categoryId\": \"1\",\n    \"numberOfTickets\": \"1\",\n    \"numberTickets\": [\"1\", \"200\"] \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2037,7 +2037,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}:5004/api-business/v.1/ticket/",
+							"raw": "{{host}}:5004/api-business/v.1/ticket/buy",
 							"host": [
 								"{{host}}"
 							],
@@ -2046,7 +2046,54 @@
 								"api-business",
 								"v.1",
 								"ticket",
-								""
+								"buy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Tickets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventId\": \"1\",\n    \"presentationId\" : \"1\",\n    \"zoneId\": \"1\",\n    \"categoryId\": \"1\",\n    \"numberOfTickets\": \"1\",\n    \"numberTickets\": [\"1432\", \"22\"] \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:5004/api-business/v.1/ticket/generate/event/1/presentation/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-business",
+								"v.1",
+								"ticket",
+								"generate",
+								"event",
+								"1",
+								"presentation",
+								"1"
 							]
 						}
 					},
@@ -2380,6 +2427,110 @@
 								"event",
 								"1",
 								"presentation",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Zone By Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/zone/category/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"zone",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category By Event Id And PResentation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/category/event/1/presentation/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"category",
+								"event",
+								"1",
+								"presentation",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ticket By Event And Presentation And Zone And Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:5004/api-public-users/v.1/ticket/event/1/presentation/1/zone/1/category/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-public-users",
+								"v.1",
+								"ticket",
+								"event",
+								"1",
+								"presentation",
+								"1",
+								"zone",
+								"1",
+								"category",
 								"1"
 							]
 						}
