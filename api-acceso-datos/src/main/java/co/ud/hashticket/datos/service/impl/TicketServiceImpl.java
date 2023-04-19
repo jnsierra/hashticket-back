@@ -83,7 +83,7 @@ public class TicketServiceImpl implements TicketService {
         if(!ticketEntity.isPresent()){
             throw new Exception("No se encontro tickete comprado");
         }
-        Optional<Long> idConfigEvent = configEventService.recogit rdSale(eventId, presentationId);
+        Optional<Long> idConfigEvent = configEventService.recordSale(eventId, presentationId);
         if(!idConfigEvent.isPresent()){
             throw new Exception("Imposible actualizar el consolidado en config_event_service");
         }

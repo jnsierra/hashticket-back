@@ -47,7 +47,7 @@ public class ZoneConfigEventEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( name = "config_event_id")
     private ConfigEventEntity configEvent;
-    @Column( name = "number_of_tickets")
+    @Column( name = "number_of_tickets", updatable = false)
     private Long numberOfTickets;
     @Column(name = "cost")
     private BigDecimal cost;
