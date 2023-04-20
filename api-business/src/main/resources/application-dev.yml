@@ -11,3 +11,6 @@ endpoint:
     protocol: http
     host: localhost
     port: 5005
+
+logging:
+    config: classpath:log4j2-dev.xml

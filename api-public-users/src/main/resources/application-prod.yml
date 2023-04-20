@@ -16,3 +16,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://server-discovery:1111/eureka
+
+logging:
+  config: classpath:log4j2-prod.xml

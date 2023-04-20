@@ -11,3 +11,6 @@ endpoint:
     protocol: http
     host: ${SERVER_DATOS}
     port: 5005
+
+logging:
+  config: classpath:log4j2-prod.xml
