@@ -87,4 +87,18 @@ public class TicketController {
         }
         return ResponseEntity.ok(TicketMapper.INSTANCE.map(entity.get()));
     }
+
+    @GetMapping(value = "/event/{eventId}/presentation/{presentationId}/by/email/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<TicketDto>> getByEmailAndEventAndPresentation(@PathVariable("eventId") Long eventId
+            ,@PathVariable("{presentationId}") Long presentationId
+            ,@PathVariable("{email}") String email
+    ){
+        Set<TicketEntity> entities = ticketService.getByEmailAndEventAndPresentation(email, eventId, presentationId);
+        if(entities.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(TicketMapper.INSTANCE.map(entities));
+    }
+
+
 }

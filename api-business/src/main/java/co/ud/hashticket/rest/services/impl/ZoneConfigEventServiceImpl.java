@@ -24,4 +24,7 @@ public class ZoneConfigEventServiceImpl implements ZoneConfigEventService {
     public Set<ZoneConfigEventDto> getByIdEventAndPresentation(Long idEvent, Long idPresentation) {
         return zoneConfigEventClient.getByIdEventAndPresentation(idEvent, idPresentation);
     }
+    public ZoneConfigEventDto save(ZoneConfigEventDto zoneConfigEventDto){
+        return zoneConfigEventClient.save(zoneConfigEventDto);
+    }
 }

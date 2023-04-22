@@ -94,6 +94,11 @@ public class TicketServiceImpl implements TicketService {
         return ticketEntity;
     }
 
+    @Override
+    public Set<TicketEntity> getByEmailAndEventAndPresentation(String email, Long eventId, Long presentationId) {
+        return ticketRepository.getByEmailAndEventAndPresentation(email, eventId, presentationId);
+    }
+
     private String getAlphaNumericString(int n) {
         // choose a Character random from this String
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

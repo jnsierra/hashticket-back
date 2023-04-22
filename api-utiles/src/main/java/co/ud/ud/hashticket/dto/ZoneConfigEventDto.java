@@ -12,4 +12,5 @@ public class ZoneConfigEventDto {
     private Long numberOfTickets;
     private BigDecimal cost;
     private Long numberOfTicketsSold;
+    private Boolean createTickets;
 }

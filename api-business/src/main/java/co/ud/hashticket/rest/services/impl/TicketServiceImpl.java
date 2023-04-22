@@ -12,22 +12,32 @@ import co.ud.ud.hashticket.dto.responses.GenericResponse;
 import co.ud.ud.hashticket.dto.ticket.BuyTicket;
 import co.ud.ud.hashticket.dto.ticket.ConfirmBuyTicket;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
+import co.ud.ud.hashticket.exception.BusinessException;
+import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
 public class TicketServiceImpl implements TicketService {
-    private final ZoneConfigEventService zoneConfigEventService;
-    private final ZoneService zoneService;
+    private ZoneConfigEventService zoneConfigEventService;
+    private ZoneService zoneService;
     private final TicketClient ticketClient;
     private final UserLoggerService userLoggerService;
+
+    private final BiFunction<Long, Long, Set<ZoneConfigEventDto>> functionGenerateTickets = (eventId, presentationId) -> zoneConfigEventService.getByIdEventAndPresentation(eventId, presentationId)
+            .stream()
+            .filter(Predicate.not(ZoneConfigEventDto::getCreateTickets))
+            .collect(Collectors.toSet());
+    private final Function<Long, ZoneDto> functionGetZone = zoneId -> zoneService.getById(zoneId);
+    private final Function<Set<ZoneConfigEventDto>,Set<ZoneConfigEventDto>> functionValidate = item -> validateConfig(item);
 
     @Autowired
     public TicketServiceImpl(ZoneConfigEventService zoneConfigEventService, ZoneService zoneService, TicketClient ticketClient,UserLoggerService userLoggerService) {
@@ -39,8 +49,23 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Boolean generateTicket(Long idEvent, Long idPresentation) {
-        return findInformation(idEvent, idPresentation);
+        Set<ZoneConfigEventDto> configs = functionGenerateTickets.apply(idEvent, idPresentation);
+        Function<Set<ZoneConfigEventDto>, Boolean> ticketsFunction = functionValidate
+                .andThen(item -> generateTicketObj(item, idEvent, idPresentation))
+                .andThen(this::generateTicketIterate)
+                .andThen(item -> this.confirmCreate(item, configs));
+        Boolean valida = ticketsFunction.apply(configs);
+        return valida;
     }
+    private Boolean confirmCreate(Boolean valida, Set<ZoneConfigEventDto> configs){
+        configs.stream().
+                forEach(item -> {
+                    item.setCreateTickets(Boolean.TRUE);
+                    this.zoneConfigEventService.save(item);
+                });
+        return Boolean.TRUE;
+    }
+
 
     @Override
     public GenericResponse< ConfirmBuyTicket >buyTicket(BuyTicket buyTicket) {
@@ -99,29 +124,44 @@ public class TicketServiceImpl implements TicketService {
         }
         return Boolean.FALSE;
     }
-
-    private Boolean findInformation(Long idEvent, Long idPresentation){
-        Set<ZoneConfigEventDto> responseSet = zoneConfigEventService.getByIdEventAndPresentation(idEvent, idPresentation);
-        responseSet
-                .stream()
-                .forEach(zoneConfigEvent -> {
-                    ZoneDto item = zoneService.getById(zoneConfigEvent.getZoneId());
-                    generateTickets(idEvent, item.getId(), item.getCategoryId(), idPresentation, zoneConfigEvent.getNumberOfTickets());
-                });
-        return Boolean.TRUE;
+    private Set<ZoneConfigEventDto> validateConfig(Set<ZoneConfigEventDto> responseSet){
+        if(responseSet.isEmpty()){
+            throw new BusinessException(2L,"error","No existe ninguna zona por generar tickets o las actuales ya tienen tickets generados");
+        }
+        return responseSet;
     }
 
-    private void generateTickets(Long eventId, Long zoneId, Long categoryId, Long presentationId, Long numberOfTickets){
-        for(long i=1 ; i <= numberOfTickets; i++){
-            ticketClient.save(TicketDto.builder()
-                            .eventId(eventId)
-                            .zoneId(zoneId)
-                            .categoryId(categoryId)
-                            .presentationId(presentationId)
-                            .numberTicket(i)
-                            .state(StatusTicket.CREATED)
+    private Set<TicketDto> generateTicketObj(Set<ZoneConfigEventDto> zoneConfigEvents, Long idEvent, Long idPresentation){
+        return zoneConfigEvents.stream()
+                .map(zoneConfigEventDto -> generateTickets(zoneConfigEventDto, idEvent, idPresentation))
+                .flatMap(tickets -> tickets.stream())
+                .collect(Collectors.toSet());
+    }
+
+
+    private Set<TicketDto> generateTickets(ZoneConfigEventDto zoneConfigEventDto, Long eventId, Long presentationId){
+        Set<TicketDto> ticketsDto = new HashSet<>();
+        ZoneDto zone = functionGetZone.apply(zoneConfigEventDto.getZoneId());
+        for(long i=1; i <= zoneConfigEventDto.getNumberOfTickets(); i++){
+            ticketsDto.add(TicketDto.builder()
+                    .eventId(eventId)
+                    .zoneId(zone.getId())
+                    .categoryId(zone.getCategoryId())
+                    .presentationId(presentationId)
+                    .numberTicket(i)
+                    .state(StatusTicket.CREATED)
                     .build());
         }
+        return  ticketsDto;
     }
+    private Boolean generateTicketIterate(Set<TicketDto> tickets){
+        tickets.stream()
+                .forEach(this::saveTicket);
+        return Boolean.TRUE;
+    }
+    private void saveTicket(TicketDto ticketDto){
+        ticketClient.save(ticketDto);
+    }
+
 
 }

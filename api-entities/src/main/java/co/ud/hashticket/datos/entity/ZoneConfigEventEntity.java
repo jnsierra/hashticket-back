@@ -18,10 +18,10 @@ import java.math.BigDecimal;
 @NamedQuery(name = "ZoneConfigEventEntity.getByZoneAndConfigEvent", query = """
         SELECT znCon
           FROM ZoneConfigEventEntity znCon 
-        inner join znCon.zone zon
-        inner join znCon.configEvent conE
-        WHERE zon.id = :zoneId
-          AND conE.id = :configEventId
+         inner join znCon.zone zon
+         inner join znCon.configEvent conE
+         WHERE zon.id = :zoneId
+           AND conE.id = :configEventId
         """)
 @Getter @Setter
 @AllArgsConstructor
@@ -53,7 +53,8 @@ public class ZoneConfigEventEntity implements Serializable {
     private BigDecimal cost;
     @Column(name = "number_of_tickets_sold")
     private Long numberOfTicketsSold;
-
+    @Column(name = "create_tickets")
+    private Boolean createTickets;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -9,4 +9,5 @@ public interface ZoneConfigEventService {
     Set<ZoneConfigEventDto>  getByIdEvent(Long idEvent);
 
     Set<ZoneConfigEventDto>  getByIdEventAndPresentation(Long idEvent, Long idPresentation);
+    ZoneConfigEventDto save(ZoneConfigEventDto zoneConfigEventDto);
 }

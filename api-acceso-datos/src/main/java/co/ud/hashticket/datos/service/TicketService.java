@@ -27,4 +27,5 @@ public interface TicketService {
                          Long categoryId,
                          Long presentationId,
                          Long numberTicket)throws Exception;
+    Set<TicketEntity> getByEmailAndEventAndPresentation(String email, Long eventId, Long presentationId);
 }

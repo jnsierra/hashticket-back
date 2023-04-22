@@ -36,6 +36,15 @@ import java.io.Serializable;
           AND ticket.state = 'CREATED'           
        ORDER BY ticket.ticketPk.numberTicket 
         """)
+@NamedQuery(name = "TicketEntity.getByEmailAndEventAndPresentation", query = """
+        SELECT ticket
+          FROM TicketEntity ticket
+         INNER JOIN ticket.ticketPk.presentation  pr
+         INNER JOIN ticket.ticketPk.event ev
+         WHERE ticket.userEmail = :email
+           AND ev.id = :eventId
+           AND pr.id = :presentationId
+        """)
 @Table(name = "tickets")
 public class TicketEntity implements Serializable {
     private static final long serialVersionUID = 1234567L;

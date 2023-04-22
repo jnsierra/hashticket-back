@@ -29,4 +29,5 @@ public interface TicketRepository extends JpaRepository<TicketEntity, TicketPkEn
                         @Param(value = "confirmationNumber")String confirmationNumber,
                         @Param(value = "user")String user);
     Set<TicketEntity> getByEventAndPresentationAndZoneAndCategory(Long eventId, Long presentationId, Long zoneId, Long categoryId);
+    Set<TicketEntity> getByEmailAndEventAndPresentation(String email, Long eventId, Long presentationId);
 }
