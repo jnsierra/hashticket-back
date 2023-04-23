@@ -2,6 +2,7 @@ package co.ud.hashticket.datos.controller;
 
 import co.ud.hashticket.datos.entity.TicketEntity;
 import co.ud.hashticket.datos.entity.TicketPkEntity;
+import co.ud.hashticket.datos.filtering.SearchRequest;
 import co.ud.hashticket.datos.mapper.TicketMapper;
 import co.ud.hashticket.datos.mapper.TicketPkMapper;
 import co.ud.hashticket.datos.service.TicketService;
@@ -10,10 +11,12 @@ import co.ud.ud.hashticket.dto.TicketViewDto;
 import co.ud.ud.hashticket.dto.responses.GenericQuery;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -100,5 +103,8 @@ public class TicketController {
         return ResponseEntity.ok(TicketMapper.INSTANCE.map(entities));
     }
 
-
+    @PostMapping(value = "/search")
+    public GenericQuery<TicketViewDto> search(@RequestBody SearchRequest request) {
+        return ticketService.searchTickets(request);
+    }
 }
