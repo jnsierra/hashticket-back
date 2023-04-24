@@ -35,4 +35,8 @@ public class TicketController {
         return ResponseEntity.ok(ticketService.buyTicket(buyTicket));
     }
 
+    @GetMapping("/by/user")
+    public ResponseEntity<GenericResponse> getTickets() {
+        return ResponseEntity.ok(ticketService.getTiketsByUser());
+    }
 }

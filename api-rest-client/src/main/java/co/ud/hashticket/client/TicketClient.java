@@ -1,6 +1,9 @@
 package co.ud.hashticket.client;
 
+import co.ud.hashticket.dto.SearchRequest;
 import co.ud.ud.hashticket.dto.TicketDto;
+import co.ud.ud.hashticket.dto.TicketViewDto;
+import co.ud.ud.hashticket.dto.responses.GenericQuery;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -30,4 +33,6 @@ public interface TicketClient {
             , @RequestParam Long presentationId
             , @RequestParam Long numberTicket
     );
+    @PostMapping(value = "/search")
+    GenericQuery<TicketViewDto> search(@RequestBody SearchRequest request);
 }

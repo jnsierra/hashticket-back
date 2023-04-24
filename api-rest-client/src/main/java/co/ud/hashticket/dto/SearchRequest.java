@@ -1,4 +1,4 @@
-package co.ud.hashticket.datos.filtering;
+package co.ud.hashticket.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

@@ -6,7 +6,6 @@ import co.ud.hashticket.datos.filtering.SearchRequest;
 import co.ud.ud.hashticket.dto.TicketViewDto;
 import co.ud.ud.hashticket.dto.responses.GenericQuery;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
-import org.springframework.data.domain.Page;
 
 import java.util.Optional;
 import java.util.Set;

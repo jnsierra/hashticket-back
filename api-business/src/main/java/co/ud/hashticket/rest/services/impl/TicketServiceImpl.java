@@ -1,19 +1,24 @@
 package co.ud.hashticket.rest.services.impl;
 
 import co.ud.hashticket.client.TicketClient;
+import co.ud.hashticket.dto.FieldType;
+import co.ud.hashticket.dto.FilterRequest;
+import co.ud.hashticket.dto.Operator;
+import co.ud.hashticket.dto.SearchRequest;
 import co.ud.hashticket.rest.services.TicketService;
 import co.ud.hashticket.rest.services.ZoneConfigEventService;
 import co.ud.hashticket.rest.services.ZoneService;
 import co.ud.hashticket.security.service.UserLoggerService;
 import co.ud.ud.hashticket.dto.TicketDto;
+import co.ud.ud.hashticket.dto.TicketViewDto;
 import co.ud.ud.hashticket.dto.ZoneConfigEventDto;
 import co.ud.ud.hashticket.dto.ZoneDto;
+import co.ud.ud.hashticket.dto.responses.GenericQuery;
 import co.ud.ud.hashticket.dto.responses.GenericResponse;
 import co.ud.ud.hashticket.dto.ticket.BuyTicket;
 import co.ud.ud.hashticket.dto.ticket.ConfirmBuyTicket;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
 import co.ud.ud.hashticket.exception.BusinessException;
-import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +35,9 @@ public class TicketServiceImpl implements TicketService {
     private ZoneConfigEventService zoneConfigEventService;
     private ZoneService zoneService;
     private final TicketClient ticketClient;
-    private final UserLoggerService userLoggerService;
-
+    private UserLoggerService userLoggerService;
+    private final Function<String, String> getUserAuth = (x) -> userLoggerService.getUserLogger();
+     
     private final BiFunction<Long, Long, Set<ZoneConfigEventDto>> functionGenerateTickets = (eventId, presentationId) -> zoneConfigEventService.getByIdEventAndPresentation(eventId, presentationId)
             .stream()
             .filter(Predicate.not(ZoneConfigEventDto::getCreateTickets))
@@ -40,7 +46,8 @@ public class TicketServiceImpl implements TicketService {
     private final Function<Set<ZoneConfigEventDto>,Set<ZoneConfigEventDto>> functionValidate = item -> validateConfig(item);
 
     @Autowired
-    public TicketServiceImpl(ZoneConfigEventService zoneConfigEventService, ZoneService zoneService, TicketClient ticketClient,UserLoggerService userLoggerService) {
+    public TicketServiceImpl(ZoneConfigEventService zoneConfigEventService, ZoneService zoneService
+            , TicketClient ticketClient,UserLoggerService userLoggerService) {
         this.zoneConfigEventService = zoneConfigEventService;
         this.zoneService = zoneService;
         this.ticketClient = ticketClient;
@@ -96,6 +103,37 @@ public class TicketServiceImpl implements TicketService {
                 .data(confirmations)
                 .build();
     }
+
+    @Override
+    public GenericResponse<TicketViewDto> getTiketsByUser() {
+        Function<String, GenericResponse<TicketViewDto>> ticketsFunction = getUserAuth
+                .andThen(this::generateObjectQuery)
+                .andThen(ticketClient::search)
+                .andThen(this::mapperTicket);
+        return ticketsFunction.apply("t");
+    }
+    public SearchRequest generateObjectQuery(String user){
+        return SearchRequest
+                .builder()
+                .filters(List.of(
+                        FilterRequest.builder()
+                                .key("userEmail")
+                                .operator(Operator.EQUAL)
+                                .fieldType(FieldType.STRING)
+                                .value(user)
+                                .build()
+                ))
+                .build();
+    }
+    public GenericResponse<TicketViewDto> mapperTicket(GenericQuery<TicketViewDto> tickets){
+        return GenericResponse.<TicketViewDto>builder()
+                .data(tickets.getResults())
+                .code(1L)
+                .type("ok")
+                .message("Consulta ejecutada exitosamente")
+                .build();
+    }
+
     private Optional<TicketDto> buyTicket(BuyTicket buyTicket, Long numberTicket){
         ResponseEntity<TicketDto> response = ticketClient.buyTicket(StatusTicket.RESERVED, buyTicket.getEventId()
                 , buyTicket.getZoneId()
@@ -162,6 +200,4 @@ public class TicketServiceImpl implements TicketService {
     private void saveTicket(TicketDto ticketDto){
         ticketClient.save(ticketDto);
     }
-
-
 }

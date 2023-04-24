@@ -1,7 +1,5 @@
 package co.ud.hashticket.datos.filtering;
 
-import co.ud.hashticket.datos.entity.EventEntity;
-import co.ud.hashticket.datos.entity.TicketPkEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -9,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;
-import javax.persistence.criteria.Join;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

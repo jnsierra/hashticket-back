@@ -20,4 +20,6 @@ public class TicketViewDto {
     private String presentationName;
     private Long numberTicket;
     private StatusTicket state;
+    private String userEmail;
+    private String confirmationNumber;
 }
