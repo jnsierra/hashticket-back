@@ -1674,6 +1674,46 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Tickets",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filters\": [\n        {\n            \"key\": \"userEmail\",\n            \"operator\": \"EQUAL\",\n            \"fieldType\": \"STRING\",\n            \"value\": \"jnsierrac@gmail.com\"\n        },\n        {\n            \"key\": \"ticketPk.numberTicket\",\n            \"operator\": \"EQUAL_EMBEDDED_ID\",\n            \"fieldType\": \"LONG\",\n            \"value\": \"1\"\n        }\n    ],\n    \"joins\": [\n        {\n            \"entity\" : \"event\",\n            \"value\": \"1\", \n            \"fieldType\": \"LONG\"\n        },\n        {\n            \"entity\" : \"presentation\",\n            \"value\": \"2\", \n            \"fieldType\": \"LONG\"\n        }\n    ],\n    \"sorts\": [],\n    \"page\": null,\n    \"size\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/ticket/search",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"ticket",
+										"search"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1754,6 +1794,46 @@
 										"1",
 										"presentation",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tickets",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filters\": [\n        {\n            \"key\": \"userEmail\",\n            \"operator\": \"EQUAL\",\n            \"fieldType\": \"STRING\",\n            \"value\": \"jnsierrac@gmail.com\"\n        },\n        {\n            \"key\": \"ticketPk.numberTicket\",\n            \"operator\": \"EQUAL_EMBEDDED_ID\",\n            \"fieldType\": \"LONG\",\n            \"value\": \"1\"\n        }\n    ],\n    \"joins\": [\n        {\n            \"entity\" : \"event\",\n            \"value\": \"1\", \n            \"fieldType\": \"LONG\"\n        }\n    ],\n    \"sorts\": [],\n    \"page\": null,\n    \"size\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:5004/api-acceso-datos/v.1/ticket/search",
+									"host": [
+										"{{host}}"
+									],
+									"port": "5004",
+									"path": [
+										"api-acceso-datos",
+										"v.1",
+										"ticket",
+										"search"
 									]
 								}
 							},
@@ -2029,7 +2109,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"eventId\": \"1\",\n    \"presentationId\" : \"1\",\n    \"zoneId\": \"1\",\n    \"categoryId\": \"1\",\n    \"numberOfTickets\": \"1\",\n    \"numberTickets\": [\"1\", \"200\"] \n}",
+							"raw": "{\n    \"eventId\": \"1\",\n    \"presentationId\" : \"1\",\n    \"zoneId\": \"1\",\n    \"categoryId\": \"1\",\n    \"numberOfTickets\": \"1\",\n    \"numberTickets\": [\"3\"] \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2094,6 +2174,50 @@
 								"1",
 								"presentation",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tickets User Autenticated",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:5004/api-business/v.1/ticket/by/user",
+							"host": [
+								"{{host}}"
+							],
+							"port": "5004",
+							"path": [
+								"api-business",
+								"v.1",
+								"ticket",
+								"by",
+								"user"
 							]
 						}
 					},
@@ -2231,7 +2355,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"jnsierra@outlook.com\",\n    \"name\":\"Diana Alvarado\"\n}",
+							"raw": "{\n    \"email\":\"jnsierra\",\n    \"name\":\"Diana Alvarado\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
