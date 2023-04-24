@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/v.1/user")
 public class UserController {
@@ -19,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<UsuarioDto> save(@RequestBody UsuarioDto usuarioDto){
+    public ResponseEntity<UsuarioDto> save(@Valid @RequestBody UsuarioDto usuarioDto){
         return ResponseEntity.ok(userService.saveUserPublic(usuarioDto));
     }
 }

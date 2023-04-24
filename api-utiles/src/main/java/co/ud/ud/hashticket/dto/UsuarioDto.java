@@ -6,12 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class UsuarioDto {
     private Long id;
+    @Email(message = "invalid email")
     private String email;
     private String code;
     private String password;
