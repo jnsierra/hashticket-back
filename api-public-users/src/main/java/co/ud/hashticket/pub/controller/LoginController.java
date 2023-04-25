@@ -5,6 +5,7 @@ import co.ud.hashticket.pub.service.TokenService;
 import co.ud.ud.hashticket.dto.TokenDto;
 import co.ud.ud.hashticket.dto.UsuarioDto;
 import co.ud.ud.hashticket.enumeration.LOGIN_ACTION;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/login")
+@Slf4j
 public class LoginController {
     private final TokenService tokenService;
     private final LoginService loginService;
@@ -33,10 +35,12 @@ public class LoginController {
             //Genero el token en la aplicacion
             Optional<TokenDto> token = tokenService.generateTokenUser(usuarioDto.getEmail());
             if (token.isPresent()) {
+                log.info("LOGIN|200|{}|{}",usuarioDto.getEmail(), login.toString());
                 token.get().setLoginAction(LOGIN_ACTION.SUCCESS);
                 return ResponseEntity.ok(token.get());
             }
         }
+        log.info("LOGIN|401|{}|{}",usuarioDto.getEmail(), login.toString());
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }
