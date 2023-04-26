@@ -7,6 +7,8 @@ import co.ud.ud.hashticket.dto.UsuarioDto;
 import co.ud.ud.hashticket.enumeration.LOGIN_ACTION;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.sleuth.Span;
+import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +25,20 @@ import java.util.Optional;
 public class LoginController {
     private final TokenService tokenService;
     private final LoginService loginService;
+    private Tracer tracer;
     @Autowired
-    public LoginController(TokenService tokenService, LoginService loginService) {
+    public LoginController(TokenService tokenService, LoginService loginService, Tracer tracer) {
         this.tokenService = tokenService;
         this.loginService = loginService;
+        this.tracer = tracer;
     }
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> login(@RequestBody UsuarioDto usuarioDto) {
+        Span span = tracer.currentSpan();
+        if (span != null) {
+            log.info("Trace ID {}", span.context().traceId());
+            log.info("Span ID {}", span.context().spanId());
+        }
         LOGIN_ACTION login = loginService.validaLogin(usuarioDto.getEmail(), usuarioDto.getPassword());
         if (LOGIN_ACTION.SUCCESS.equals(login) || LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD.equals(login)) {
             //Genero el token en la aplicacion

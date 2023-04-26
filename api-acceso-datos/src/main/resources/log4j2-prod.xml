@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
-        <Property name="LOG_PATTERN">%p %d{yyyy-MM-dd HH:mm:ss} [%tn] %c - %m%n</Property>
+        <Property name="LOG_PATTERN">%p %d{yyyy-MM-dd HH:mm:ss} [%tn] [${APP_NAME},%X{traceId},%X{spanId}] %c - %m%n</Property>
         <Property name="APP_LOG_ROOT">/opt/logs</Property>
     </Properties>
 

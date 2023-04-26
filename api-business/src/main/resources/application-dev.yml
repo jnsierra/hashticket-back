@@ -14,3 +14,8 @@ endpoint:
 
 logging:
     config: classpath:log4j2-dev.xml
+
+spring:
+  sleuth:
+    sampler:
+      probability: 1.0

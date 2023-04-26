@@ -12,3 +12,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka
+spring:
+  sleuth:
+    sampler:
+      probability: 1.0

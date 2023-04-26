@@ -1,23 +1,22 @@
-package co.ud.hashticket.datos.interceptor;
+package co.ud.hashticket.pub.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.function.Function;
 
-@Component
 @Slf4j
-public class InterceptorRequest implements HandlerInterceptor {
-
+public class TraceLogInterceptor implements HandlerInterceptor {
+    private final Function<HttpServletRequest, Boolean> funcValidExistsHeader = (request) -> Objects.isNull(request.getHeader("x-uow"));
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response,
+                             Object handler) throws Exception {
         request.setAttribute("start" , System.currentTimeMillis());
-        log.info("This is the user authenticated: {} ", authentication);
         return true;
     }
     @Override
@@ -31,5 +30,4 @@ public class InterceptorRequest implements HandlerInterceptor {
                 ,System.currentTimeMillis() - (long) request.getAttribute("start")
                 ,request.getRequestURI());
     }
-
 }
