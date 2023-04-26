@@ -21,10 +21,10 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="co.ud.hashticket" additivity="false">
+        <AsyncLogger name="co.ud.hashticket" additivity="false">
             <AppenderRef ref="appLog" />
             <AppenderRef ref="Console" />
-        </Logger>
+        </AsyncLogger>
         <Root level="info">
             <AppenderRef ref="Console" />
             <AppenderRef ref="appLog" />

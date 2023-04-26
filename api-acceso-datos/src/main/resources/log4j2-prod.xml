@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30">
+<Configuration status="INFO" monitorInterval="30">
     <Properties>
-        <Property name="LOG_PATTERN">%p %d{yyyy-MM-dd HH:mm:ss} [%tn] [${APP_NAME},%X{traceId},%X{spanId}] %c - %m%n</Property>
+        <Property name="LOG_PATTERN">%p %d{yyyy-MM-dd HH:mm:ss} [%tn] [${spring:spring.application.name},%X{traceId},%X{spanId}] %c - %m%n</Property>
         <Property name="APP_LOG_ROOT">/opt/logs</Property>
     </Properties>
 
@@ -21,13 +21,12 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="co.ud.hashticket" additivity="false">
+        <AsyncLogger name="co.ud.hashticket" additivity="false">
             <AppenderRef ref="appLog" />
             <AppenderRef ref="Console" />
-        </Logger>
+        </AsyncLogger>
         <Root level="debug">
             <AppenderRef ref="Console" />
-            <AppenderRef ref="appLog" />
         </Root>
     </Loggers>
 </Configuration>
