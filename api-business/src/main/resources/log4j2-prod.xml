@@ -6,9 +6,6 @@
     </Properties>
 
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT" follow="true">
-            <PatternLayout pattern="${LOG_PATTERN}" />
-        </Console>
         <RollingFile name="appLog"
                      fileName="${APP_LOG_ROOT}/business.log"
                      filePattern="${APP_LOG_ROOT}/business-%d{yyyy-MM-dd}-%i.log">
@@ -21,12 +18,8 @@
     </Appenders>
 
     <Loggers>
-        <AsyncLogger name="co.ud.hashticket" additivity="false">
+        <asyncRoot level="INFO">
             <AppenderRef ref="appLog" />
-            <AppenderRef ref="Console" />
-        </AsyncLogger>
-        <Root level="debug">
-            <AppenderRef ref="Console" />
-        </Root>
+        </asyncRoot>
     </Loggers>
 </Configuration>

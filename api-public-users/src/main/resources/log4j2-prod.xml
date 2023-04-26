@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO" monitorInterval="30">
+<Configuration status="WARN" monitorInterval="30">
     <Properties>
         <Property name="LOG_PATTERN">%p %d{yyyy-MM-dd HH:mm:ss} [%tn] [${spring:spring.application.name},%X{traceId},%X{spanId}] %c - %m%n</Property>
         <Property name="APP_LOG_ROOT">/opt/logs</Property>
     </Properties>
 
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT" follow="true">
-            <PatternLayout pattern="${LOG_PATTERN}" />
-        </Console>
         <RollingFile name="appLog"
                      fileName="${APP_LOG_ROOT}/public.log"
                      filePattern="${APP_LOG_ROOT}/public-%d{yyyy-MM-dd}-%i.log">
@@ -21,12 +18,8 @@
     </Appenders>
 
     <Loggers>
-        <AsyncLogger name="co.ud.hashticket" additivity="false">
+        <Root level="INFO">
             <AppenderRef ref="appLog" />
-            <AppenderRef ref="Console" />
-        </AsyncLogger>
-        <Root level="debug">
-            <AppenderRef ref="Console" />
         </Root>
     </Loggers>
 </Configuration>
