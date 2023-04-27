@@ -34,11 +34,6 @@ public class LoginController {
     }
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> login(@RequestBody UsuarioDto usuarioDto) {
-        Span span = tracer.currentSpan();
-        if (span != null) {
-            log.info("Trace ID {}", span.context().traceId());
-            log.info("Span ID {}", span.context().spanId());
-        }
         LOGIN_ACTION login = loginService.validaLogin(usuarioDto.getEmail(), usuarioDto.getPassword());
         if (LOGIN_ACTION.SUCCESS.equals(login) || LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD.equals(login)) {
             //Genero el token en la aplicacion
