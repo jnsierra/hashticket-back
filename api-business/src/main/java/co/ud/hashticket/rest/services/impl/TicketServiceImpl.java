@@ -19,6 +19,7 @@ import co.ud.ud.hashticket.dto.ticket.BuyTicket;
 import co.ud.ud.hashticket.dto.ticket.ConfirmBuyTicket;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
 import co.ud.ud.hashticket.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class TicketServiceImpl implements TicketService {
     private ZoneConfigEventService zoneConfigEventService;
     private ZoneService zoneService;
@@ -76,10 +78,6 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public GenericResponse< ConfirmBuyTicket >buyTicket(BuyTicket buyTicket) {
-        System.out.println("**************");
-        System.out.println(userLoggerService.getUserLogger());
-        System.out.println("**************");
-
         if(!validateAvailability(buyTicket)){
             return GenericResponse.<ConfirmBuyTicket>builder()
                     .code(1L)
@@ -89,12 +87,11 @@ public class TicketServiceImpl implements TicketService {
         }
         Set<ConfirmBuyTicket> confirmations = buyTicket.getNumberTickets().stream()
                 .map(item -> this.buyTicket(buyTicket, item))
-                .peek(System.out::println)
+                .peek(item -> log.info("PURCHASED-TICKET|{}|{}|{}",item.isPresent(), (item.isPresent() ? item.get().getNumberTicket() : -1L), item.isPresent() ? item.get().getEventId() : -1L) )
                 .map(item -> ConfirmBuyTicket.builder()
                         .confirmNumberTicket(item.get().getConfirmationNumber())
                         .numberTicket(item.get().getNumberTicket())
                         .build())
-                .peek(System.out::println)
                 .collect(Collectors.toSet());
         return GenericResponse.<ConfirmBuyTicket>builder()
                 .code(0L)

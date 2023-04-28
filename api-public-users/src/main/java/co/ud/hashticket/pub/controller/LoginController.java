@@ -39,7 +39,7 @@ public class LoginController {
             //Genero el token en la aplicacion
             Optional<TokenDto> token = tokenService.generateTokenUser(usuarioDto.getEmail());
             if (token.isPresent()) {
-                log.info("LOGIN|200|{}|{}",usuarioDto.getEmail(), login.toString());
+                log.info("LOGIN|200|{}|{}",usuarioDto.getEmail(), login);
                 token.get().setLoginAction(LOGIN_ACTION.SUCCESS);
                 return ResponseEntity.ok(token.get());
             }
