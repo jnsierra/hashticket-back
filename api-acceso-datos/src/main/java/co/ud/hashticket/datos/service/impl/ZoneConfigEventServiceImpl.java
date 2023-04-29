@@ -6,6 +6,7 @@ import co.ud.hashticket.datos.service.ZoneConfigEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -40,7 +41,7 @@ public class ZoneConfigEventServiceImpl implements ZoneConfigEventService {
         if(!entity.isPresent()){
             return Boolean.FALSE;
         }
-        entity.get().setNumberOfTicketsSold(entity.get().getNumberOfTicketsSold() + 1L);
+        entity.get().setNumberOfTicketsSold(Objects.isNull(entity.get().getNumberOfTicketsSold())? 0L : entity.get().getNumberOfTicketsSold() + 1L);
         return Boolean.TRUE;
     }
 }
