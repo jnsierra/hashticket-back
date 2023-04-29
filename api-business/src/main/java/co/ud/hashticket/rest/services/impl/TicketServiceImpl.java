@@ -39,11 +39,7 @@ public class TicketServiceImpl implements TicketService {
     private final TicketClient ticketClient;
     private UserLoggerService userLoggerService;
     private final Function<String, String> getUserAuth = (x) -> userLoggerService.getUserLogger();
-     
-    private final BiFunction<Long, Long, Set<ZoneConfigEventDto>> functionGenerateTickets = (eventId, presentationId) -> zoneConfigEventService.getByIdEventAndPresentation(eventId, presentationId)
-            .stream()
-            .filter(Predicate.not(ZoneConfigEventDto::getCreateTickets))
-            .collect(Collectors.toSet());
+    private final BiFunction<Long, Long, Set<ZoneConfigEventDto>> functionGenerateTickets = (eventId, presentationId) -> zoneConfigEventService.getByIdEventAndPresentation(eventId, presentationId);
     private final Function<Long, ZoneDto> functionGetZone = zoneId -> zoneService.getById(zoneId);
     private final Function<Set<ZoneConfigEventDto>,Set<ZoneConfigEventDto>> functionValidate = item -> validateConfig(item);
 
@@ -58,13 +54,25 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Boolean generateTicket(Long idEvent, Long idPresentation) {
-        Set<ZoneConfigEventDto> configs = functionGenerateTickets.apply(idEvent, idPresentation);
+        Set<ZoneConfigEventDto> configs = functionGenerateTickets.andThen(this::validateSet).apply(idEvent, idPresentation);
         Function<Set<ZoneConfigEventDto>, Boolean> ticketsFunction = functionValidate
                 .andThen(item -> generateTicketObj(item, idEvent, idPresentation))
                 .andThen(this::generateTicketIterate)
                 .andThen(item -> this.confirmCreate(item, configs));
         Boolean valida = ticketsFunction.apply(configs);
         return valida;
+    }
+
+    public Set<ZoneConfigEventDto> validateSet(Set<ZoneConfigEventDto> zoneConfig){
+        return zoneConfig.stream()
+                .map(item -> {
+                    if (Objects.isNull(item.getCreateTickets())) {
+                        item.setCreateTickets(Boolean.FALSE);
+                    }
+                    return  item;
+                })
+                .filter(Predicate.not(ZoneConfigEventDto::getCreateTickets))
+                .collect(Collectors.toSet());
     }
     private Boolean confirmCreate(Boolean valida, Set<ZoneConfigEventDto> configs){
         configs.stream().

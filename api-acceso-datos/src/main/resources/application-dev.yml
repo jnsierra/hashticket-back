@@ -4,7 +4,7 @@ spring:
       probability: 1.0
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/tickets
+    url: jdbc:postgresql://192.168.0.30:5436/tickets
     username: hashticket
     password: 12345678
     type: com.zaxxer.hikari.HikariDataSource
