@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="3" author="admin">
+        <insert tableName="user_type">
+            <column name="id"  valueComputed="${sequence.user_type}"></column>
+            <column name="type" value="ROLE_UNVERIFIED_USER"></column>
+            <column name="description" value="Usuario sin verificar"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

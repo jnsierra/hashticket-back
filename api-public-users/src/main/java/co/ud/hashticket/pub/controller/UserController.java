@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<UsuarioDto> save(@Valid @RequestBody UsuarioDto usuarioDto){
+    public ResponseEntity<Boolean> save(@Valid @RequestBody UsuarioDto usuarioDto){
         return ResponseEntity.ok(userService.saveUserPublic(usuarioDto));
     }
 }

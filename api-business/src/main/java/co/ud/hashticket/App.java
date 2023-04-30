@@ -1,4 +1,4 @@
-package co.ud.hashticket.rest;
+package co.ud.hashticket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

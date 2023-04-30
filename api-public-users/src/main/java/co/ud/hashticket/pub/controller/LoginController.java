@@ -7,7 +7,6 @@ import co.ud.ud.hashticket.dto.UsuarioDto;
 import co.ud.ud.hashticket.enumeration.LOGIN_ACTION;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

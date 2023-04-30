@@ -30,3 +30,8 @@ logging:
         type:
           descriptor:
             sql: trace
+
+mail:
+  configuration:
+    user: admin@compraboletas.shop
+    password: Nicole1310*
