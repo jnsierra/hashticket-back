@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordServiceImpl passwordService;
     private final EmailServiceImpl emailService;
     private UserTypeService userTypeService;
-    private final static String USER_TYPE_NEW = "ROLE_UNVERIFIED_USER";
+    private static final String USER_TYPE_NEW = "ROLE_UNVERIFIED_USER";
     private UnaryOperator<UsuarioDto> functionUser = user -> UserMapper.INSTANCE.map(user.getEmail()
             , user.getName()
             , "0"
