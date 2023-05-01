@@ -35,7 +35,7 @@ public class ConfigEventController {
         return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(entity.get()));
     }
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<ConfigEventDto>> getAllç(){
+    public ResponseEntity<Set<ConfigEventDto>> getAll(){
         Set<ConfigEventEntity> entities = configEventService.getAll();
         if(entities.isEmpty()){
             return ResponseEntity.noContent()

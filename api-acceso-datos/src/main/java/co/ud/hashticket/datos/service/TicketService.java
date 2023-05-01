@@ -28,7 +28,7 @@ public interface TicketService {
                          Long zoneId,
                          Long categoryId,
                          Long presentationId,
-                         Long numberTicket)throws Exception;
+                         Long numberTicket);
     Set<TicketEntity> getByEmailAndEventAndPresentation(String email, Long eventId, Long presentationId);
     GenericQuery<TicketViewDto> searchTickets(SearchRequest request);
 }

@@ -61,15 +61,15 @@ public class TicketController {
     @GetMapping(value = "/event/{event_id}/presentation/{presentation_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GenericQuery<TicketViewDto>> getByEventAndPresentation(@PathVariable("event_id")Long eventId
             , @PathVariable("presentation_id")Long presentationId
-            , @RequestParam Integer record
+            , @RequestParam Integer myRecord
             , @RequestParam Integer page){
-        Set<TicketViewDto> entities = ticketService.getByEventIdAndPresentationId(eventId, presentationId,record, page);
+        Set<TicketViewDto> entities = ticketService.getByEventIdAndPresentationId(eventId, presentationId, myRecord, page);
         if(entities.isEmpty()){
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(GenericQuery.<TicketViewDto>builder()
                 .results(entities)
-                .records(record)
+                .records(myRecord)
                         .page(page)
                 .totalRecords(ticketService.countByEventIdAndPresentationId(eventId, presentationId))
                 .build());
@@ -81,7 +81,7 @@ public class TicketController {
             , @RequestParam Long categoryId
             , @RequestParam Long presentationId
             , @RequestParam Long numberTicket
-    ) throws Exception {
+    ) {
         Optional<TicketEntity> entity = ticketService.buyTicket(state, eventId, zoneId, categoryId, presentationId, numberTicket);
         if(!entity.isPresent()){
             return ResponseEntity.noContent().build();

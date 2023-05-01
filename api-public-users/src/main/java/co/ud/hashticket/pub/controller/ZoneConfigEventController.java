@@ -32,6 +32,6 @@ public class ZoneConfigEventController {
             return ResponseEntity.noContent()
                     .build();
         }
-        return ResponseEntity.ok(entities.stream().map(item -> ZoneConfigEventMapper.INSTANCE.mapToView(item) ).collect(Collectors.toSet()));
+        return ResponseEntity.ok(entities.stream().map(ZoneConfigEventMapper.INSTANCE::mapToView).collect(Collectors.toSet()));
     }
 }

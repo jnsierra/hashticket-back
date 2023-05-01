@@ -13,6 +13,8 @@ import co.ud.hashticket.security.service.UserLoggerService;
 import co.ud.ud.hashticket.dto.TicketViewDto;
 import co.ud.ud.hashticket.dto.responses.GenericQuery;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
+import co.ud.ud.hashticket.exception.BusinessException;
+import co.ud.ud.hashticket.exception.enumeration.TYPE_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -68,10 +70,10 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @Transactional
-    public Optional<TicketEntity> buyTicket(StatusTicket state, Long eventId, Long zoneId, Long categoryId, Long presentationId, Long numberTicket)throws Exception{
+    public Optional<TicketEntity> buyTicket(StatusTicket state, Long eventId, Long zoneId, Long categoryId, Long presentationId, Long numberTicket){
         Integer update = this.updateState(state, eventId, zoneId, categoryId, presentationId, numberTicket, this.getAlphaNumericString(40), userLoggerService.getUserLogger());
         if(update != 1 ){
-            throw new Exception("Se genero actualizacion a mas de un registro");
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Se genero actualizacion a mas de un registro");
         }
         Optional<TicketEntity> ticketEntity = this.getById(TicketPkEntity.builder()
                 .event(EventEntity.builder()
@@ -89,15 +91,15 @@ public class TicketServiceImpl implements TicketService {
                 .numberTicket(numberTicket)
                 .build());
         if(!ticketEntity.isPresent()){
-            throw new Exception("No se encontro tickete comprado");
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR,"No se encontro tickete comprado");
         }
         Optional<Long> idConfigEvent = configEventService.recordSale(eventId, presentationId);
         if(!idConfigEvent.isPresent()){
-            throw new Exception("Imposible actualizar el consolidado en config_event_service");
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR,"Imposible actualizar el consolidado en config_event_service");
         }
         Boolean valida = zoneConfigEventService.recordSale(zoneId, idConfigEvent.get());
         if(!valida){
-            throw new Exception("Imposible actualizar el consolidado por zona");
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR,"Imposible actualizar el consolidado por zona");
         }
         return ticketEntity;
     }

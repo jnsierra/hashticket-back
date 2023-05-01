@@ -9,6 +9,7 @@ import co.ud.hashticket.pub.service.UserTypeService;
 import co.ud.ud.hashticket.dto.UsuarioDto;
 import co.ud.ud.hashticket.enumeration.USER_STATE;
 import co.ud.ud.hashticket.exception.BusinessException;
+import co.ud.ud.hashticket.exception.enumeration.TYPE_EXCEPTION;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 @Service
 @Slf4j
@@ -28,8 +30,8 @@ public class UserServiceImpl implements UserService {
     private final PasswordServiceImpl passwordService;
     private final EmailServiceImpl emailService;
     private UserTypeService userTypeService;
-    private final String USER_TYPE_NEW = "ROLE_UNVERIFIED_USER";
-    private Function<UsuarioDto, UsuarioDto> functionUser = user -> UserMapper.INSTANCE.map(user.getEmail()
+    private final static String USER_TYPE_NEW = "ROLE_UNVERIFIED_USER";
+    private UnaryOperator<UsuarioDto> functionUser = user -> UserMapper.INSTANCE.map(user.getEmail()
             , user.getName()
             , "0"
             , "S"
@@ -37,7 +39,7 @@ public class UserServiceImpl implements UserService {
             , "000");
     private Function<String, Optional<UserTypeEntity>> functionGetUserType = item -> {
         Optional<UserTypeEntity> obj = userTypeService.findByType(item);
-        obj.orElseThrow(() -> new BusinessException(2L,"error", String.format("Error finding Type User %s", USER_TYPE_NEW)));
+        obj.orElseThrow(() -> new BusinessException(2L,  TYPE_EXCEPTION.ERROR, String.format("Error finding Type User %s", USER_TYPE_NEW)));
         return obj;
     };
     private Function<UsuarioDto, Boolean> functionCreateUser = functionUser.andThen(this::generatePassword)
@@ -72,7 +74,7 @@ public class UserServiceImpl implements UserService {
     }
     private UserEntity validateInsert(Optional<UserEntity> user){
         if(user.isEmpty()){
-            throw new BusinessException(2L,"error", "Error inserting user");
+            throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "Error inserting user");
         }
         return user.get();
     }
@@ -83,9 +85,9 @@ public class UserServiceImpl implements UserService {
             Contraseña: %s
             """, userEntity.getEmail(), userEntity.getPassword());
     }
-    private Boolean sendNotification(UserEntity userEntity){
+    private boolean sendNotification(UserEntity userEntity){
         if( !emailService.sendSimpleMessage(userEntity.getEmail(),"Nuevo Usuario", createMessageUser(userEntity)) ){
-            throw new BusinessException(2L,"error", "Error send email notification");
+            throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "Error send email notification");
         }
         return Boolean.TRUE;
     }

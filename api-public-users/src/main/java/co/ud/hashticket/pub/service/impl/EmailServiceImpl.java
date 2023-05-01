@@ -17,7 +17,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public Boolean sendSimpleMessage(String to, String subject, String text) {
+    public boolean sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("admin@compraboletas.shop");
         message.setTo(to);

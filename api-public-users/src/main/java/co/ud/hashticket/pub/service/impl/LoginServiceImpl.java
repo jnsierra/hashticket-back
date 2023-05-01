@@ -31,7 +31,7 @@ public class LoginServiceImpl implements LoginService {
         if(!this.validatePassword(email, pass, user.get())){
             return LOGIN_ACTION.PASSWORD_INCORRECT;
         }
-        if(!this.validateChagePass(user.get())){
+        if(this.validateChagePass(user.get())){
             return LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD;
         }
         return LOGIN_ACTION.SUCCESS;
