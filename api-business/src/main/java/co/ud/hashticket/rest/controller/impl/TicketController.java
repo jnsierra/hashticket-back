@@ -1,6 +1,7 @@
 package co.ud.hashticket.rest.controller.impl;
 
 import co.ud.hashticket.rest.services.TicketService;
+import co.ud.ud.hashticket.dto.TicketViewDto;
 import co.ud.ud.hashticket.dto.responses.GenericResponse;
 import co.ud.ud.hashticket.dto.ticket.BuyTicket;
 import co.ud.ud.hashticket.dto.ticket.ConfirmBuyTicket;
@@ -20,12 +21,12 @@ public class TicketController {
     }
 
     @GetMapping("/generate/event/{event_id}/presentation/{presentation_id}")
-    public ResponseEntity<GenericResponse> generate(@PathVariable(value = "event_id") Long idEvent, @PathVariable(value = "presentation_id") Long idPresentation ) {
+    public ResponseEntity<GenericResponse<String>> generate(@PathVariable(value = "event_id") Long idEvent, @PathVariable(value = "presentation_id") Long idPresentation ) {
         boolean resp = ticketService.generateTicket(idEvent, idPresentation);
         if(!resp){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(GenericResponse.builder()
+        return ResponseEntity.ok(GenericResponse.<String>builder()
                         .code(1L)
                         .message("Boletas Generadas Correctamente")
                         .type(TYPE_EXCEPTION.SUCCESS)
@@ -37,7 +38,7 @@ public class TicketController {
     }
 
     @GetMapping("/by/user")
-    public ResponseEntity<GenericResponse> getTickets() {
+    public ResponseEntity<GenericResponse<TicketViewDto>> getTickets() {
         return ResponseEntity.ok(ticketService.getTiketsByUser());
     }
 }

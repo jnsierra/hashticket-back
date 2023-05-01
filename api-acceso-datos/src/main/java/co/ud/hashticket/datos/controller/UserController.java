@@ -7,10 +7,7 @@ import co.ud.ud.hashticket.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v.1/user")
@@ -23,6 +20,10 @@ public class UserController {
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<UsuarioDto> save(@RequestBody UsuarioDto usuarioDto){
         UserEntity entity = UserMapper.INSTANCE.map(usuarioDto);
-        return ResponseEntity.ok(UserMapper.INSTANCE.map( entity ));
+        return ResponseEntity.ok(UserMapper.INSTANCE.map( userService.save(entity) ));
+    }
+    @PostMapping(value = "/changePassword")
+    public ResponseEntity<Boolean> updatePasswordUser(@RequestBody UsuarioDto usuarioDto){
+        return ResponseEntity.ok(userService.updatePassword(usuarioDto.getEmail(), usuarioDto.getPassword()));
     }
 }

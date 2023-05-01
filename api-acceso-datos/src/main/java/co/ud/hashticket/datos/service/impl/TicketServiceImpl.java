@@ -35,7 +35,8 @@ public class TicketServiceImpl implements TicketService {
     private final ConfigEventService configEventService;
     private final ZoneConfigEventService zoneConfigEventService;
     private final UserLoggerService userLoggerService;
-    private final BiFunction<SearchSpecification<TicketEntity>,Pageable, Page<TicketEntity>> findAllTicket = (specification, pageable) -> ticketRepository.findAll(specification, pageable);
+    private final BiFunction<SearchSpecification<TicketEntity>, Pageable, Page<TicketEntity>> findAllTicket = (specification, pageable) -> ticketRepository.findAll(specification, pageable);
+
     @Autowired
     public TicketServiceImpl(TicketRepository ticketRepository, UserLoggerService userLoggerService, ConfigEventService configEventService, ZoneConfigEventService zoneConfigEventService) {
         this.ticketRepository = ticketRepository;
@@ -43,14 +44,17 @@ public class TicketServiceImpl implements TicketService {
         this.configEventService = configEventService;
         this.zoneConfigEventService = zoneConfigEventService;
     }
+
     @Override
     public TicketEntity save(TicketEntity ticket) {
         return ticketRepository.save(ticket);
     }
+
     @Override
     public Optional<TicketEntity> getById(TicketPkEntity id) {
         return ticketRepository.findById(id);
     }
+
     @Override
     public Set<TicketViewDto> getByEventIdAndPresentationId(Long eventId, Long presentationId, Integer records, Integer page) {
         Pageable pageable = PageRequest.of(page, records);
@@ -58,6 +62,7 @@ public class TicketServiceImpl implements TicketService {
         return result.stream().map(TicketMapper.INSTANCE::mapToView)
                 .collect(Collectors.toSet());
     }
+
     @Override
     public Integer countByEventIdAndPresentationId(Long eventId, Long presentationId) {
         return ticketRepository.countByEventIdAndPresentationId(eventId, presentationId);
@@ -70,9 +75,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @Transactional
-    public Optional<TicketEntity> buyTicket(StatusTicket state, Long eventId, Long zoneId, Long categoryId, Long presentationId, Long numberTicket){
+    public Optional<TicketEntity> buyTicket(StatusTicket state, Long eventId, Long zoneId, Long categoryId, Long presentationId, Long numberTicket) {
         Integer update = this.updateState(state, eventId, zoneId, categoryId, presentationId, numberTicket, this.getAlphaNumericString(40), userLoggerService.getUserLogger());
-        if(update != 1 ){
+        if (update != 1) {
             throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Se genero actualizacion a mas de un registro");
         }
         Optional<TicketEntity> ticketEntity = this.getById(TicketPkEntity.builder()
@@ -90,16 +95,16 @@ public class TicketServiceImpl implements TicketService {
                         .build())
                 .numberTicket(numberTicket)
                 .build());
-        if(!ticketEntity.isPresent()){
-            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR,"No se encontro tickete comprado");
+        if (!ticketEntity.isPresent()) {
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "No se encontro tickete comprado");
         }
         Optional<Long> idConfigEvent = configEventService.recordSale(eventId, presentationId);
-        if(!idConfigEvent.isPresent()){
-            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR,"Imposible actualizar el consolidado en config_event_service");
+        if (!idConfigEvent.isPresent()) {
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Imposible actualizar el consolidado en config_event_service");
         }
-        Boolean valida = zoneConfigEventService.recordSale(zoneId, idConfigEvent.get());
-        if(!valida){
-            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR,"Imposible actualizar el consolidado por zona");
+        boolean valida = zoneConfigEventService.recordSale(zoneId, idConfigEvent.get());
+        if (!valida) {
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Imposible actualizar el consolidado por zona");
         }
         return ticketEntity;
     }
@@ -108,27 +113,25 @@ public class TicketServiceImpl implements TicketService {
     public Set<TicketEntity> getByEmailAndEventAndPresentation(String email, Long eventId, Long presentationId) {
         return ticketRepository.getByEmailAndEventAndPresentation(email, eventId, presentationId);
     }
+
     @Override
     @Transactional
     public GenericQuery<TicketViewDto> searchTickets(SearchRequest request) {
         BiFunction<SearchSpecification<TicketEntity>, Pageable, GenericQuery<TicketViewDto>> find = findAllTicket.andThen(this::mapper)
                 .andThen(item -> filterByJoins(item, request.getJoins()));
-        return find.apply(new SearchSpecification<>(request),SearchSpecification.getPageable(request.getPage(), request.getSize()));
+        return find.apply(new SearchSpecification<>(request), SearchSpecification.getPageable(request.getPage(), request.getSize()));
     }
 
-    private GenericQuery<TicketViewDto> filterByJoins(GenericQuery<TicketViewDto> data,List<JoinEntity> joins){
+    private GenericQuery<TicketViewDto> filterByJoins(GenericQuery<TicketViewDto> data, List<JoinEntity> joins) {
         Set<TicketViewDto> temp = data.getResults();
-        for(JoinEntity join : joins){
+        for (JoinEntity join : joins) {
             temp = temp.stream().filter(ticket -> {
-                if("event".equalsIgnoreCase(join.getEntity())){
-                    if(ticket.getEventId().equals(join.getFieldType().parse(join.getValue()))){
-                        return true;
-                    }
+                if ("event".equalsIgnoreCase(join.getEntity()) && ticket.getEventId().equals(join.getFieldType().parse(join.getValue()))) {
+                    return true;
                 }
-                if("presentation".equalsIgnoreCase(join.getEntity())){
-                    if(ticket.getPresentationId().equals(join.getFieldType().parse(join.getValue()))){
-                        return true;
-                    }
+                if ("presentation".equalsIgnoreCase(join.getEntity()) && ticket.getPresentationId().equals(join.getFieldType().parse(join.getValue()))) {
+                    return true;
+
                 }
                 return false;
             }).collect(Collectors.toSet());
@@ -137,7 +140,7 @@ public class TicketServiceImpl implements TicketService {
         return data;
     }
 
-    private GenericQuery<TicketViewDto> mapper(Page<TicketEntity> ticketEntities){
+    private GenericQuery<TicketViewDto> mapper(Page<TicketEntity> ticketEntities) {
         return GenericQuery.<TicketViewDto>builder()
                 .results(TicketMapper.INSTANCE.mapToView(new HashSet<>(ticketEntities.getContent())))
                 .totalRecords((int) ticketEntities.getTotalElements())
@@ -160,7 +163,7 @@ public class TicketServiceImpl implements TicketService {
             // generate a random number between
             // 0 to AlphaNumericString variable length
             int index
-                    = (int)(AlphaNumericString.length()
+                    = (int) (AlphaNumericString.length()
                     * Math.random());
 
             // add Character one by one in end of sb

@@ -17,10 +17,18 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@NamedQuery(name = "UserEntity.updateAttempts", query = "update UserEntity usu set usu.attempts = :attempts WHERE usu.id = :id")
+@NamedQuery(name = "UserEntity.updateAttempts", query = """
+        update UserEntity usu set usu.attempts = :attempts WHERE usu.id = :id
+        """)
+@NamedQuery(name = "UserEntity.updatePassword", query = """
+        UPDATE UserEntity usu
+           SET usu.password = :password,
+               usu.changePassword = 'N'
+         WHERE usu.email = :email        
+        """)
 @Entity
 @Table(name = "user_tickets")
-public class UserEntity  extends Auditable<String> implements Serializable {
+public class UserEntity extends Auditable<String> implements Serializable {
 
     private static final long serialVersionUID = 2405172041950251807L;
     @Id
@@ -50,11 +58,12 @@ public class UserEntity  extends Auditable<String> implements Serializable {
     private USER_STATE state;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_tickets_user_type",
-            joinColumns = { @JoinColumn(name = "user_tickets_id") },
-            inverseJoinColumns = { @JoinColumn( name = "user_type_id")}
+            joinColumns = {@JoinColumn(name = "user_tickets_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_type_id")}
 
     )
     private Set<UserTypeEntity> userTypes;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

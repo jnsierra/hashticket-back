@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>, CrudRep
     @Modifying
     @Transactional
     Integer updateAttempts(@Param("id") Long id, @Param("attempts") Long attempts);
+    @Modifying
+    Integer updatePassword(@Param("email")String email, @Param("password")String password);
 }

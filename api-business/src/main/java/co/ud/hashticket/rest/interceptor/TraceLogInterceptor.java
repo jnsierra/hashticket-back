@@ -5,12 +5,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Objects;
-import java.util.function.Function;
 
 @Slf4j
 public class TraceLogInterceptor implements HandlerInterceptor {
-    private final Function<HttpServletRequest, Boolean> funcValidExistsHeader = (request) -> Objects.isNull(request.getHeader("x-uow"));
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,

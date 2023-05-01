@@ -4,4 +4,5 @@ import co.ud.hashticket.datos.entity.UserEntity;
 
 public interface UserService {
     UserEntity save(UserEntity userEntity);
+    boolean updatePassword(String email, String password);
 }

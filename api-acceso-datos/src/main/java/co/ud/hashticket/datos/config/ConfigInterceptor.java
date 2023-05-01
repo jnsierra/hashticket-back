@@ -4,10 +4,10 @@ import co.ud.hashticket.datos.interceptor.InterceptorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Component
-public class ConfigInterceptor extends WebMvcConfigurerAdapter {
+public class ConfigInterceptor implements WebMvcConfigurer {
 
     private final InterceptorRequest interceptorRequest;
 

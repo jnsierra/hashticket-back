@@ -10,7 +10,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity // Enable Spring Security’s web security support
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) // To configure method-level security
+@EnableGlobalMethodSecurity(securedEnabled = true, 
+        prePostEnabled = true,
+        jsr250Enabled = true
+) // To configure method-level security
 @Slf4j
 public class SecurityConfig {
 

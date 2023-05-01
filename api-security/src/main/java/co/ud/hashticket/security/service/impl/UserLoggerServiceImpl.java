@@ -11,6 +11,7 @@ public class UserLoggerServiceImpl implements UserLoggerService {
         String usuario = "";
         try {
             usuario = SecurityContextHolder.getContext().getAuthentication().getName();
+
         }catch (Exception e){
             usuario = "publico";
         }
