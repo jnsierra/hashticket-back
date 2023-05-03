@@ -10,16 +10,17 @@ import co.ud.ud.hashticket.dto.UsuarioDto;
 import co.ud.ud.hashticket.enumeration.USER_STATE;
 import co.ud.ud.hashticket.exception.BusinessException;
 import co.ud.ud.hashticket.exception.enumeration.TYPE_EXCEPTION;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import java.io.StringWriter;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
@@ -78,17 +79,31 @@ public class UserServiceImpl implements UserService {
         }
         return user.get();
     }
-    private String createMessageUser(UserEntity userEntity){
-        return String.format("""
-            Se ha creado un usuario en https://www.compraboletas.shop/ a continuación de proporcionamos las credenciales para tu ingreso:
-            Usuario: %s
-            Contraseña: %s
-            """, userEntity.getEmail(), userEntity.getPassword());
-    }
     private boolean sendNotification(UserEntity userEntity){
-        if( !emailService.sendSimpleMessage(userEntity.getEmail(),"Nuevo Usuario", createMessageUser(userEntity)) ){
-            throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "Error send email notification");
+        try {
+            if(!emailService.sendHtmlMessage(userEntity.getEmail(), "Nueva cuenta", this.getTemplate(userEntity.getEmail(), userEntity.getPassword()))){
+                throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "Error send email notification");
+            }
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
         }
         return Boolean.TRUE;
+    }
+
+    private String getTemplate(String email, String password){
+        try {
+            Configuration config = new Configuration(Configuration.VERSION_2_3_31);
+            config.setClassForTemplateLoading(getClass(), "/");
+            Template template = config.getTemplate("bienvenida.ftl");
+            Map<String, Object> datos = new HashMap<>();
+            datos.put("email", email);
+            datos.put("password", password);
+            StringWriter sw = new StringWriter();
+            template.process(datos, sw);
+            return sw.toString();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return "Ok";
     }
 }

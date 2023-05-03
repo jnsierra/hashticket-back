@@ -10,6 +10,7 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -62,7 +63,7 @@ public class UserEntity extends Auditable<String> implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "user_type_id")}
 
     )
-    private Set<UserTypeEntity> userTypes;
+    private Set<UserTypeEntity> userTypes = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -77,5 +78,13 @@ public class UserEntity extends Auditable<String> implements Serializable {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+    public void removeUserType(UserTypeEntity userTypeEntity){
+        this.userTypes.remove(userTypeEntity);
+        userTypeEntity.getUsers().remove(this);
+    }
+    public void addUserType(UserTypeEntity userTypeEntity){
+        this.userTypes.add(userTypeEntity);
+        userTypeEntity.getUsers().add(this);
     }
 }

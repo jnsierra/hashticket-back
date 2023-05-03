@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -38,6 +39,7 @@ public class EventController {
         return ResponseEntity.ok(EventMapper.INSTANCE.map(entity.get()));
     }
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
     public ResponseEntity<Set<EventDto>> getAll(){
         Set<EventEntity> entities = eventService.getAll();
         if(entities.isEmpty()){
