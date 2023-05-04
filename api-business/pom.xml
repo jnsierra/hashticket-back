@@ -52,9 +52,21 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>co.ud.hashticket.App</mainClass>
+                    <layout>JAR</layout>
                     <finalName>${project.name}-${project.version}</finalName>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <!-- The main class to start by executing java -jar -->
+        <start-class>com.baeldung.demo.DemoApplication</start-class>
+    </properties>
 </project>
