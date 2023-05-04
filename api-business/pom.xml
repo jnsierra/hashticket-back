@@ -51,12 +51,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>co.ud.hashticket.App</mainClass>
-                        </manifest>
-                    </archive>
+                    <mainClass>co.ud.hashticket.App</mainClass>
                     <finalName>${project.name}-${project.version}</finalName>
                 </configuration>
             </plugin>
