@@ -25,11 +25,13 @@ public class EventController {
         this.eventService = eventService;
     }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
     public ResponseEntity<EventDto> save(@RequestBody EventDto eventDto){
         EventEntity entity = EventMapper.INSTANCE.map(eventDto);
         return new ResponseEntity<>(EventMapper.INSTANCE.map( eventService.save( entity ) ), HttpStatus.CREATED);
     }
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
     public ResponseEntity<EventDto> get(@PathVariable(value = "id")Long id){
         Optional<EventEntity> entity = eventService.findById(id);
         if(!entity.isPresent()){

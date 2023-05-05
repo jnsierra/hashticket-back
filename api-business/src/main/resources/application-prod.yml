@@ -14,3 +14,8 @@ endpoint:
 
 logging:
   config: classpath:log4j2-prod.xml
+
+mail:
+  configuration:
+    user: admin@compraboletas.shop
+    password: Nicole1310*

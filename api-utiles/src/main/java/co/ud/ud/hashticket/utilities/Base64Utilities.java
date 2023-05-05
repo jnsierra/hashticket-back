@@ -1,5 +1,7 @@
 package co.ud.ud.hashticket.utilities;
 
+import co.ud.ud.hashticket.enumeration.TYPE_FILES;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,5 +51,21 @@ public class Base64Utilities {
             base64 = base64.substring(find);
         }
         return base64;
+    }
+    public static String convertFileToBase64(String filePath, TYPE_FILES typeFiles){
+        String typeData = "";
+        byte[] fileContent = new byte[0];
+        try {
+            fileContent = FileUtils.readFileToByteArray(new File(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return generateDataType(typeFiles) + Base64.getEncoder().encodeToString(fileContent);
+    }
+    public static String generateDataType(TYPE_FILES typeFiles){
+        return switch (typeFiles){
+            case PDF -> "data:image/pdf;base64,";
+            case PNG -> "data:image/png;base64,";
+        };
     }
 }

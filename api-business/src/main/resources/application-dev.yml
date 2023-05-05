@@ -19,3 +19,10 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+qr:
+  path: /Users/nicolas/Documents/repo_qr/
+
+mail:
+  configuration:
+    user: admin@compraboletas.shop
+    password: Nicole1310*

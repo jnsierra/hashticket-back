@@ -7,18 +7,17 @@ import co.ud.ud.hashticket.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Service
 public class UserServiceImpl implements UserService {
     private UserTicketsClient userTicketsClient;
     private final UserLoggerService userLoggerService;
-    private Function<UsuarioDto, Boolean> functionUpdate = (user) -> userTicketsClient.updatePasswordUser(user);
-    private Function<String, Boolean> functionDeleteUserType = (email) -> userTicketsClient.deleteUserTypeByEmail(email);
-    private Function<UsuarioDto, Boolean> functionAddUserType = (user) -> userTicketsClient.addUserTypeByEmail(user,ROLE_GENERIC);
-    private final static String ROLE_GENERIC = "ROLE_USER_GENERIC";
+    private Function<UsuarioDto, Boolean> functionUpdate = user -> userTicketsClient.updatePasswordUser(user);
+    private Predicate<String> isDeletedUserType = email -> userTicketsClient.deleteUserTypeByEmail(email);
+    private Predicate<UsuarioDto> isAddUserType = user -> userTicketsClient.addUserTypeByEmail(user, ROLE_GENERIC);
+    private static final String ROLE_GENERIC = "ROLE_USER_GENERIC";
     @Autowired
     public UserServiceImpl(UserTicketsClient userTicketsClient, UserLoggerService userLoggerService) {
         this.userTicketsClient = userTicketsClient;
@@ -40,9 +39,9 @@ public class UserServiceImpl implements UserService {
 
     }
     private boolean deleteRoles(boolean response, String email) {
-        return response ? functionDeleteUserType.apply(email) : false;
+        return response ? isDeletedUserType.test(email) : false;
     }
     private boolean addRoleGeneric(boolean response, UsuarioDto usuarioDto){
-        return response ? functionAddUserType.apply(usuarioDto) : false;
+        return response ? isAddUserType.test(usuarioDto) : false;
     }
 }

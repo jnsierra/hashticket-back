@@ -5,9 +5,7 @@ import co.ud.hashticket.dto.FieldType;
 import co.ud.hashticket.dto.FilterRequest;
 import co.ud.hashticket.dto.Operator;
 import co.ud.hashticket.dto.SearchRequest;
-import co.ud.hashticket.rest.services.TicketService;
-import co.ud.hashticket.rest.services.ZoneConfigEventService;
-import co.ud.hashticket.rest.services.ZoneService;
+import co.ud.hashticket.rest.services.*;
 import co.ud.hashticket.security.service.UserLoggerService;
 import co.ud.ud.hashticket.dto.TicketDto;
 import co.ud.ud.hashticket.dto.TicketViewDto;
@@ -26,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
@@ -37,18 +36,31 @@ public class TicketServiceImpl implements TicketService {
     private ZoneService zoneService;
     private final TicketClient ticketClient;
     private UserLoggerService userLoggerService;
+    private EmailService emailService;
+    private QRGeneratorService qRGeneratorService;
+    private GenerateTemplatesEmailServiceImpl generateTemplatesEmailService;
     private final UnaryOperator<String> getUserAuth = x -> userLoggerService.getUserLogger();
     private final BiFunction<Long, Long, Set<ZoneConfigEventDto>> functionGenerateTickets = (eventId, presentationId) -> zoneConfigEventService.getByIdEventAndPresentation(eventId, presentationId);
     private final LongFunction<ZoneDto> functionGetZone = zoneId -> zoneService.getById(zoneId);
     private final UnaryOperator<Set<ZoneConfigEventDto>> functionValidate = item -> validateConfig(item);
-
+    private Function<Optional<TicketDto>, ConfirmBuyTicket > functionCreateObjConfirm = ticket -> {
+        log.info("PURCHASED-TICKET|{}|{}|{}", ticket.isPresent(), (ticket.isPresent() ? ticket.get().getNumberTicket() : -1L), ticket.isPresent() ? ticket.get().getEventId() : -1L);
+        return ConfirmBuyTicket.builder()
+                .confirmNumberTicket(ticket.get().getConfirmationNumber())
+                .numberTicket(ticket.get().getNumberTicket())
+                .build();
+    };
     @Autowired
     public TicketServiceImpl(ZoneConfigEventService zoneConfigEventService, ZoneService zoneService
-            , TicketClient ticketClient, UserLoggerService userLoggerService) {
+            , TicketClient ticketClient, UserLoggerService userLoggerService, QRGeneratorService qRGeneratorService
+            , GenerateTemplatesEmailServiceImpl generateTemplatesEmailService, EmailService emailService) {
         this.zoneConfigEventService = zoneConfigEventService;
         this.zoneService = zoneService;
         this.ticketClient = ticketClient;
         this.userLoggerService = userLoggerService;
+        this.qRGeneratorService = qRGeneratorService;
+        this.generateTemplatesEmailService = generateTemplatesEmailService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -84,8 +96,6 @@ public class TicketServiceImpl implements TicketService {
                 });
         return Boolean.TRUE;
     }
-
-
     @Override
     public GenericResponse<ConfirmBuyTicket> buyTicket(BuyTicket buyTicket) {
         if (!validateAvailability(buyTicket)) {
@@ -97,13 +107,10 @@ public class TicketServiceImpl implements TicketService {
         }
         Set<ConfirmBuyTicket> confirmations = buyTicket.getNumberTickets().stream()
                 .map(item -> this.buyTicket(buyTicket, item))
-                .map(item -> {
-                    log.info("PURCHASED-TICKET|{}|{}|{}", item.isPresent(), (item.isPresent() ? item.get().getNumberTicket() : -1L), item.isPresent() ? item.get().getEventId() : -1L);
-                    return ConfirmBuyTicket.builder()
-                            .confirmNumberTicket(item.get().getConfirmationNumber())
-                            .numberTicket(item.get().getNumberTicket())
-                            .build();
-                })
+                .filter(Optional::isPresent)
+                .map(this::generateQR)
+                .map(functionCreateObjConfirm)
+                .map(this::sendEmailConfirmation)
                 .collect(Collectors.toSet());
         return GenericResponse.<ConfirmBuyTicket>builder()
                 .code(0L)
@@ -112,7 +119,24 @@ public class TicketServiceImpl implements TicketService {
                 .data(confirmations)
                 .build();
     }
-
+    private ConfirmBuyTicket sendEmailConfirmation(ConfirmBuyTicket confirmBuyTicket){
+        String htmlTemplate = generateTemplatesEmailService.buyTicket(confirmBuyTicket.getConfirmNumberTicket());
+        boolean send = false;
+        try {
+            send = emailService.sendHtmlMessage(userLoggerService.getUserLogger(), "Compra Ticket", htmlTemplate);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+        //TODO persistir en la base de datos que se envio la notificación correctamente
+        return confirmBuyTicket;
+    }
+    private Optional<TicketDto> generateQR(Optional<TicketDto> ticket){
+        boolean qRGenerator = qRGeneratorService.generateQRCodeImage(ticket.get().getConfirmationNumber());
+        if(qRGenerator){
+            return ticket;
+        }
+        return Optional.empty();
+    }
     @Override
     public GenericResponse<TicketViewDto> getTiketsByUser() {
         Function<String, GenericResponse<TicketViewDto>> ticketsFunction = getUserAuth

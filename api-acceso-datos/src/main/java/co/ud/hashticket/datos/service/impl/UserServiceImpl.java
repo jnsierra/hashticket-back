@@ -3,7 +3,6 @@ package co.ud.hashticket.datos.service.impl;
 import co.ud.hashticket.datos.entity.UserEntity;
 import co.ud.hashticket.datos.entity.UserTypeEntity;
 import co.ud.hashticket.datos.repository.UserRepository;
-import co.ud.hashticket.datos.repository.UserTypeRepository;
 import co.ud.hashticket.datos.service.UserService;
 import co.ud.hashticket.datos.service.UserTypeService;
 import co.ud.ud.hashticket.exception.BusinessException;
