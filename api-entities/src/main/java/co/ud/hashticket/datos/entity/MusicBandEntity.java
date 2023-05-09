@@ -1,8 +1,8 @@
 package co.ud.hashticket.datos.entity;
 
-import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
