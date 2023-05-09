@@ -55,12 +55,10 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         Optional<UserTypeEntity> userTypeObj = userTypeService.getByType(userType);
-        if(user.isEmpty()){
+        if(userTypeObj.isEmpty()){
             return false;
         }
-        if(user.isPresent()){
-            user.get().addUserType(userTypeObj.get());
-        }
+        user.get().addUserType(userTypeObj.get());
         return true;
     }
 }
