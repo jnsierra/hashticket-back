@@ -1,6 +1,8 @@
 package co.ud.ud.hashticket.utilities;
 
 import co.ud.ud.hashticket.enumeration.TYPE_FILES;
+import co.ud.ud.hashticket.exception.BusinessException;
+import co.ud.ud.hashticket.exception.enumeration.TYPE_EXCEPTION;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,12 +55,11 @@ public class Base64Utilities {
         return base64;
     }
     public static String convertFileToBase64(String filePath, TYPE_FILES typeFiles){
-        String typeData = "";
         byte[] fileContent = new byte[0];
         try {
             fileContent = FileUtils.readFileToByteArray(new File(filePath));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR,"Error al convertir a base64", e);
         }
         return generateDataType(typeFiles) + Base64.getEncoder().encodeToString(fileContent);
     }

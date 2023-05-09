@@ -17,6 +17,7 @@ public class FeignConfig {
 
     @Bean
     Logger.Level feignLoggerLevel() {
+        System.out.println("Llegooooo");
         return Logger.Level.FULL;
     }
 }

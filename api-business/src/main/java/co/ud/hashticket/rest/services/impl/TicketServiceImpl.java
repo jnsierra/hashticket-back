@@ -18,13 +18,13 @@ import co.ud.ud.hashticket.dto.ticket.ConfirmBuyTicket;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
 import co.ud.ud.hashticket.exception.BusinessException;
 import co.ud.ud.hashticket.exception.enumeration.TYPE_EXCEPTION;
+import javax.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 public class TicketServiceImpl implements TicketService {
     private ZoneConfigEventService zoneConfigEventService;
     private ZoneService zoneService;
-    private final TicketClient ticketClient;
+    private TicketClient ticketClient;
     private UserLoggerService userLoggerService;
     private EmailService emailService;
     private QRGeneratorService qRGeneratorService;
@@ -43,13 +43,17 @@ public class TicketServiceImpl implements TicketService {
     private final BiFunction<Long, Long, Set<ZoneConfigEventDto>> functionGenerateTickets = (eventId, presentationId) -> zoneConfigEventService.getByIdEventAndPresentation(eventId, presentationId);
     private final LongFunction<ZoneDto> functionGetZone = zoneId -> zoneService.getById(zoneId);
     private final UnaryOperator<Set<ZoneConfigEventDto>> functionValidate = item -> validateConfig(item);
-    private Function<Optional<TicketDto>, ConfirmBuyTicket > functionCreateObjConfirm = ticket -> {
+    private Function<Optional<TicketDto>, ConfirmBuyTicket> functionCreateObjConfirm = ticket -> {
         log.info("PURCHASED-TICKET|{}|{}|{}", ticket.isPresent(), (ticket.isPresent() ? ticket.get().getNumberTicket() : -1L), ticket.isPresent() ? ticket.get().getEventId() : -1L);
         return ConfirmBuyTicket.builder()
                 .confirmNumberTicket(ticket.get().getConfirmationNumber())
                 .numberTicket(ticket.get().getNumberTicket())
                 .build();
     };
+    private final UnaryOperator<TicketDto> funcGetTicket = ticket ->
+            ticketClient.getByIdNumber(ticket.getEventId(), ticket.getZoneId(), ticket.getCategoryId(), ticket.getPresentationId(), ticket.getNumberTicket());
+    private final Predicate<TicketDto> isTicketAvailable = ticket -> (Objects.nonNull(ticket) && StatusTicket.CREATED.equals(ticket.getState()));
+
     @Autowired
     public TicketServiceImpl(ZoneConfigEventService zoneConfigEventService, ZoneService zoneService
             , TicketClient ticketClient, UserLoggerService userLoggerService, QRGeneratorService qRGeneratorService
@@ -62,7 +66,6 @@ public class TicketServiceImpl implements TicketService {
         this.generateTemplatesEmailService = generateTemplatesEmailService;
         this.emailService = emailService;
     }
-
     @Override
     public Boolean generateTicket(Long idEvent, Long idPresentation) {
         Set<ZoneConfigEventDto> configs = functionGenerateTickets.andThen(this::validateSet).apply(idEvent, idPresentation);
@@ -96,17 +99,20 @@ public class TicketServiceImpl implements TicketService {
                 });
         return Boolean.TRUE;
     }
+
     @Override
     public GenericResponse<ConfirmBuyTicket> buyTicket(BuyTicket buyTicket) {
-        if (!validateAvailability(buyTicket)) {
+        if (!isTicketsAvailability.test(buyTicket)) {
             return GenericResponse.<ConfirmBuyTicket>builder()
                     .code(1L)
                     .type(TYPE_EXCEPTION.ERROR)
                     .message("Tickets no disponibles")
                     .build();
         }
-        Set<ConfirmBuyTicket> confirmations = buyTicket.getNumberTickets().stream()
-                .map(item -> this.buyTicket(buyTicket, item))
+        Set<ConfirmBuyTicket> confirmations = createTicket(buyTicket).stream()
+                .peek(ticketDto -> log.debug("Ticket pre buy {}", ticketDto))
+                .map(this::buyTicket)
+                .peek(ticketDto -> log.debug("Ticket buy {}", ticketDto))
                 .filter(Optional::isPresent)
                 .map(this::generateQR)
                 .map(functionCreateObjConfirm)
@@ -119,7 +125,8 @@ public class TicketServiceImpl implements TicketService {
                 .data(confirmations)
                 .build();
     }
-    private ConfirmBuyTicket sendEmailConfirmation(ConfirmBuyTicket confirmBuyTicket){
+
+    private ConfirmBuyTicket sendEmailConfirmation(ConfirmBuyTicket confirmBuyTicket) {
         String htmlTemplate = generateTemplatesEmailService.buyTicket(confirmBuyTicket.getConfirmNumberTicket());
         boolean send = false;
         try {
@@ -130,13 +137,15 @@ public class TicketServiceImpl implements TicketService {
         //TODO persistir en la base de datos que se envio la notificación correctamente
         return confirmBuyTicket;
     }
-    private Optional<TicketDto> generateQR(Optional<TicketDto> ticket){
+
+    private Optional<TicketDto> generateQR(Optional<TicketDto> ticket) {
         boolean qRGenerator = qRGeneratorService.generateQRCodeImage(ticket.get().getConfirmationNumber());
-        if(qRGenerator){
+        if (qRGenerator) {
             return ticket;
         }
         return Optional.empty();
     }
+
     @Override
     public GenericResponse<TicketViewDto> getTiketsByUser() {
         Function<String, GenericResponse<TicketViewDto>> ticketsFunction = getUserAuth
@@ -168,36 +177,36 @@ public class TicketServiceImpl implements TicketService {
                 .message("Consulta ejecutada exitosamente")
                 .build();
     }
-
-    private Optional<TicketDto> buyTicket(BuyTicket buyTicket, Long numberTicket) {
-        ResponseEntity<TicketDto> response = ticketClient.buyTicket(StatusTicket.RESERVED, buyTicket.getEventId()
-                , buyTicket.getZoneId()
-                , buyTicket.getCategoryId()
-                , buyTicket.getPresentationId()
-                , numberTicket);
-        if (HttpStatus.NO_CONTENT.equals(response.getStatusCode())) {
-            return Optional.empty();
-        }
-        return Optional.of(response.getBody());
+    private final Function<TicketDto, ResponseEntity<TicketDto>> functBuyTicket = ticket -> ticketClient.buyTicket(StatusTicket.RESERVED
+            , ticket.getEventId()
+            , ticket.getZoneId()
+            , ticket.getCategoryId()
+            , ticket.getPresentationId()
+            , ticket.getNumberTicket());
+    private Optional<TicketDto> buyTicket(TicketDto buyTicket) {
+        return (Optional<TicketDto>) functBuyTicket
+                .andThen( response -> HttpStatus.NO_CONTENT.equals(response.getStatusCode()) ? Optional.empty() : Optional.of(response.getBody()))
+                .apply(buyTicket);
     }
-
-    public boolean validateAvailability(BuyTicket buyTicket) {
-        Set<Long> availability = buyTicket.getNumberTickets().stream()
-                .filter(item -> validateTicket(buyTicket.getEventId(), buyTicket.getZoneId(), buyTicket.getCategoryId(), buyTicket.getPresentationId(), item))
+    public Set<TicketDto> createTicket(BuyTicket buyTicket) {
+        return buyTicket.getNumberTickets().stream()
+                .map(ticketNum -> TicketDto.builder()
+                        .eventId(buyTicket.getEventId())
+                        .zoneId(buyTicket.getZoneId())
+                        .categoryId(buyTicket.getCategoryId())
+                        .presentationId(buyTicket.getPresentationId())
+                        .numberTicket(ticketNum)
+                        .build())
                 .collect(Collectors.toSet());
-        return (availability.size() == buyTicket.getNumberTickets().size()) ? Boolean.TRUE : Boolean.FALSE;
     }
+    private final Predicate<BuyTicket> isTicketsAvailability = buyTicket -> createTicket(buyTicket).stream()
+            .peek(ticket -> log.debug("ticket pre validated {}", ticket))
+            .filter(Predicate.not(this::validateTicket))
+            .peek(ticket -> log.debug("ticket validated {}", ticket))
+            .count() == 0;
 
-    private Boolean validateTicket(Long eventId
-            , Long zoneId
-            , Long categoryId
-            , Long presentationId
-            , Long numberTicket) {
-        TicketDto ticket = ticketClient.getByIdNumber(eventId, zoneId, categoryId, presentationId, numberTicket);
-        if (Objects.nonNull(ticket) && StatusTicket.CREATED.equals(ticket.getState())) {
-            return Boolean.TRUE;
-        }
-        return Boolean.FALSE;
+    private boolean validateTicket(TicketDto ticketDto) {
+        return isTicketAvailable.test(funcGetTicket.apply(ticketDto));
     }
 
     private Set<ZoneConfigEventDto> validateConfig(Set<ZoneConfigEventDto> responseSet) {

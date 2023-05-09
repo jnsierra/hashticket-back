@@ -1,8 +1,8 @@
 package co.ud.hashticket.datos.entity;
 
+import javax.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Builder

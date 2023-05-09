@@ -22,10 +22,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
@@ -126,12 +125,10 @@ public class TicketServiceImpl implements TicketService {
         Set<TicketViewDto> temp = data.getResults();
         for (JoinEntity join : joins) {
             temp = temp.stream().filter(ticket -> {
-                if ("event".equalsIgnoreCase(join.getEntity()) && ticket.getEventId().equals(join.getFieldType().parse(join.getValue()))) {
+                if ("event".equalsIgnoreCase(join.getEntity()) && ticket.getEventId().equals(join.getFieldType().parse(join.getValue())) ||
+                    "presentation".equalsIgnoreCase(join.getEntity()) && ticket.getPresentationId().equals(join.getFieldType().parse(join.getValue()))
+                ){
                     return true;
-                }
-                if ("presentation".equalsIgnoreCase(join.getEntity()) && ticket.getPresentationId().equals(join.getFieldType().parse(join.getValue()))) {
-                    return true;
-
                 }
                 return false;
             }).collect(Collectors.toSet());
@@ -152,22 +149,27 @@ public class TicketServiceImpl implements TicketService {
 
     private String getAlphaNumericString(int n) {
         // choose a Character random from this String
-        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        AlphaNumericString += "0123456789";
-        AlphaNumericString += "abcdefghijklmnopqrstuvxyz";
+        String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        alphaNumericString += "0123456789";
+        alphaNumericString += "abcdefghijklmnopqrstuvxyz";
 
         // create StringBuffer size of AlphaNumericString
         StringBuilder sb = new StringBuilder(n);
+        Random rand;
+        try {
+            rand = SecureRandom.getInstanceStrong();
+        } catch (NoSuchAlgorithmException e) {
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Error al generar la instancia del random", e );
+        }
         for (int i = 0; i < n; i++) {
 
             // generate a random number between
             // 0 to AlphaNumericString variable length
-            int index
-                    = (int) (AlphaNumericString.length()
-                    * Math.random());
+            int index = (alphaNumericString.length()
+                    * rand.nextInt() );
 
             // add Character one by one in end of sb
-            sb.append(AlphaNumericString
+            sb.append(alphaNumericString
                     .charAt(index));
         }
         return sb.toString();

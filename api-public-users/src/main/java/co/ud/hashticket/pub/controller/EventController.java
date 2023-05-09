@@ -27,7 +27,7 @@ public class EventController {
     }
     @GetMapping(value = "/active", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Set<EventDto>> getActiveEvent(){
-        Set<EventEntity> entities = eventService.getAllActive();
+        Set<EventEntity> entities = eventService.getActiveAndAfterToday();
         if(entities.isEmpty()){
             return ResponseEntity.noContent().build();
         }

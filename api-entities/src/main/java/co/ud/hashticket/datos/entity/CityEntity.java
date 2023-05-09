@@ -1,11 +1,11 @@
 package co.ud.hashticket.datos.entity;
 
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 

@@ -12,12 +12,12 @@ import co.ud.ud.hashticket.exception.BusinessException;
 import co.ud.ud.hashticket.exception.enumeration.TYPE_EXCEPTION;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import javax.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.MessagingException;
 import java.io.StringWriter;
 import java.time.LocalDate;
 import java.util.*;
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
                 throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "Error send email notification");
             }
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Error al enviar la notificacion por correo",e);
         }
         return Boolean.TRUE;
     }

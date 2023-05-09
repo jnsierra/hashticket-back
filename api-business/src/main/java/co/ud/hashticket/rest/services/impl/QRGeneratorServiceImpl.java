@@ -1,6 +1,8 @@
 package co.ud.hashticket.rest.services.impl;
 
 import co.ud.hashticket.rest.services.QRGeneratorService;
+import co.ud.ud.hashticket.exception.BusinessException;
+import co.ud.ud.hashticket.exception.enumeration.TYPE_EXCEPTION;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -27,7 +29,7 @@ public class QRGeneratorServiceImpl implements QRGeneratorService {
         try {
             return this.qRCodeWriter.encode(confirmationCode, BarcodeFormat.QR_CODE, WIDTH, HEIGHT);
         } catch (WriterException e) {
-            throw new RuntimeException(e);
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Error al crear PNG QR", e);
         }
     };
     private BiPredicate<Path, BitMatrix> isCreated = (path, bitMatrix) -> {

@@ -28,7 +28,7 @@ public class LoginController {
         this.tokenService = tokenService;
         this.loginService = loginService;
     }
-    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> login(@RequestBody UsuarioDto usuarioDto) {
         LOGIN_ACTION login = loginService.validaLogin(usuarioDto.getEmail(), usuarioDto.getPassword());
         if (LOGIN_ACTION.SUCCESS.equals(login) || LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD.equals(login)) {

@@ -1,11 +1,11 @@
 package co.ud.hashticket.datos.entity;
 
 import co.ud.ud.hashticket.enumeration.EventStatus;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -27,6 +27,12 @@ import java.util.Set;
                                                             and conEv.event.id = event.id
                                                             and conEv.presentation.id = pr.id
                                                                 """)
+@NamedQuery(name = "EventEntity.findByEventStatusAndAfterTodayEvent", query = """
+                                                           FROM EventEntity event
+                                                          WHERE event.eventStatus = :eventStatus
+                                                            AND event.date > current_date
+        
+        """)
 @Getter @Setter
 @Entity
 @Table(name = "event")

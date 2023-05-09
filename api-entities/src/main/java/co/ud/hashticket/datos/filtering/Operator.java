@@ -1,11 +1,11 @@
 package co.ud.hashticket.datos.filtering;
 
-import lombok.extern.slf4j.Slf4j;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

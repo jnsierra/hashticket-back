@@ -1,26 +1,35 @@
 package co.ud.hashticket.datos.entity;
 
 import co.ud.ud.hashticket.enumeration.StatusTicket;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Getter @Setter
-@NamedQuery(name = "TicketEntity.getByEventIdAndPresentationId", query = "from TicketEntity ticket inner join fetch ticket.ticketPk.event as eve inner join fetch ticket.ticketPk.presentation as pr inner join fetch ticket.ticketPk.zone as zone inner join fetch ticket.ticketPk.category as cat inner join fetch ticket.ticketPk.presentation as pr  where  eve.id = :eventId and pr.id = :presentationId order by ticket.ticketPk.numberTicket ")
+@NamedQuery(name = "TicketEntity.getByEventIdAndPresentationId", query = """
+            from TicketEntity ticket 
+inner join fetch ticket.ticketPk.event as eve 
+inner join fetch ticket.ticketPk.presentation as pr 
+inner join fetch ticket.ticketPk.zone as zone 
+inner join fetch ticket.ticketPk.category as cat 
+           where eve.id = :eventId 
+             and pr.id = :presentationId 
+        order by ticket.ticketPk.numberTicket 
+            """)
 @NamedQuery(name = "TicketEntity.countByEventIdAndPresentationId", query = "select count(*) from TicketEntity ticket inner join ticket.ticketPk.event as eve inner join ticket.ticketPk.presentation as pr where eve.id = :eventId and pr.id = :presentationId")
 @NamedQuery(name = "TicketEntity.updateState", query = """
         Update TicketEntity tic
            set state = :state ,
            confirmationNumber = :confirmationNumber , 
            userEmail = :user
-         where event_id = :eventId
-           and zone_id = :zoneId
-           and category_id = :categoryId
-           and presentation_id = :presentationId
-           and number_ticket = :numberTicket
+         where tic.ticketPk.event.id = :eventId
+           and tic.ticketPk.zone.id = :zoneId
+           and tic.ticketPk.category.id = :categoryId
+           and tic.ticketPk.presentation.id = :presentationId
+           and tic.ticketPk.numberTicket = :numberTicket
         """)
 @NamedQuery(name = "TicketEntity.getByEventAndPresentationAndZoneAndCategory", query = """
         SELECT ticket
@@ -39,11 +48,12 @@ import java.io.Serializable;
 @NamedQuery(name = "TicketEntity.getByEmailAndEventAndPresentation", query = """
         SELECT ticket
           FROM TicketEntity ticket
-         INNER JOIN ticket.ticketPk.presentation  pr
+         INNER JOIN ticket.ticketPk.presentation  pre
          INNER JOIN ticket.ticketPk.event ev
          WHERE ticket.userEmail = :email
            AND ev.id = :eventId
-           AND pr.id = :presentationId
+           AND pre.id = :presentationId
+           AND pre.id = :presentationId
         """)
 @Table(name = "tickets")
 public class TicketEntity implements Serializable {

@@ -6,12 +6,14 @@ import co.ud.ud.hashticket.dto.responses.GenericResponse;
 import co.ud.ud.hashticket.dto.ticket.BuyTicket;
 import co.ud.ud.hashticket.dto.ticket.ConfirmBuyTicket;
 import co.ud.ud.hashticket.exception.enumeration.TYPE_EXCEPTION;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v.1/ticket")
+@Slf4j
 public class TicketController {
 
     private final TicketService ticketService;
@@ -34,6 +36,7 @@ public class TicketController {
     }
     @PostMapping("/buy")
     public ResponseEntity<GenericResponse<ConfirmBuyTicket>> buyTickets(@RequestBody BuyTicket buyTicket){
+        log.debug("Buy Ticket {}",buyTicket);
         return ResponseEntity.ok(ticketService.buyTicket(buyTicket));
     }
 

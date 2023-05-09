@@ -58,7 +58,9 @@ public class UserServiceImpl implements UserService {
         if(user.isEmpty()){
             return false;
         }
-        user.get().addUserType(userTypeObj.get());
+        if(user.isPresent()){
+            user.get().addUserType(userTypeObj.get());
+        }
         return true;
     }
 }

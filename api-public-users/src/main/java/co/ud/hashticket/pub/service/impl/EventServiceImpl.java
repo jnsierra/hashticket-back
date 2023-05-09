@@ -22,6 +22,11 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findByEventStatus(EventStatus.CREATED);
     }
     @Override
+    public Set<EventEntity> getActiveAndAfterToday() {
+        return eventRepository.findByEventStatusAndAfterTodayEvent(EventStatus.CREATED);
+    }
+
+    @Override
     public Optional<EventEntity> getById(Long id) {
         return eventRepository.findById(id);
     }

@@ -1,9 +1,9 @@
 package co.ud.hashticket.datos.entity;
 
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
