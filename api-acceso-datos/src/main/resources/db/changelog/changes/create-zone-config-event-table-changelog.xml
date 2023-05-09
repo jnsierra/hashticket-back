@@ -21,6 +21,13 @@
             <column name="cost" type="decimal">
                 <constraints nullable="false" />
             </column>
+            <column name="number_of_tickets_sold"
+                    type="INT"
+                    defaultValue="0" />
+            <column name="create_tickets"
+                    type="boolean"
+                    defaultValueBoolean="false"
+            />
         </createTable>
         <rollback>
             <dropTable tableName="zone"/>

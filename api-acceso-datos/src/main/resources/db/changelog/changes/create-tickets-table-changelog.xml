@@ -24,8 +24,11 @@
             <column name="status" type="VARCHAR(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="user" type="VARCHAR(255)">
+            <column name="user_email" type="VARCHAR(255)" >
                 <constraints nullable="true" />
+            </column>
+            <column name="confirmation" type="varchar(50)" >
+                <constraints unique="true" />
             </column>
         </createTable>
         <rollback>

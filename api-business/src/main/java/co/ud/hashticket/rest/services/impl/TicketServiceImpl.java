@@ -24,7 +24,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
@@ -43,6 +42,7 @@ public class TicketServiceImpl implements TicketService {
     private final BiFunction<Long, Long, Set<ZoneConfigEventDto>> functionGenerateTickets = (eventId, presentationId) -> zoneConfigEventService.getByIdEventAndPresentation(eventId, presentationId);
     private final LongFunction<ZoneDto> functionGetZone = zoneId -> zoneService.getById(zoneId);
     private final UnaryOperator<Set<ZoneConfigEventDto>> functionValidate = item -> validateConfig(item);
+    private final Predicate<String> isGenerateCode = codeConfirmation -> qRGeneratorService.generateQRCodeImage(codeConfirmation);
     private Function<Optional<TicketDto>, ConfirmBuyTicket> functionCreateObjConfirm = ticket -> {
         log.info("PURCHASED-TICKET|{}|{}|{}", ticket.isPresent(), (ticket.isPresent() ? ticket.get().getNumberTicket() : -1L), ticket.isPresent() ? ticket.get().getEventId() : -1L);
         return ConfirmBuyTicket.builder()
@@ -126,21 +126,19 @@ public class TicketServiceImpl implements TicketService {
                 .build();
     }
 
-    private ConfirmBuyTicket sendEmailConfirmation(ConfirmBuyTicket confirmBuyTicket) {
-        String htmlTemplate = generateTemplatesEmailService.buyTicket(confirmBuyTicket.getConfirmNumberTicket());
-        boolean send = false;
-        try {
-            send = emailService.sendHtmlMessage(userLoggerService.getUserLogger(), "Compra Ticket", htmlTemplate);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-        //TODO persistir en la base de datos que se envio la notificación correctamente
+    private ConfirmBuyTicket sendEmailConfirmation(ConfirmBuyTicket confirmBuyTicket){
+        String htmlTemplate = Optional.ofNullable(generateTemplatesEmailService.buyTicket(confirmBuyTicket.getConfirmNumberTicket()))
+                .orElseThrow(() -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Error al generar el template html para el correo"));
+        Boolean isSending = Optional.ofNullable(emailService.sendHtmlMessage(userLoggerService.getUserLogger(), "Compra Ticket", htmlTemplate))
+                .orElseThrow(() -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Error al enviar notificacion de confirmacion de compra"));
+        isSendingNotification(confirmBuyTicket, isSending);
         return confirmBuyTicket;
     }
-
+    private void isSendingNotification(ConfirmBuyTicket confirmBuyTicket, boolean sending){
+        //TODO persistir en la base de datos que se envio la notificación correctamente
+    }
     private Optional<TicketDto> generateQR(Optional<TicketDto> ticket) {
-        boolean qRGenerator = qRGeneratorService.generateQRCodeImage(ticket.get().getConfirmationNumber());
-        if (qRGenerator) {
+        if (isGenerateCode.test(ticket.orElseThrow( () -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "")).getConfirmationNumber()) ){
             return ticket;
         }
         return Optional.empty();

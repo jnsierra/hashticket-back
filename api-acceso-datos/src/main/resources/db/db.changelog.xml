@@ -33,9 +33,4 @@
     <include file="/db/changelog/changes/create-zone-config-event-table-changelog.xml" />
     <include file="/db/changelog/changes/create-tickets-table-changelog.xml" />
     <include file="/db/changelog/changes/create-event-images-table-changelog.xml" />
-    <include file="/db/changelog/changes/alter-ticket-table-13-04-2023-changelog.xml" />
-    <include file="/db/changelog/changes/alter-ticket-table-14-04-2023-changelog.xml" />
-    <include file="/db/changelog/changes/alter-ticket-table-14-04-2023_01-changelog.xml" />
-    <include file="/db/changelog/changes/alter-ticket-table-21-04-2023-changelog.xml" />
-    <include file="/db/changelog/changes/alter-user_type-table-30-04-2023-changelog.xml" />
 </databaseChangeLog>

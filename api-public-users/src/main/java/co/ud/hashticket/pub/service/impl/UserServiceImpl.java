@@ -38,10 +38,9 @@ public class UserServiceImpl implements UserService {
             , "S"
             , USER_STATE.ACTIVE
             , "000");
-    private Function<String, Optional<UserTypeEntity>> functionGetUserType = item -> {
+    private Function<String, UserTypeEntity> functionGetUserType = item -> {
         Optional<UserTypeEntity> obj = userTypeService.findByType(item);
-        obj.orElseThrow(() -> new BusinessException(2L,  TYPE_EXCEPTION.ERROR, String.format("Error finding Type User %s", USER_TYPE_NEW)));
-        return obj;
+        return obj.orElseThrow(() -> new BusinessException(2L, TYPE_EXCEPTION.ERROR, String.format("Error finding Type User %s", USER_TYPE_NEW)));
     };
     private Function<UsuarioDto, Boolean> functionCreateUser = functionUser.andThen(this::generatePassword)
             .andThen(UserMapper.INSTANCE::map)
@@ -69,7 +68,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setLastModifiedBy("external_user");
         userEntity.setCreatedDate(LocalDate.now());
         userEntity.setLastModifiedDate(LocalDate.now());
-        userEntity.setUserTypes(new HashSet<>(Arrays.asList(this.functionGetUserType.apply(this.USER_TYPE_NEW).get())));
+        userEntity.setUserTypes(new HashSet<>(Arrays.asList(this.functionGetUserType.apply(USER_TYPE_NEW))));
         UserEntity user = userRepository.save(userEntity);
         return Objects.nonNull(user.getId()) ? Optional.of(user): Optional.empty() ;
     }

@@ -16,7 +16,6 @@ public class MailConfig {
     private String passwordEmail;
     @Bean
     public JavaMailSender getJavaMailSender() {
-        System.out.println("Llego 02");
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.zoho.com");
         mailSender.setPort(465);

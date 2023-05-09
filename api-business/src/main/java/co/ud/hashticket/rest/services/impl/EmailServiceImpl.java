@@ -16,14 +16,18 @@ public class EmailServiceImpl implements EmailService {
         this.emailSender = emailSender;
     }
     @Override
-    public boolean sendHtmlMessage(String to, String subject, String htmlBody) throws MessagingException {
-        MimeMessage message = emailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-        message.setFrom("admin@compraboletas.shop");
-        helper.setTo(to);
-        helper.setSubject(subject);
-        helper.setText(htmlBody, true);
-        emailSender.send(message);
+    public Boolean sendHtmlMessage(String to, String subject, String htmlBody) {
+        try{
+            MimeMessage message = emailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            message.setFrom("admin@compraboletas.shop");
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(htmlBody, true);
+            emailSender.send(message);
+        }catch (MessagingException e){
+            return null;
+        }
         return true;
     }
 }
