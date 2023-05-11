@@ -27,4 +27,8 @@ public class ZoneConfigEventServiceImpl implements ZoneConfigEventService {
     public ZoneConfigEventDto save(ZoneConfigEventDto zoneConfigEventDto){
         return zoneConfigEventClient.save(zoneConfigEventDto);
     }
+    @Override
+    public Boolean updateCreateTickets(Long id) {
+        return zoneConfigEventClient.updateCreateTickets(id);
+    }
 }

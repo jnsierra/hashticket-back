@@ -16,40 +16,56 @@ import java.util.Set;
 @RequestMapping("/v.1/config_event")
 public class ConfigEventController {
     private final ConfigEventService configEventService;
+
     @Autowired
     public ConfigEventController(ConfigEventService configEventService) {
         this.configEventService = configEventService;
     }
+
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ConfigEventDto> save(@RequestBody ConfigEventDto configEventDto){
+    public ResponseEntity<ConfigEventDto> save(@RequestBody ConfigEventDto configEventDto) {
         ConfigEventEntity entity = ConfigEventMapper.INSTANCE.map(configEventDto);
-        return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map( configEventService.save(entity)));
+        return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(configEventService.save(entity)));
     }
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ConfigEventDto> get(@PathVariable(value = "id")Long id){
+    public ResponseEntity<ConfigEventDto> get(@PathVariable(value = "id") Long id) {
         Optional<ConfigEventEntity> entity = configEventService.findById(id);
-        if(!entity.isPresent()){
+        if (!entity.isPresent()) {
             return ResponseEntity.noContent()
                     .build();
         }
         return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(entity.get()));
     }
+
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<ConfigEventDto>> getAll(){
+    public ResponseEntity<Set<ConfigEventDto>> getAll() {
         Set<ConfigEventEntity> entities = configEventService.getAll();
-        if(entities.isEmpty()){
+        if (entities.isEmpty()) {
             return ResponseEntity.noContent()
                     .build();
         }
         return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(entities));
     }
+
     @GetMapping(value = "/event/{idEvent}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<ConfigEventDto>> getByEvent(@PathVariable(value = "idEvent")Long idEvent){
+    public ResponseEntity<Set<ConfigEventDto>> getByEvent(@PathVariable(value = "idEvent") Long idEvent) {
         Set<ConfigEventEntity> entities = configEventService.findByEventId(idEvent);
-        if(entities.isEmpty()){
+        if (entities.isEmpty()) {
             return ResponseEntity.noContent()
                     .build();
         }
         return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(entities));
+    }
+
+    @GetMapping(value = "/event/{idEvent}/presentation/{idPresentation}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ConfigEventDto> getByEvent(@PathVariable(value = "idEvent") Long idEvent,
+                                                     @PathVariable(value = "idPresentation") Long idPresentation) {
+        Optional<ConfigEventEntity> entity = configEventService.findByEventIdAndPresentationId(idEvent, idPresentation);
+        if (entity.isEmpty()) {
+            return ResponseEntity.noContent()
+                    .build();
+        }
+        return ResponseEntity.ok(ConfigEventMapper.INSTANCE.map(entity.get()));
     }
 }

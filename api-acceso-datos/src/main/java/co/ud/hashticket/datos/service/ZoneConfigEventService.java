@@ -11,4 +11,5 @@ public interface ZoneConfigEventService {
     Set<ZoneConfigEventEntity> getZoneConfigByEvent(Long id);
     Set<ZoneConfigEventEntity> getZoneConfigByEventAndPresentation(Long idEvent, Long idPresentation);
     Boolean recordSale(Long zoneId, Long configEventId);
+    Boolean updateCreateTickets(Long id);
 }

@@ -3,10 +3,8 @@ package co.ud.hashticket.client;
 import co.ud.ud.hashticket.dto.ZoneConfigEventDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -18,4 +16,6 @@ public interface ZoneConfigEventClient {
     Set<ZoneConfigEventDto> getByIdEventAndPresentation(@PathVariable(value = "event_id")Long idEvent, @PathVariable(value = "presentation_id")Long idPresentation );
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
     ZoneConfigEventDto save(@RequestBody ZoneConfigEventDto zoneDto);
+    @PutMapping(value = "/{id}")
+    Boolean updateCreateTickets(@PathVariable(value = "id")Long id);
 }

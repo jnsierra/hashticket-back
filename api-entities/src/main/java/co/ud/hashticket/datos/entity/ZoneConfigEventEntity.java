@@ -23,6 +23,17 @@ import java.math.BigDecimal;
          WHERE zon.id = :zoneId
            AND conE.id = :configEventId
         """)
+@NamedQuery(name = "ZoneConfigEventEntity.getByConfigEventId", query = """
+        SELECT znCon
+          FROM ZoneConfigEventEntity znCon
+    INNER JOIN znCon.configEvent conEv
+         WHERE conEv.id = :configEventId
+        """)
+@NamedQuery(name = "ZoneConfigEventEntity.updateCreateTickets", query = """
+        UPDATE ZoneConfigEventEntity znCfEv
+           SET createTickets = :createTickets
+         WHERE znCfEv.id = :id
+        """)
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor

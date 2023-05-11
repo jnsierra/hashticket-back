@@ -44,5 +44,8 @@ public class ConfigEventServiceImpl implements ConfigEventService {
         entity.get().setNumberOfTicketsSold(entity.get().getNumberOfTicketsSold().add(BigDecimal.ONE));
         return Optional.of(entity.get().getId());
     }
-
+    @Override
+    public Optional<ConfigEventEntity> findByEventIdAndPresentationId(Long eventId, Long presentationId) {
+        return configEventRepository.getByEventIdAndPresentation(presentationId,eventId);
+    }
 }

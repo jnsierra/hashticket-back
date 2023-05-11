@@ -32,16 +32,16 @@ import java.util.stream.Collectors;
 @Slf4j
 public class TicketServiceImpl implements TicketService {
     private ZoneConfigEventService zoneConfigEventService;
+    private ConfigEventService configEventService;
     private ZoneService zoneService;
     private TicketClient ticketClient;
     private UserLoggerService userLoggerService;
     private EmailService emailService;
     private QRGeneratorService qRGeneratorService;
     private GenerateTemplatesEmailServiceImpl generateTemplatesEmailService;
-    private final UnaryOperator<String> getUserAuth = x -> userLoggerService.getUserLogger();
     private final BiFunction<Long, Long, Set<ZoneConfigEventDto>> functionGenerateTickets = (eventId, presentationId) -> zoneConfigEventService.getByIdEventAndPresentation(eventId, presentationId);
     private final LongFunction<ZoneDto> functionGetZone = zoneId -> zoneService.getById(zoneId);
-    private final UnaryOperator<Set<ZoneConfigEventDto>> functionValidate = item -> validateConfig(item);
+    //    private final UnaryOperator<Set<ZoneConfigEventDto>> functionValidate = item -> validateConfig(item);
     private final Predicate<String> isGenerateCode = codeConfirmation -> qRGeneratorService.generateQRCodeImage(codeConfirmation);
     private Function<Optional<TicketDto>, ConfirmBuyTicket> functionCreateObjConfirm = ticket -> {
         log.info("PURCHASED-TICKET|{}|{}|{}", ticket.isPresent(), (ticket.isPresent() ? ticket.get().getNumberTicket() : -1L), ticket.isPresent() ? ticket.get().getEventId() : -1L);
@@ -53,11 +53,27 @@ public class TicketServiceImpl implements TicketService {
     private final UnaryOperator<TicketDto> funcGetTicket = ticket ->
             ticketClient.getByIdNumber(ticket.getEventId(), ticket.getZoneId(), ticket.getCategoryId(), ticket.getPresentationId(), ticket.getNumberTicket());
     private final Predicate<TicketDto> isTicketAvailable = ticket -> (Objects.nonNull(ticket) && StatusTicket.CREATED.equals(ticket.getState()));
-
+    private final BiFunction<Long, Long, Set<TicketDto>> funcGenerateTicketObj = (idEvent, idPresentation) ->
+            functionGenerateTickets.apply(idEvent, idPresentation).stream().map(zoneConfigEventDto -> generateTickets(zoneConfigEventDto, idEvent, idPresentation))
+                    .flatMap(Collection::stream)
+                    .collect(Collectors.toSet());
+    private Function<String, SearchRequest> funcObjectQuery = user -> SearchRequest
+            .builder()
+            .filters(List.of(
+                    FilterRequest.builder()
+                            .key("userEmail")
+                            .operator(Operator.EQUAL)
+                            .fieldType(FieldType.STRING)
+                            .value(user)
+                            .build()
+            ))
+            .build();
+    private final BiPredicate<Long, Long> isEqualParameterConfigEvent = (zoneConfigEvent, configEvent) -> zoneConfigEvent.equals(configEvent);
     @Autowired
     public TicketServiceImpl(ZoneConfigEventService zoneConfigEventService, ZoneService zoneService
             , TicketClient ticketClient, UserLoggerService userLoggerService, QRGeneratorService qRGeneratorService
-            , GenerateTemplatesEmailServiceImpl generateTemplatesEmailService, EmailService emailService) {
+            , GenerateTemplatesEmailServiceImpl generateTemplatesEmailService, EmailService emailService
+            , ConfigEventService configEventService) {
         this.zoneConfigEventService = zoneConfigEventService;
         this.zoneService = zoneService;
         this.ticketClient = ticketClient;
@@ -65,15 +81,32 @@ public class TicketServiceImpl implements TicketService {
         this.qRGeneratorService = qRGeneratorService;
         this.generateTemplatesEmailService = generateTemplatesEmailService;
         this.emailService = emailService;
+        this.configEventService = configEventService;
     }
+
     @Override
     public Boolean generateTicket(Long idEvent, Long idPresentation) {
+        isValidProcess(idEvent, idPresentation);
         Set<ZoneConfigEventDto> configs = functionGenerateTickets.andThen(this::validateSet).apply(idEvent, idPresentation);
-        Function<Set<ZoneConfigEventDto>, Boolean> ticketsFunction = functionValidate
-                .andThen(item -> generateTicketObj(item, idEvent, idPresentation))
-                .andThen(this::generateTicketIterate)
-                .andThen(item -> this.confirmCreate(item, configs));
-        return ticketsFunction.apply(configs);
+        if(!funcGenerateTicketObj.andThen(this::generateTicketIterate).apply(idEvent, idPresentation)){
+            return false;
+        }
+        return this.confirmCreate(configs);
+    }
+    private void isValidProcess(Long idEvent, Long idPresentation) {
+        Set<ZoneConfigEventDto> configs = functionGenerateTickets.andThen(this::validateSet).apply(idEvent, idPresentation);
+        if (Objects.isNull(configs) || configs.isEmpty()) {
+            throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "No existe ninguna zona por generar tickets o las actuales ya tienen tickets generados");
+        }
+        //Valido si tengo config event
+        if(!configEventService.existsConfigEvent(idEvent, idPresentation)){
+            throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "No existe configuracion para el evento");
+        }
+        long sumaTickets = configs.stream().mapToLong(ZoneConfigEventDto::getNumberOfTickets).sum();
+        if(!isEqualParameterConfigEvent.test(sumaTickets, configEventService.getNumberOfTicketsEventAndPresentation(idEvent, idPresentation))){
+            throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "No coinciden la parametrizacion de la configuracion del evento y la configuracion de las zonas del evento");
+        }
+
     }
 
     public Set<ZoneConfigEventDto> validateSet(Set<ZoneConfigEventDto> zoneConfig) {
@@ -88,16 +121,10 @@ public class TicketServiceImpl implements TicketService {
                 .collect(Collectors.toSet());
     }
 
-    private Boolean confirmCreate(boolean valida, Set<ZoneConfigEventDto> configs) {
-        if (!valida) {
-            return false;
-        }
+    private boolean confirmCreate(Set<ZoneConfigEventDto> configs) {
         configs.stream().
-                forEach(item -> {
-                    item.setCreateTickets(Boolean.TRUE);
-                    this.zoneConfigEventService.save(item);
-                });
-        return Boolean.TRUE;
+                forEach(item -> this.zoneConfigEventService.updateCreateTickets(item.getId()));
+        return true;
     }
 
     @Override
@@ -126,7 +153,7 @@ public class TicketServiceImpl implements TicketService {
                 .build();
     }
 
-    private ConfirmBuyTicket sendEmailConfirmation(ConfirmBuyTicket confirmBuyTicket){
+    private ConfirmBuyTicket sendEmailConfirmation(ConfirmBuyTicket confirmBuyTicket) {
         String htmlTemplate = Optional.ofNullable(generateTemplatesEmailService.buyTicket(confirmBuyTicket.getConfirmNumberTicket()))
                 .orElseThrow(() -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Error al generar el template html para el correo"));
         Boolean isSending = Optional.ofNullable(emailService.sendHtmlMessage(userLoggerService.getUserLogger(), "Compra Ticket", htmlTemplate))
@@ -134,11 +161,13 @@ public class TicketServiceImpl implements TicketService {
         isSendingNotification(confirmBuyTicket, isSending);
         return confirmBuyTicket;
     }
-    private void isSendingNotification(ConfirmBuyTicket confirmBuyTicket, boolean sending){
+
+    private void isSendingNotification(ConfirmBuyTicket confirmBuyTicket, boolean sending) {
         //TODO persistir en la base de datos que se envio la notificación correctamente
     }
+
     private Optional<TicketDto> generateQR(Optional<TicketDto> ticket) {
-        if (isGenerateCode.test(ticket.orElseThrow( () -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "")).getConfirmationNumber()) ){
+        if (isGenerateCode.test(ticket.orElseThrow(() -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "")).getConfirmationNumber())) {
             return ticket;
         }
         return Optional.empty();
@@ -146,27 +175,11 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public GenericResponse<TicketViewDto> getTiketsByUser() {
-        Function<String, GenericResponse<TicketViewDto>> ticketsFunction = getUserAuth
-                .andThen(this::generateObjectQuery)
+        Function<String, GenericResponse<TicketViewDto>> ticketsFunction = funcObjectQuery
                 .andThen(ticketClient::search)
                 .andThen(this::mapperTicket);
-        return ticketsFunction.apply("t");
+        return ticketsFunction.apply(userLoggerService.getUserLogger());
     }
-
-    public SearchRequest generateObjectQuery(String user) {
-        return SearchRequest
-                .builder()
-                .filters(List.of(
-                        FilterRequest.builder()
-                                .key("userEmail")
-                                .operator(Operator.EQUAL)
-                                .fieldType(FieldType.STRING)
-                                .value(user)
-                                .build()
-                ))
-                .build();
-    }
-
     public GenericResponse<TicketViewDto> mapperTicket(GenericQuery<TicketViewDto> tickets) {
         return GenericResponse.<TicketViewDto>builder()
                 .data(tickets.getResults())
@@ -175,17 +188,20 @@ public class TicketServiceImpl implements TicketService {
                 .message("Consulta ejecutada exitosamente")
                 .build();
     }
+
     private final Function<TicketDto, ResponseEntity<TicketDto>> functBuyTicket = ticket -> ticketClient.buyTicket(StatusTicket.RESERVED
             , ticket.getEventId()
             , ticket.getZoneId()
             , ticket.getCategoryId()
             , ticket.getPresentationId()
             , ticket.getNumberTicket());
+
     private Optional<TicketDto> buyTicket(TicketDto buyTicket) {
         return (Optional<TicketDto>) functBuyTicket
-                .andThen( response -> HttpStatus.NO_CONTENT.equals(response.getStatusCode()) ? Optional.empty() : Optional.of(response.getBody()))
+                .andThen(response -> HttpStatus.NO_CONTENT.equals(response.getStatusCode()) ? Optional.empty() : Optional.of(response.getBody()))
                 .apply(buyTicket);
     }
+
     public Set<TicketDto> createTicket(BuyTicket buyTicket) {
         return buyTicket.getNumberTickets().stream()
                 .map(ticketNum -> TicketDto.builder()
@@ -197,6 +213,7 @@ public class TicketServiceImpl implements TicketService {
                         .build())
                 .collect(Collectors.toSet());
     }
+
     private final Predicate<BuyTicket> isTicketsAvailability = buyTicket -> createTicket(buyTicket).stream()
             .peek(ticket -> log.debug("ticket pre validated {}", ticket))
             .filter(Predicate.not(this::validateTicket))
@@ -212,13 +229,6 @@ public class TicketServiceImpl implements TicketService {
             throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "No existe ninguna zona por generar tickets o las actuales ya tienen tickets generados");
         }
         return responseSet;
-    }
-
-    private Set<TicketDto> generateTicketObj(Set<ZoneConfigEventDto> zoneConfigEvents, Long idEvent, Long idPresentation) {
-        return zoneConfigEvents.stream()
-                .map(zoneConfigEventDto -> generateTickets(zoneConfigEventDto, idEvent, idPresentation))
-                .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
     }
 
 
@@ -238,10 +248,10 @@ public class TicketServiceImpl implements TicketService {
         return ticketsDto;
     }
 
-    private Boolean generateTicketIterate(Set<TicketDto> tickets) {
+    private boolean generateTicketIterate(Set<TicketDto> tickets) {
         tickets.stream()
                 .forEach(this::saveTicket);
-        return Boolean.TRUE;
+        return true;
     }
 
     private void saveTicket(TicketDto ticketDto) {

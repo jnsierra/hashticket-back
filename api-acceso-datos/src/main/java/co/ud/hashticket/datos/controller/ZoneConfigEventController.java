@@ -51,4 +51,8 @@ public class ZoneConfigEventController {
         }
         return ResponseEntity.ok(ZoneConfigEventMapper.INSTANCE.map(response));
     }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Boolean> updateCreateTickets(@PathVariable(value = "id")Long id){
+        return ResponseEntity.ok(zoneConfigEventService.updateCreateTickets(id));
+    }
 }
