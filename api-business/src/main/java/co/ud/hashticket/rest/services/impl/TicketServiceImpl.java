@@ -15,6 +15,7 @@ import co.ud.ud.hashticket.dto.responses.GenericQuery;
 import co.ud.ud.hashticket.dto.responses.GenericResponse;
 import co.ud.ud.hashticket.dto.ticket.BuyTicket;
 import co.ud.ud.hashticket.dto.ticket.ConfirmBuyTicket;
+import co.ud.ud.hashticket.enumeration.EventStatus;
 import co.ud.ud.hashticket.enumeration.StatusTicket;
 import co.ud.ud.hashticket.exception.BusinessException;
 import co.ud.ud.hashticket.exception.enumeration.TYPE_EXCEPTION;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class TicketServiceImpl implements TicketService {
+    private EventService eventService;
     private ZoneConfigEventService zoneConfigEventService;
     private ConfigEventService configEventService;
     private ZoneService zoneService;
@@ -41,7 +43,6 @@ public class TicketServiceImpl implements TicketService {
     private GenerateTemplatesEmailServiceImpl generateTemplatesEmailService;
     private final BiFunction<Long, Long, Set<ZoneConfigEventDto>> functionGenerateTickets = (eventId, presentationId) -> zoneConfigEventService.getByIdEventAndPresentation(eventId, presentationId);
     private final LongFunction<ZoneDto> functionGetZone = zoneId -> zoneService.getById(zoneId);
-    //    private final UnaryOperator<Set<ZoneConfigEventDto>> functionValidate = item -> validateConfig(item);
     private final Predicate<String> isGenerateCode = codeConfirmation -> qRGeneratorService.generateQRCodeImage(codeConfirmation);
     private Function<Optional<TicketDto>, ConfirmBuyTicket> functionCreateObjConfirm = ticket -> {
         log.info("PURCHASED-TICKET|{}|{}|{}", ticket.isPresent(), (ticket.isPresent() ? ticket.get().getNumberTicket() : -1L), ticket.isPresent() ? ticket.get().getEventId() : -1L);
@@ -69,11 +70,17 @@ public class TicketServiceImpl implements TicketService {
             ))
             .build();
     private final BiPredicate<Long, Long> isEqualParameterConfigEvent = (zoneConfigEvent, configEvent) -> zoneConfigEvent.equals(configEvent);
+    private final Predicate<Set<ZoneConfigEventDto>> isConfirmCreate = configs ->  {
+        configs.stream().
+                forEach(item -> this.zoneConfigEventService.updateCreateTickets(item.getId()));
+        return true;
+    };
+    private final LongPredicate isConfirmEvent = eventId -> eventService.changeStatusEventWaiting(eventId);
     @Autowired
     public TicketServiceImpl(ZoneConfigEventService zoneConfigEventService, ZoneService zoneService
             , TicketClient ticketClient, UserLoggerService userLoggerService, QRGeneratorService qRGeneratorService
             , GenerateTemplatesEmailServiceImpl generateTemplatesEmailService, EmailService emailService
-            , ConfigEventService configEventService) {
+            , ConfigEventService configEventService, EventService eventService) {
         this.zoneConfigEventService = zoneConfigEventService;
         this.zoneService = zoneService;
         this.ticketClient = ticketClient;
@@ -82,8 +89,8 @@ public class TicketServiceImpl implements TicketService {
         this.generateTemplatesEmailService = generateTemplatesEmailService;
         this.emailService = emailService;
         this.configEventService = configEventService;
+        this.eventService = eventService;
     }
-
     @Override
     public Boolean generateTicket(Long idEvent, Long idPresentation) {
         isValidProcess(idEvent, idPresentation);
@@ -91,9 +98,20 @@ public class TicketServiceImpl implements TicketService {
         if(!funcGenerateTicketObj.andThen(this::generateTicketIterate).apply(idEvent, idPresentation)){
             return false;
         }
-        return this.confirmCreate(configs);
+        return isConfirmCreate.and(item -> this.isConfirmEvent(idEvent)).test(configs);
+    }
+
+    private boolean isConfirmEvent(Long idEvent) {
+        return isConfirmEvent.test(idEvent);
     }
     private void isValidProcess(Long idEvent, Long idPresentation) {
+        //Valido si el evento ya creo sus boletas
+        eventService.getEventById(idEvent).filter(EventStatus.CREATED::equals)
+                .orElseThrow(()-> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Evento en estado diferente a CREATED (imposible generar tickets)"));
+        //Valido si existe configuracion para la generacion de tickets
+        Optional.ofNullable(functionGenerateTickets.apply(idEvent, idPresentation))
+                .orElseThrow(() -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "No existe configuracion para la generacion de tickets"));
+
         Set<ZoneConfigEventDto> configs = functionGenerateTickets.andThen(this::validateSet).apply(idEvent, idPresentation);
         if (Objects.isNull(configs) || configs.isEmpty()) {
             throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "No existe ninguna zona por generar tickets o las actuales ya tienen tickets generados");
@@ -120,13 +138,6 @@ public class TicketServiceImpl implements TicketService {
                 .filter(Predicate.not(ZoneConfigEventDto::getCreateTickets))
                 .collect(Collectors.toSet());
     }
-
-    private boolean confirmCreate(Set<ZoneConfigEventDto> configs) {
-        configs.stream().
-                forEach(item -> this.zoneConfigEventService.updateCreateTickets(item.getId()));
-        return true;
-    }
-
     @Override
     public GenericResponse<ConfirmBuyTicket> buyTicket(BuyTicket buyTicket) {
         if (!isTicketsAvailability.test(buyTicket)) {
@@ -223,15 +234,6 @@ public class TicketServiceImpl implements TicketService {
     private boolean validateTicket(TicketDto ticketDto) {
         return isTicketAvailable.test(funcGetTicket.apply(ticketDto));
     }
-
-    private Set<ZoneConfigEventDto> validateConfig(Set<ZoneConfigEventDto> responseSet) {
-        if (responseSet.isEmpty()) {
-            throw new BusinessException(2L, TYPE_EXCEPTION.ERROR, "No existe ninguna zona por generar tickets o las actuales ya tienen tickets generados");
-        }
-        return responseSet;
-    }
-
-
     private Set<TicketDto> generateTickets(ZoneConfigEventDto zoneConfigEventDto, Long eventId, Long presentationId) {
         Set<TicketDto> ticketsDto = new HashSet<>();
         ZoneDto zone = functionGetZone.apply(zoneConfigEventDto.getZoneId());

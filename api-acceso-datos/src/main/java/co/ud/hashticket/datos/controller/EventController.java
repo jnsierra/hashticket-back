@@ -4,6 +4,7 @@ import co.ud.hashticket.datos.entity.EventEntity;
 import co.ud.hashticket.datos.mapper.EventMapper;
 import co.ud.hashticket.datos.service.EventService;
 import co.ud.ud.hashticket.dto.EventDto;
+import co.ud.ud.hashticket.enumeration.EventStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +18,6 @@ import java.util.Set;
 @RestController
 @RequestMapping("/v.1/event")
 public class EventController {
-
     private final EventService eventService;
 
     @Autowired
@@ -48,5 +48,10 @@ public class EventController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(EventMapper.INSTANCE.map(entities));
+    }
+    @PutMapping(value = "/{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean updateStatusEvent(@PathVariable("eventId") Long eventId
+            , @RequestParam EventStatus eventStatus){
+        return eventService.updateEventStatus(eventId, eventStatus);
     }
 }

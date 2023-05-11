@@ -52,10 +52,8 @@ public class ZoneConfigEventServiceImpl implements ZoneConfigEventService {
         }
         //Valido si la suma de todos los zone config events es menor o igual que el total del evento
         Set<ZoneConfigEventEntity> zonesConfig = zoneConfigEventRepository.getByConfigEventId(idConfigEvent);
-        if (!zonesConfig.isEmpty()) {
-            if ( funcSumValues.apply(zonesConfig,ticketsZoneConfigEvent) > numberTickets ) {
+        if (!zonesConfig.isEmpty() && funcSumValues.apply(zonesConfig,ticketsZoneConfigEvent) > numberTickets) {
                 throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "El numero de tickets que deseas insertar supera a los parametrizados para el evento");
-            }
         }
         if (isZoneConfigEventExists.test(zoneConfigEvent.getZone().getId(), zoneConfigEvent.getConfigEvent().getId())) {
             throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Configuración existente");
@@ -89,7 +87,7 @@ public class ZoneConfigEventServiceImpl implements ZoneConfigEventService {
     @Override
     @Transactional
     public Boolean updateCreateTickets(Long id) {
-        if( !(zoneConfigEventRepository.updateCreateTickets(id, true) == 1) ? true : false){
+        if( zoneConfigEventRepository.updateCreateTickets(id, true) != 1 ){
             throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Error al actualizar zone config event ");
         }
         return true;

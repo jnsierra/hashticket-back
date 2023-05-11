@@ -3,7 +3,6 @@ package co.ud.hashticket.client;
 import co.ud.ud.hashticket.dto.ZoneConfigEventDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;

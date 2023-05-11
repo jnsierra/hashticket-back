@@ -33,6 +33,11 @@ import java.util.Set;
                                                             AND event.date > current_date
         
         """)
+@NamedQuery(name = "EventEntity.updateEventStatus", query = """
+        Update EventEntity eve
+           set eventStatus = :eventStatus
+         where eve.id = :id
+        """)
 @Getter @Setter
 @Entity
 @Table(name = "event")
