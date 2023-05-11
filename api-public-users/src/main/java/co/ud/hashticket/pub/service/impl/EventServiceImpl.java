@@ -23,7 +23,7 @@ public class EventServiceImpl implements EventService {
     }
     @Override
     public Set<EventEntity> getActiveAndAfterToday() {
-        return eventRepository.findByEventStatusAndAfterTodayEvent(EventStatus.CREATED);
+        return eventRepository.findByEventStatusAndAfterTodayEvent(EventStatus.WAITING);
     }
 
     @Override

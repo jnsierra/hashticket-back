@@ -21,7 +21,6 @@ public class TicketController {
     public TicketController(TicketService ticketService) {
         this.ticketService = ticketService;
     }
-
     @GetMapping("/generate/event/{event_id}/presentation/{presentation_id}")
     public ResponseEntity<GenericResponse<String>> generate(@PathVariable(value = "event_id") Long idEvent, @PathVariable(value = "presentation_id") Long idPresentation ) {
         boolean resp = ticketService.generateTicket(idEvent, idPresentation);

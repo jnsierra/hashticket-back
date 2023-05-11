@@ -165,8 +165,7 @@ public class TicketServiceImpl implements TicketService {
 
             // generate a random number between
             // 0 to AlphaNumericString variable length
-            int index = (alphaNumericString.length()
-                    * rand.nextInt() );
+            int index = rand.nextInt(0, alphaNumericString.length());
 
             // add Character one by one in end of sb
             sb.append(alphaNumericString

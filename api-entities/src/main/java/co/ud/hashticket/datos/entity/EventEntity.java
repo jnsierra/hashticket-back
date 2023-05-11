@@ -30,8 +30,7 @@ import java.util.Set;
 @NamedQuery(name = "EventEntity.findByEventStatusAndAfterTodayEvent", query = """
                                                            FROM EventEntity event
                                                           WHERE event.eventStatus = :eventStatus
-                                                            AND event.date > current_date
-        
+                                                            AND event.date >= current_date
         """)
 @NamedQuery(name = "EventEntity.updateEventStatus", query = """
         Update EventEntity eve
