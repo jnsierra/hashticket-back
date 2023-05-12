@@ -179,7 +179,9 @@ public class TicketServiceImpl implements TicketService {
     }
 
     private Optional<TicketDto> generateQR(Optional<TicketDto> ticket) {
+        log.info("GENERATE-TICKET|{}|{}|{}", ticket.isPresent(), (ticket.isPresent() ? ticket.get().getNumberTicket() : -1L), ticket.isPresent() ? ticket.get().getEventId() : -1L);
         if (isGenerateCode.test(ticket.orElseThrow(() -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "")).getConfirmationNumber())) {
+            log.info("GENERATE-QR|true");
             return ticket;
         }
         return Optional.empty();
