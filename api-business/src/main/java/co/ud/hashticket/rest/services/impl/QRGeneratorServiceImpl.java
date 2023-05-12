@@ -15,9 +15,12 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Service
 @Slf4j
@@ -35,6 +38,8 @@ public class QRGeneratorServiceImpl implements QRGeneratorService {
         }
     };
     private BiPredicate<Path, BitMatrix> isCreated = (path, bitMatrix) -> {
+        //Valido si el path existe
+
         try {
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
         } catch (IOException e) {
@@ -53,6 +58,10 @@ public class QRGeneratorServiceImpl implements QRGeneratorService {
     }
     @Override
     public boolean generateQRCodeImage(String confirmationCode) {
+        Path path = Paths.get(pathQRs);
+        if(!Files.isDirectory(path)){
+            throw new BusinessException(1L, TYPE_EXCEPTION.ERROR, String.format("No existe el directorio %s base para el almacenamiento de los qrs contacte al administrador", pathQRs));
+        }
         return isCreated.test(functionGeneratePath.apply(confirmationCode) ,functionBitMatrix.apply(confirmationCode));
     }
 }
