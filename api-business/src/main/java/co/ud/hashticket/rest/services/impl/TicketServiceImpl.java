@@ -106,11 +106,12 @@ public class TicketServiceImpl implements TicketService {
     }
     private void isValidProcess(Long idEvent, Long idPresentation) {
         //Valido si el evento ya creo sus boletas
-        eventService.getEventById(idEvent).filter(EventStatus.CREATED::equals)
+        eventService.getEventById(idEvent)
+                .filter(Predicate.not(EventStatus.CREATED::equals))
                 .orElseThrow(()-> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "Evento en estado diferente a CREATED (imposible generar tickets)"));
         //Valido si existe configuracion para la generacion de tickets
         Optional.ofNullable(functionGenerateTickets.apply(idEvent, idPresentation))
-                .orElseThrow(() -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "No existe configuracion para la generacion de tickets"));
+                .orElseThrow(() -> new BusinessException(1L, TYPE_EXCEPTION.ERROR, "No existen configuraciones de zona para la generacion de tickets"));
 
         Set<ZoneConfigEventDto> configs = functionGenerateTickets.andThen(this::validateSet).apply(idEvent, idPresentation);
         if (Objects.isNull(configs) || configs.isEmpty()) {
