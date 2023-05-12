@@ -8,6 +8,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 @Service
+@Slf4j
 public class QRGeneratorServiceImpl implements QRGeneratorService {
     @Value("${qr.path}")
     private String pathQRs;
@@ -40,7 +42,11 @@ public class QRGeneratorServiceImpl implements QRGeneratorService {
         }
         return true;
     };
-    private Function<String, Path> functionGeneratePath = confirmationCode -> FileSystems.getDefault().getPath(String.format("%s%s.png", pathQRs,confirmationCode));
+    private Function<String, Path> functionGeneratePath = confirmationCode ->  {
+            String PATH = String.format("%s%s.png", pathQRs,confirmationCode);
+            log.info("GENERATE-PATH-QR|{}", PATH);
+            return FileSystems.getDefault().getPath(PATH);
+    };
     @Autowired
     public QRGeneratorServiceImpl(QRCodeWriter qRCodeWriter) {
         this.qRCodeWriter = qRCodeWriter;
