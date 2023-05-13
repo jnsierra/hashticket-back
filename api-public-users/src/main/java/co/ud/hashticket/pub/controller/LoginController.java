@@ -40,6 +40,9 @@ public class LoginController {
             }
         }
         log.info("LOGIN|401|{}|{}",usuarioDto.getEmail(), login.toString());
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(TokenDto.builder()
+                .loginAction(LOGIN_ACTION.UN_AUTHORIZED)
+                .mensaje("Usuario no autorizado")
+                .build(), HttpStatus.UNAUTHORIZED );
     }
 }
