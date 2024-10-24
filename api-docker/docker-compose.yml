@@ -1,0 +1,22 @@
+version: '3.9'
+
+#########################
+# INFRASTRUCTURE
+#########################
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - 5433:5432
+    volumes:
+      - /Users/nicolas/Documents/volumenes/vol_postgresql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: S3cret
+      POSTGRES_USER: hashticket
+      POSTGRES_DB: tickero
+      PGDATA: /var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U hashticket -d tickero" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
